@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="PickleShell gives ChatGPT a secure path to a local OpenCode agent.">
+  <title>PickleShell | ChatGPT to OpenCode</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #17212b;
+      --muted: #536270;
+      --line: #d9e2e8;
+      --paper: #ffffff;
+      --soft: #f3f7f8;
+      --teal: #087f8c;
+      --teal-dark: #075e68;
+      --yellow: #f2c14e;
+      --max: 1080px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+    a { color: var(--teal-dark); }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
+    header { border-bottom: 1px solid var(--line); background: var(--paper); }
+    nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 0; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 800; text-decoration: none; font-size: 1.1rem; }
+    .brand img { width: 34px; height: 34px; object-fit: contain; }
+    nav ul { display: flex; gap: 20px; list-style: none; padding: 0; margin: 0; }
+    nav a { text-decoration: none; font-size: .94rem; }
+    .hero { padding: 78px 0 64px; background: var(--soft); border-bottom: 1px solid var(--line); }
+    .eyebrow { color: var(--teal-dark); font-weight: 750; letter-spacing: .08em; text-transform: uppercase; font-size: .78rem; }
+    h1 { max-width: 760px; margin: 12px 0 18px; font-size: clamp(2.5rem, 7vw, 5.4rem); line-height: 1.02; letter-spacing: -.04em; }
+    .lead { max-width: 680px; color: var(--muted); font-size: 1.2rem; margin: 0 0 28px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .button { display: inline-block; padding: 11px 17px; border: 1px solid var(--teal); border-radius: 6px; background: var(--teal); color: #fff; text-decoration: none; font-weight: 700; }
+    .button.secondary { background: transparent; color: var(--teal-dark); }
+    section { padding: 62px 0; }
+    h2 { margin: 0 0 24px; font-size: 2rem; line-height: 1.15; }
+    h3 { margin: 0 0 8px; font-size: 1.1rem; }
+    .intro { max-width: 720px; color: var(--muted); }
+    .architecture { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 28px; }
+    .node { min-height: 112px; padding: 18px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; }
+    .node.accent { border-color: var(--yellow); background: #fffaf0; }
+    .arrow { align-self: center; text-align: center; color: var(--teal); font-size: 1.4rem; }
+    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+    .item { padding: 22px; border-top: 3px solid var(--teal); background: var(--soft); }
+    .item p { margin: 0; color: var(--muted); }
+    .code { padding: 22px; overflow-x: auto; border-radius: 6px; background: #17212b; color: #e9f2f3; font: .92rem/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    .security { background: var(--soft); border-block: 1px solid var(--line); }
+    footer { padding: 28px 0 42px; color: var(--muted); font-size: .92rem; }
+    @media (max-width: 760px) {
+      .wrap { width: min(var(--max), calc(100% - 28px)); }
+      nav { align-items: flex-start; }
+      nav ul { gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
+      .hero { padding: 54px 0 48px; }
+      .architecture { grid-template-columns: 1fr; }
+      .arrow { transform: rotate(90deg); min-height: 18px; }
+      .grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Primary navigation">
+        <a class="brand" href="#top"><img src="pickleshell-logo.png" alt="">PickleShell</a>
+        <ul>
+          <li><a href="#architecture">Architecture</a></li>
+          <li><a href="#security">Security</a></li>
+          <li><a href="https://github.com/pickleshell/pickleshell">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">ChatGPT + OpenCode</div>
+        <h1>A secure path to your local coding agent.</h1>
+        <p class="lead">PickleShell connects ChatGPT to a locally operated OpenCode agent through an outbound-only Secure MCP Tunnel. Your Gateway stays off the public Internet.</p>
+        <div class="actions">
+          <a class="button" href="https://github.com/pickleshell/pickleshell">View the repository</a>
+          <a class="button secondary" href="https://github.com/pickleshell/pickleshell/blob/main/docs/deployment.md">Deployment guide</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <div class="wrap">
+        <h2>How it works</h2>
+        <p class="intro">The public interface is an MCP tool. The local Gateway is authenticated, workspace-scoped, and reachable only inside the trusted environment.</p>
+        <div class="architecture" aria-label="Request path">
+          <div class="node">ChatGPT</div><div class="arrow" aria-hidden="true">→</div>
+          <div class="node accent">Secure MCP Tunnel</div><div class="arrow" aria-hidden="true">→</div>
+          <div class="node">PickleShell MCP</div><div class="arrow" aria-hidden="true">→</div>
+          <div class="node">Gateway → OpenCode</div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Built for controlled local work</h2>
+        <div class="grid">
+          <article class="item"><h3>Session continuity</h3><p>Continue an OpenCode conversation with an explicit <code>session_id</code>.</p></article>
+          <article class="item"><h3>Operator control</h3><p>Choose workspaces and models from an allowlist you control.</p></article>
+          <article class="item"><h3>Small file transfer</h3><p>Transfer up to 20 files with size, destination, overwrite, and path checks.</p></article>
+          <article class="item"><h3>Parallel sessions</h3><p>Independent sessions run in parallel; a duplicate explicit session receives an immediate busy response.</p></article>
+        </div>
+      </div>
+    </section>
+
+    <section class="security" id="security">
+      <div class="wrap">
+        <h2>Security boundary</h2>
+        <p class="intro">PickleShell is a trusted single-operator bridge, not an anonymous public shell. Use a dedicated unprivileged service account and keep credentials outside the repository.</p>
+        <pre class="code"><code>ChatGPT
+  → outbound Secure MCP Tunnel
+  → authenticated Gateway
+  → model allowlist
+  → workspace-relative file boundary
+  → OpenCode</code></pre>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <h2>Get started</h2>
+        <p class="intro">Read the deployment guide, configure the tunnel, refresh the PickleShell plugin in ChatGPT, and run the smoke checks before using a production workspace.</p>
+        <div class="actions">
+          <a class="button" href="https://github.com/pickleshell/pickleshell/blob/main/docs/chatgpt.md">ChatGPT setup</a>
+          <a class="button secondary" href="https://github.com/pickleshell/pickleshell/blob/main/SECURITY.md">Security model</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">PickleShell <span aria-hidden="true">·</span> MIT License <span aria-hidden="true">·</span> Pre-release 0.1.0</div>
+  </footer>
+</body>
+</html>
