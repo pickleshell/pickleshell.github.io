@@ -337,7 +337,7 @@
       border-top: 1px solid color-mix(in srgb, var(--pickle-light) 20%, transparent);
     }
     footer a { color: var(--pickle-dark); font-weight: 600; }
-    .footer-pickle { font-size: 1.3rem; display: block; margin-bottom: 8px; }
+    .footer-pickle { display: block; margin: 0 auto 8px; width: 28px; height: 28px; border-radius: 6px; }
 
     /* ── MOBILE ────────────────────────── */
     @media (max-width: 860px) {
@@ -560,7 +560,7 @@
 
   <footer>
     <div class="wrap">
-      <span class="footer-pickle" aria-hidden="true">&#129362;</span>
+      <img class="footer-pickle" src="pickleshell-logo.png" alt="PickleShell logo" width="28" height="28">
       PickleShell &middot; <a href="https://github.com/pickleshell/pickleshell/blob/main/LICENSE">MIT License</a> &middot; Pre-release 0.1.0
       <br>
       <small style="color:var(--ink-muted)">A secure bridge from ChatGPT to a local OpenCode agent.</small>
