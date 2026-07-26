@@ -3,147 +3,568 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="PickleShell gives ChatGPT a secure path to a local OpenCode agent.">
-  <title>PickleShell | ChatGPT to OpenCode</title>
+  <meta name="description" content="PickleShell gives ChatGPT a secure path to a local OpenCode agent. A controlled bridge, not a public shell.">
+  <title>PickleShell — ChatGPT to OpenCode</title>
   <style>
     :root {
-      color-scheme: light;
-      --ink: #17212b;
-      --muted: #536270;
-      --line: #d9e2e8;
-      --paper: #ffffff;
-      --soft: #f3f7f8;
-      --teal: #087f8c;
-      --teal-dark: #075e68;
-      --yellow: #f2c14e;
-      --max: 1080px;
+      --pickle: #7cb342;
+      --pickle-light: #aed581;
+      --pickle-dark: #558b2f;
+      --teal: #00796b;
+      --teal-deep: #004d40;
+      --cream: #fefcf3;
+      --cream-dark: #f5f0e0;
+      --ink: #1a1a2e;
+      --ink-mid: #3a3a52;
+      --ink-muted: #6b6b80;
+      --white: #ffffff;
+      --seed: #c5e17a;
+      --seed-dark: #9e9d24;
+      --danger: #e53935;
+      --max: 1100px;
+      --radius: 16px;
+      --radius-sm: 10px;
+      --shadow: 0 2px 12px rgba(26,26,46,.07);
+      --shadow-lg: 0 8px 32px rgba(26,26,46,.1);
     }
-    * { box-sizing: border-box; }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --cream: #111122;
+        --cream-dark: #1a1a30;
+        --ink: #e8e8f0;
+        --ink-mid: #b8b8cc;
+        --ink-muted: #8888a0;
+        --white: #1e1e34;
+        --shadow: 0 2px 12px rgba(0,0,0,.25);
+        --shadow-lg: 0 8px 32px rgba(0,0,0,.35);
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      margin: 0;
       color: var(--ink);
-      background: var(--paper);
-      font: 16px/1.6 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--cream);
+      font: 17px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
-    a { color: var(--teal-dark); }
-    .wrap { width: min(var(--max), calc(100% - 40px)); margin: 0 auto; }
-    header { border-bottom: 1px solid var(--line); background: var(--paper); }
-    nav { display: flex; align-items: center; justify-content: space-between; gap: 24px; padding: 18px 0; }
-    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 800; text-decoration: none; font-size: 1.1rem; }
-    .brand img { width: 34px; height: 34px; object-fit: contain; }
-    nav ul { display: flex; gap: 20px; list-style: none; padding: 0; margin: 0; }
-    nav a { text-decoration: none; font-size: .94rem; }
-    .hero { padding: 78px 0 64px; background: var(--soft); border-bottom: 1px solid var(--line); }
-    .eyebrow { color: var(--teal-dark); font-weight: 750; letter-spacing: .08em; text-transform: uppercase; font-size: .78rem; }
-    h1 { max-width: 760px; margin: 12px 0 18px; font-size: clamp(2.5rem, 7vw, 5.4rem); line-height: 1.02; letter-spacing: -.04em; }
-    .lead { max-width: 680px; color: var(--muted); font-size: 1.2rem; margin: 0 0 28px; }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
-    .button { display: inline-block; padding: 11px 17px; border: 1px solid var(--teal); border-radius: 6px; background: var(--teal); color: #fff; text-decoration: none; font-weight: 700; }
-    .button.secondary { background: transparent; color: var(--teal-dark); }
-    section { padding: 62px 0; }
-    h2 { margin: 0 0 24px; font-size: 2rem; line-height: 1.15; }
-    h3 { margin: 0 0 8px; font-size: 1.1rem; }
-    .intro { max-width: 720px; color: var(--muted); }
-    .architecture { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; margin-top: 28px; }
-    .node { min-height: 112px; padding: 18px 14px; border: 1px solid var(--line); border-radius: 6px; background: var(--paper); display: flex; align-items: center; justify-content: center; text-align: center; font-weight: 700; }
-    .node.accent { border-color: var(--yellow); background: #fffaf0; }
-    .arrow { align-self: center; text-align: center; color: var(--teal); font-size: 1.4rem; }
-    .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
-    .item { padding: 22px; border-top: 3px solid var(--teal); background: var(--soft); }
-    .item p { margin: 0; color: var(--muted); }
-    .code { padding: 22px; overflow-x: auto; border-radius: 6px; background: #17212b; color: #e9f2f3; font: .92rem/1.65 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
-    .security { background: var(--soft); border-block: 1px solid var(--line); }
-    footer { padding: 28px 0 42px; color: var(--muted); font-size: .92rem; }
-    @media (max-width: 760px) {
-      .wrap { width: min(var(--max), calc(100% - 28px)); }
-      nav { align-items: flex-start; }
-      nav ul { gap: 12px; flex-wrap: wrap; justify-content: flex-end; }
-      .hero { padding: 54px 0 48px; }
-      .architecture { grid-template-columns: 1fr; }
-      .arrow { transform: rotate(90deg); min-height: 18px; }
-      .grid { grid-template-columns: 1fr; }
+
+    img { max-width: 100%; height: auto; display: block; }
+    a { color: var(--teal); text-decoration-skip-ink: auto; }
+    a:focus-visible, button:focus-visible { outline: 3px solid var(--pickle); outline-offset: 3px; border-radius: 4px; }
+
+    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+
+    /* ── NAV ────────────────────────────── */
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: color-mix(in srgb, var(--cream) 85%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid color-mix(in srgb, var(--pickle-light) 25%, transparent);
     }
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 14px 0; gap: 16px;
+    }
+    .brand {
+      display: inline-flex; align-items: center; gap: 10px;
+      text-decoration: none; color: var(--ink); font-weight: 800; font-size: 1.15rem;
+      letter-spacing: -.02em;
+    }
+    .brand img { width: 36px; height: 36px; border-radius: 8px; }
+    .brand span { position: relative; }
+    .nav-links { display: flex; gap: 8px; list-style: none; }
+    .nav-links a {
+      text-decoration: none; font-size: .92rem; font-weight: 600;
+      padding: 6px 14px; border-radius: 999px;
+      transition: background .2s, color .2s;
+    }
+    .nav-links a:hover { background: var(--pickle-light); color: var(--teal-deep); }
+    .nav-links .gh-link {
+      background: var(--ink); color: var(--cream);
+      border: 1px solid transparent;
+    }
+    .nav-links .gh-link:hover { background: var(--teal-deep); }
+
+    /* ── HERO ────────────────────────────── */
+    .hero {
+      position: relative;
+      padding: 80px 0 72px;
+      overflow: hidden;
+    }
+    .hero-inner {
+      display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 48px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: color-mix(in srgb, var(--pickle) 12%, transparent);
+      border: 1px solid color-mix(in srgb, var(--pickle) 30%, transparent);
+      padding: 5px 14px; border-radius: 999px;
+      font-size: .8rem; font-weight: 700; color: var(--pickle-dark);
+      letter-spacing: .04em; text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+    .hero-badge::before { content: ""; width: 8px; height: 8px; background: var(--pickle); border-radius: 50%; }
+    .hero h1 {
+      font-size: clamp(2.4rem, 5.5vw, 3.8rem);
+      line-height: 1.08; letter-spacing: -.035em;
+      margin: 0 0 20px; font-weight: 900;
+    }
+    .hero h1 em {
+      font-style: normal;
+      background: linear-gradient(135deg, var(--pickle-dark), var(--teal));
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-lead {
+      max-width: 540px; color: var(--ink-muted); font-size: 1.15rem;
+      margin: 0 0 32px; line-height: 1.6;
+    }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 13px 24px; border-radius: 999px;
+      font: 600 .95rem/1 system-ui, sans-serif;
+      text-decoration: none; border: 2px solid transparent;
+      transition: transform .18s ease, box-shadow .18s ease, background .2s;
+      cursor: pointer;
+    }
+    .btn:active { transform: scale(.97); }
+    .btn-primary {
+      background: linear-gradient(135deg, var(--pickle), var(--pickle-dark));
+      color: var(--white); box-shadow: 0 4px 16px rgba(124,179,66,.3);
+    }
+    .btn-primary:hover { box-shadow: 0 6px 24px rgba(124,179,66,.4); transform: translateY(-1px); }
+    .btn-secondary {
+      background: var(--white); color: var(--teal-deep);
+      border-color: var(--pickle-light);
+    }
+    @media (prefers-color-scheme: dark) {
+      .btn-secondary { background: var(--cream-dark); border-color: var(--teal); }
+    }
+    .btn-secondary:hover { border-color: var(--pickle); background: color-mix(in srgb, var(--pickle) 8%, var(--white)); }
+
+    .hero-mascot {
+      position: relative;
+      width: 240px; height: 240px; flex-shrink: 0;
+      animation: mascot-bob 4s ease-in-out infinite;
+    }
+    .hero-mascot img {
+      width: 100%; height: 100%; object-fit: contain;
+      filter: drop-shadow(0 8px 24px rgba(124,179,66,.25));
+    }
+
+    @keyframes mascot-bob {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      25% { transform: translateY(-6px) rotate(1deg); }
+      75% { transform: translateY(4px) rotate(-1deg); }
+    }
+
+    /* ── Floating seed decorations ───── */
+    .seed-deco {
+      position: absolute; border-radius: 50% 50% 50% 0;
+      background: var(--seed); opacity: .18;
+      pointer-events: none; z-index: 0;
+    }
+    .seed-1 { width: 22px; height: 32px; top: 15%; right: 8%; animation: seed-drift 7s ease-in-out infinite; }
+    .seed-2 { width: 16px; height: 24px; bottom: 20%; left: 5%; animation: seed-drift 9s ease-in-out infinite 1s; transform: rotate(45deg); }
+    .seed-3 { width: 12px; height: 18px; top: 60%; right: 20%; animation: seed-drift 8s ease-in-out infinite 2s; transform: rotate(-30deg); }
+
+    @keyframes seed-drift {
+      0%, 100% { transform: translateY(0) rotate(var(--r, 0deg)); }
+      50% { transform: translateY(-12px) rotate(calc(var(--r, 0deg) + 10deg)); }
+    }
+
+    /* ── SECTION SHARED ──────────────────── */
+    section { padding: 80px 0; position: relative; }
+    .section-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-size: .78rem; font-weight: 750; text-transform: uppercase;
+      letter-spacing: .08em; color: var(--pickle-dark);
+      margin-bottom: 12px;
+    }
+    .section-eyebrow .icon { font-size: 1.1rem; }
+    h2 {
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      line-height: 1.12; letter-spacing: -.03em;
+      margin: 0 0 16px; font-weight: 850;
+    }
+    .section-lead {
+      max-width: 600px; color: var(--ink-muted);
+      font-size: 1.08rem; margin-bottom: 40px;
+    }
+
+    /* ── ARCHITECTURE ──────────────────── */
+    .arch-section { background: var(--cream-dark); }
+    .arch-flow {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 0; align-items: stretch;
+      margin-top: 12px;
+    }
+    .arch-step {
+      position: relative;
+      background: var(--white);
+      border: 2px solid color-mix(in srgb, var(--pickle-light) 40%, transparent);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: var(--shadow);
+    }
+    .arch-step:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+    .arch-step.highlight {
+      border-color: var(--pickle);
+      background: linear-gradient(135deg, color-mix(in srgb, var(--pickle) 6%, var(--white)), var(--white));
+    }
+    .arch-step .step-icon {
+      width: 48px; height: 48px; margin: 0 auto 12px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--pickle) 10%, transparent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem;
+    }
+    .arch-step.highlight .step-icon {
+      background: color-mix(in srgb, var(--pickle) 15%, transparent);
+    }
+    .arch-step h3 { font-size: .95rem; margin: 0 0 6px; font-weight: 750; }
+    .arch-step p { font-size: .82rem; color: var(--ink-muted); margin: 0; line-height: 1.45; }
+    .arch-arrow {
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; color: var(--pickle);
+      font-weight: 700;
+    }
+
+    /* ── CAPABILITIES ──────────────────── */
+    .cap-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 18px;
+    }
+    .cap-card {
+      background: var(--white);
+      border: 1px solid color-mix(in srgb, var(--pickle-light) 35%, transparent);
+      border-radius: var(--radius);
+      padding: 26px 24px;
+      transition: transform .2s, box-shadow .2s;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .cap-card::before {
+      content: "";
+      position: absolute; top: 0; left: 0; right: 0; height: 4px;
+      background: linear-gradient(90deg, var(--pickle), var(--teal));
+      border-radius: var(--radius) var(--radius) 0 0;
+    }
+    .cap-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+    .cap-card h3 {
+      font-size: 1.05rem; margin: 0 0 8px; font-weight: 750;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .cap-card h3 .badge {
+      display: inline-block; padding: 2px 8px;
+      background: color-mix(in srgb, var(--pickle) 12%, transparent);
+      color: var(--pickle-dark); border-radius: 999px;
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .cap-card p { color: var(--ink-muted); font-size: .92rem; margin: 0; line-height: 1.55; }
+
+    /* ── SECURITY ──────────────────────── */
+    .security-section { background: var(--cream-dark); }
+    .security-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+      align-items: start;
+    }
+    .security-msg {
+      font-size: 1.05rem; color: var(--ink-mid);
+      line-height: 1.7; margin-bottom: 24px;
+    }
+    .security-msg strong { color: var(--ink); }
+    .shield-list { list-style: none; padding: 0; margin: 0; }
+    .shield-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, var(--pickle-light) 25%, transparent);
+      font-size: .95rem;
+    }
+    .shield-list li:last-child { border-bottom: none; }
+    .shield-list .shield-icon {
+      flex-shrink: 0; width: 28px; height: 28px;
+      border-radius: 50%;
+      background: color-mix(in srgb, var(--pickle) 12%, transparent);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; margin-top: 2px;
+    }
+    .code-block {
+      background: #1a1a2e; color: #c8d6e5;
+      border-radius: var(--radius);
+      padding: 24px; overflow-x: auto;
+      font: .88rem/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid #2a2a44;
+    }
+    .code-block .comment { color: #6b6b80; }
+    .code-block .accent { color: var(--pickle-light); font-weight: 600; }
+    .code-block .teal { color: #80cbc4; }
+
+    /* ── CTA SECTION ──────────────────── */
+    .cta-section { text-align: center; }
+    .cta-section h2 { max-width: 600px; margin: 0 auto 16px; }
+    .cta-section .section-lead { margin: 0 auto 32px; }
+    .cta-section .actions { justify-content: center; }
+
+    /* ── CUCUMBER DECORATIVE DIVIDER ─── */
+    .cuke-divider {
+      display: flex; align-items: center; justify-content: center;
+      gap: 12px; padding: 20px 0; color: var(--pickle-light);
+      font-size: .85rem; user-select: none;
+    }
+    .cuke-divider .line {
+      width: 60px; height: 2px;
+      background: linear-gradient(90deg, transparent, var(--pickle-light), transparent);
+      border-radius: 1px;
+    }
+
+    /* ── FOOTER ────────────────────────── */
+    footer {
+      padding: 32px 0 48px;
+      text-align: center;
+      color: var(--ink-muted);
+      font-size: .88rem;
+      border-top: 1px solid color-mix(in srgb, var(--pickle-light) 20%, transparent);
+    }
+    footer a { color: var(--pickle-dark); font-weight: 600; }
+    .footer-pickle { font-size: 1.3rem; display: block; margin-bottom: 8px; }
+
+    /* ── MOBILE ────────────────────────── */
+    @media (max-width: 860px) {
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-lead { margin-left: auto; margin-right: auto; }
+      .actions { justify-content: center; }
+      .hero-mascot { margin: 0 auto; width: 180px; height: 180px; order: -1; }
+      .arch-flow {
+        grid-template-columns: 1fr; gap: 12px;
+      }
+      .arch-arrow { transform: rotate(90deg); padding: 4px 0; }
+      .security-grid { grid-template-columns: 1fr; }
+      .seed-deco { display: none; }
+    }
+    @media (max-width: 540px) {
+      section { padding: 56px 0; }
+      .hero { padding: 52px 0 48px; }
+      .hero-mascot { width: 140px; height: 140px; }
+      .cap-grid { grid-template-columns: 1fr; }
+      nav ul { gap: 4px; }
+      .nav-links a { padding: 5px 10px; font-size: .84rem; }
+    }
+
+    /* ── REDUCED MOTION ────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .hero-mascot { animation: none; }
+      .seed-deco { animation: none; }
+    }
+
+    /* ── SKIP LINK ────────────────────── */
+    .skip-link {
+      position: absolute; top: -100%; left: 16px;
+      background: var(--pickle-dark); color: var(--white);
+      padding: 8px 16px; border-radius: 0 0 8px 8px;
+      font-weight: 700; text-decoration: none; z-index: 200;
+      transition: top .2s;
+    }
+    .skip-link:focus { top: 0; }
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
   <header>
     <div class="wrap">
       <nav aria-label="Primary navigation">
-        <a class="brand" href="#top"><img src="pickleshell-logo.png" alt="">PickleShell</a>
-        <ul>
-          <li><a href="#architecture">Architecture</a></li>
+        <a class="brand" href="#top">
+          <img src="pickleshell-logo.png" alt="" width="36" height="36">
+          <span>PickleShell</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="#architecture">How it works</a></li>
+          <li><a href="#capabilities">Capabilities</a></li>
           <li><a href="#security">Security</a></li>
-          <li><a href="https://github.com/pickleshell/pickleshell">GitHub</a></li>
+          <li><a href="https://github.com/pickleshell/pickleshell" class="gh-link">GitHub</a></li>
         </ul>
       </nav>
     </div>
   </header>
 
-  <main id="top">
-    <section class="hero">
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero" id="top">
+      <div class="seed-deco seed-1" aria-hidden="true"></div>
+      <div class="seed-deco seed-2" aria-hidden="true"></div>
+      <div class="seed-deco seed-3" aria-hidden="true"></div>
+      <div class="wrap hero-inner">
+        <div>
+          <div class="hero-badge">Secure &bull; Local &bull; Operator-Controlled</div>
+          <h1>Give ChatGPT a <em>secure path</em> to your local code.</h1>
+          <p class="hero-lead">PickleShell bridges ChatGPT to a local OpenCode agent through an outbound-only Secure MCP Tunnel. Your Gateway never touches the public Internet.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="https://github.com/pickleshell/pickleshell">View on GitHub</a>
+            <a class="btn btn-secondary" href="https://github.com/pickleshell/pickleshell/blob/main/docs/deployment.md">Deployment guide</a>
+          </div>
+        </div>
+        <div class="hero-mascot" aria-hidden="true">
+          <img src="pickleshell-logo.png" alt="PickleShell cucumber mascot" width="240" height="240">
+        </div>
+      </div>
+    </section>
+
+    <!-- ARCHITECTURE -->
+    <section class="arch-section" id="architecture">
       <div class="wrap">
-        <div class="eyebrow">ChatGPT + OpenCode</div>
-        <h1>A secure path to your local coding agent.</h1>
-        <p class="lead">PickleShell connects ChatGPT to a locally operated OpenCode agent through an outbound-only Secure MCP Tunnel. Your Gateway stays off the public Internet.</p>
+        <div class="section-eyebrow"><span class="icon">&#127793;</span> Architecture</div>
+        <h2>How the pickle gets from ChatGPT to your code</h2>
+        <p class="section-lead">Every request follows a clear, auditable path. The tunnel is initiated from your machine over outbound HTTPS only.</p>
+
+        <div class="arch-flow" role="list" aria-label="Request path through PickleShell">
+          <div class="arch-step" role="listitem">
+            <div class="step-icon">&#128172;</div>
+            <h3>ChatGPT</h3>
+            <p>User prompt or file attachment</p>
+          </div>
+          <div class="arch-arrow" aria-hidden="true">&#10140;</div>
+          <div class="arch-step highlight" role="listitem">
+            <div class="step-icon">&#128274;</div>
+            <h3>Secure MCP Tunnel</h3>
+            <p>Outbound-only, encrypted</p>
+          </div>
+          <div class="arch-arrow" aria-hidden="true">&#10140;</div>
+          <div class="arch-step" role="listitem">
+            <div class="step-icon">&#128295;</div>
+            <h3>Gateway + OpenCode</h3>
+            <p>Authenticated, workspace-scoped execution</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPABILITIES -->
+    <section id="capabilities">
+      <div class="wrap">
+        <div class="section-eyebrow"><span class="icon">&#9881;&#65039;</span> Capabilities</div>
+        <h2>What you can do with PickleShell</h2>
+        <p class="section-lead">A focused set of features designed for controlled, single-operator local work.</p>
+
+        <div class="cap-grid">
+          <article class="cap-card">
+            <h3>Session Continuity <span class="badge">Core</span></h3>
+            <p>Pick up an OpenCode conversation with an explicit <code>session_id</code>. No context lost between calls.</p>
+          </article>
+          <article class="cap-card">
+            <h3>Model Selection <span class="badge">Controlled</span></h3>
+            <p>Choose models only from an operator-controlled allowlist. No surprises, no rogue endpoints.</p>
+          </article>
+          <article class="cap-card">
+            <h3>File Transfer <span class="badge">Safe</span></h3>
+            <p>Transfer up to 20 files per request with size, destination, overwrite, and path traversal checks built in.</p>
+          </article>
+          <article class="cap-card">
+            <h3>Workspace Scoping <span class="badge">Scoped</span></h3>
+            <p>All file operations stay within the configured workspace. No accidental writes to <code>/</code>.</p>
+          </article>
+          <article class="cap-card">
+            <h3>Parallel Sessions <span class="badge">Concurrent</span></h3>
+            <p>Independent sessions run in parallel. Duplicate explicit sessions get a clean busy response.</p>
+          </article>
+          <article class="cap-card">
+            <h3>Operator Control <span class="badge">Governed</span></h3>
+            <p>Workspaces and models are operator-selected allowlists, not open menus. The human stays in the loop.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="cuke-divider" aria-hidden="true">
+      <span class="line"></span>
+      <span>&#129362;</span>
+      <span class="line"></span>
+    </div>
+
+    <!-- SECURITY -->
+    <section class="security-section" id="security">
+      <div class="wrap">
+        <div class="section-eyebrow"><span class="icon">&#128737;&#65039;</span> Security</div>
+        <h2>A secure bridge, not a public shell</h2>
+
+        <div class="security-grid">
+          <div>
+            <p class="security-msg">PickleShell is a <strong>trusted single-operator bridge</strong>, not an anonymous public service. Deploy with a dedicated unprivileged service account and keep credentials outside the repository.</p>
+            <ul class="shield-list">
+              <li>
+                <span class="shield-icon" aria-hidden="true">&#10003;</span>
+                <span>No inbound port forwarding or public endpoint</span>
+              </li>
+              <li>
+                <span class="shield-icon" aria-hidden="true">&#10003;</span>
+                <span>Outbound-only tunnel from your local machine</span>
+              </li>
+              <li>
+                <span class="shield-icon" aria-hidden="true">&#10003;</span>
+                <span>Operator-controlled workspaces and model allowlists</span>
+              </li>
+              <li>
+                <span class="shield-icon" aria-hidden="true">&#10003;</span>
+                <span>Path, symlink, and overwrite protection on file transfer</span>
+              </li>
+              <li>
+                <span class="shield-icon" aria-hidden="true">&#10003;</span>
+                <span>Authenticated requests and auditable local execution</span>
+              </li>
+            </ul>
+          </div>
+          <div class="code-block" role="presentation">
+<span class="comment">// Every request follows this path</span>
+<span class="accent">ChatGPT</span>
+  &#8594; <span class="teal">outbound Secure MCP Tunnel</span>
+  &#8594; authenticated Gateway
+  &#8594; model allowlist check
+  &#8594; workspace-relative file boundary
+  &#8594; <span class="accent">OpenCode</span>
+
+<span class="comment">// No inbound ports. No public IP. No surprises.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+      <div class="wrap">
+        <div class="section-eyebrow"><span class="icon">&#128640;</span> Get started</div>
+        <h2>Ready to bridge ChatGPT and your local agent?</h2>
+        <p class="section-lead">Read the deployment guide, configure the tunnel, refresh the PickleShell plugin in ChatGPT, and run the smoke checks before touching a production workspace.</p>
         <div class="actions">
-          <a class="button" href="https://github.com/pickleshell/pickleshell">View the repository</a>
-          <a class="button secondary" href="https://github.com/pickleshell/pickleshell/blob/main/docs/deployment.md">Deployment guide</a>
-        </div>
-      </div>
-    </section>
-
-    <section id="architecture">
-      <div class="wrap">
-        <h2>How it works</h2>
-        <p class="intro">The public interface is an MCP tool. The local Gateway is authenticated, workspace-scoped, and reachable only inside the trusted environment.</p>
-        <div class="architecture" aria-label="Request path">
-          <div class="node">ChatGPT</div><div class="arrow" aria-hidden="true">→</div>
-          <div class="node accent">Secure MCP Tunnel</div><div class="arrow" aria-hidden="true">→</div>
-          <div class="node">PickleShell MCP</div><div class="arrow" aria-hidden="true">→</div>
-          <div class="node">Gateway → OpenCode</div>
-        </div>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <h2>Built for controlled local work</h2>
-        <div class="grid">
-          <article class="item"><h3>Session continuity</h3><p>Continue an OpenCode conversation with an explicit <code>session_id</code>.</p></article>
-          <article class="item"><h3>Operator control</h3><p>Choose workspaces and models from an allowlist you control.</p></article>
-          <article class="item"><h3>Small file transfer</h3><p>Transfer up to 20 files with size, destination, overwrite, and path checks.</p></article>
-          <article class="item"><h3>Parallel sessions</h3><p>Independent sessions run in parallel; a duplicate explicit session receives an immediate busy response.</p></article>
-        </div>
-      </div>
-    </section>
-
-    <section class="security" id="security">
-      <div class="wrap">
-        <h2>Security boundary</h2>
-        <p class="intro">PickleShell is a trusted single-operator bridge, not an anonymous public shell. Use a dedicated unprivileged service account and keep credentials outside the repository.</p>
-        <pre class="code"><code>ChatGPT
-  → outbound Secure MCP Tunnel
-  → authenticated Gateway
-  → model allowlist
-  → workspace-relative file boundary
-  → OpenCode</code></pre>
-      </div>
-    </section>
-
-    <section>
-      <div class="wrap">
-        <h2>Get started</h2>
-        <p class="intro">Read the deployment guide, configure the tunnel, refresh the PickleShell plugin in ChatGPT, and run the smoke checks before using a production workspace.</p>
-        <div class="actions">
-          <a class="button" href="https://github.com/pickleshell/pickleshell/blob/main/docs/chatgpt.md">ChatGPT setup</a>
-          <a class="button secondary" href="https://github.com/pickleshell/pickleshell/blob/main/SECURITY.md">Security model</a>
+          <a class="btn btn-primary" href="https://github.com/pickleshell/pickleshell/blob/main/docs/chatgpt.md">ChatGPT setup</a>
+          <a class="btn btn-secondary" href="https://github.com/pickleshell/pickleshell/blob/main/docs/deployment.md">Deployment guide</a>
+          <a class="btn btn-secondary" href="https://github.com/pickleshell/pickleshell/blob/main/SECURITY.md">Security model</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer>
-    <div class="wrap">PickleShell <span aria-hidden="true">·</span> MIT License <span aria-hidden="true">·</span> Pre-release 0.1.0</div>
+    <div class="wrap">
+      <span class="footer-pickle" aria-hidden="true">&#129362;</span>
+      PickleShell &middot; <a href="https://github.com/pickleshell/pickleshell/blob/main/LICENSE">MIT License</a> &middot; Pre-release 0.1.0
+      <br>
+      <small style="color:var(--ink-muted)">A secure bridge from ChatGPT to a local OpenCode agent.</small>
+    </div>
   </footer>
 </body>
 </html>
