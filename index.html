@@ -239,7 +239,7 @@
     }
 
     /* ── SHOWCASE BAND ──────────────────── */
-    .showcase-band { background: #000; padding: 64px 0; }
+    .showcase-band { background: #000; padding: 32px 0; }
     .showcase-band img {
       display: block;
       margin: 0 auto;
@@ -248,6 +248,8 @@
       height: auto;
       border-radius: 4px;
     }
+    .showcase-band--example img { max-width: min(550px, 100%); }
+    .showcase-band--connect img  { max-width: min(657px, 100%); }
 
     /* ── CTA SECTION ──────────────────── */
     .cta-section { text-align: center; }
@@ -350,7 +352,7 @@
     </section>
 
     <!-- SHOWCASE -->
-    <section class="showcase-band" id="showcase">
+    <section class="showcase-band showcase-band--example" id="showcase">
       <img src="pickleshell-example1.png" alt="ChatGPT conversation demonstrating PickleShell creating a Git repository and README from an attached cucumber logo">
     </section>
 
@@ -384,7 +386,7 @@
     </section>
 
     <!-- SECURITY -->
-    <section class="showcase-band" id="security">
+    <section class="showcase-band showcase-band--connect" id="security">
       <img src="pickleshell-connect.png" alt="ChatGPT connection dialog for adding the PickleShell app and reviewing its permissions">
     </section>
 
