@@ -243,7 +243,8 @@
     .showcase-band img {
       display: block;
       margin: 0 auto;
-      max-width: min(960px, 100%);
+      width: auto;
+      max-width: 100%;
       height: auto;
       border-radius: 4px;
     }
@@ -253,18 +254,6 @@
     .cta-section h2 { max-width: 600px; margin: 0 auto 16px; }
     .cta-section .section-lead { margin: 0 auto 32px; }
     .cta-section .actions { justify-content: center; }
-
-    /* ── CUCUMBER DECORATIVE DIVIDER ─── */
-    .cuke-divider {
-      display: flex; align-items: center; justify-content: center;
-      gap: 12px; padding: 20px 0; color: var(--pickle-light);
-      font-size: .85rem; user-select: none;
-    }
-    .cuke-divider .line {
-      width: 60px; height: 2px;
-      background: linear-gradient(90deg, transparent, var(--pickle-light), transparent);
-      border-radius: 1px;
-    }
 
     /* ── FOOTER ────────────────────────── */
     footer {
@@ -362,9 +351,7 @@
 
     <!-- SHOWCASE -->
     <section class="showcase-band" id="showcase">
-      <div class="wrap">
-        <img src="pickleshell-example1.png" alt="ChatGPT conversation demonstrating PickleShell creating a Git repository and README from an attached cucumber logo" width="960">
-      </div>
+      <img src="pickleshell-example1.png" alt="ChatGPT conversation demonstrating PickleShell creating a Git repository and README from an attached cucumber logo">
     </section>
 
     <!-- ARCHITECTURE -->
@@ -396,17 +383,9 @@
       </div>
     </section>
 
-    <div class="cuke-divider" aria-hidden="true">
-      <span class="line"></span>
-      <span>&#129362;</span>
-      <span class="line"></span>
-    </div>
-
     <!-- SECURITY -->
     <section class="showcase-band" id="security">
-      <div class="wrap">
-        <img src="pickleshell-connect.png" alt="ChatGPT connection dialog for adding the PickleShell app and reviewing its permissions" width="960">
-      </div>
+      <img src="pickleshell-connect.png" alt="ChatGPT connection dialog for adding the PickleShell app and reviewing its permissions">
     </section>
 
     <!-- CTA -->
