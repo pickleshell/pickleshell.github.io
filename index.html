@@ -238,77 +238,15 @@
       font-weight: 700;
     }
 
-    /* ── CAPABILITIES ──────────────────── */
-    .cap-grid {
-      display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 18px;
+    /* ── SHOWCASE BAND ──────────────────── */
+    .showcase-band { background: #000; padding: 64px 0; }
+    .showcase-band img {
+      display: block;
+      margin: 0 auto;
+      max-width: min(960px, 100%);
+      height: auto;
+      border-radius: 4px;
     }
-    .cap-card {
-      background: var(--white);
-      border: 1px solid color-mix(in srgb, var(--pickle-light) 35%, transparent);
-      border-radius: var(--radius);
-      padding: 26px 24px;
-      transition: transform .2s, box-shadow .2s;
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
-    .cap-card::before {
-      content: "";
-      position: absolute; top: 0; left: 0; right: 0; height: 4px;
-      background: linear-gradient(90deg, var(--pickle), var(--teal));
-      border-radius: var(--radius) var(--radius) 0 0;
-    }
-    .cap-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); }
-    .cap-card h3 {
-      font-size: 1.05rem; margin: 0 0 8px; font-weight: 750;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .cap-card h3 .badge {
-      display: inline-block; padding: 2px 8px;
-      background: color-mix(in srgb, var(--pickle) 12%, transparent);
-      color: var(--pickle-dark); border-radius: 999px;
-      font-size: .68rem; font-weight: 700; text-transform: uppercase;
-      letter-spacing: .04em;
-    }
-    .cap-card p { color: var(--ink-muted); font-size: .92rem; margin: 0; line-height: 1.55; }
-
-    /* ── SECURITY ──────────────────────── */
-    .security-section { background: var(--cream-dark); }
-    .security-grid {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
-      align-items: start;
-    }
-    .security-msg {
-      font-size: 1.05rem; color: var(--ink-mid);
-      line-height: 1.7; margin-bottom: 24px;
-    }
-    .security-msg strong { color: var(--ink); }
-    .shield-list { list-style: none; padding: 0; margin: 0; }
-    .shield-list li {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 10px 0; border-bottom: 1px solid color-mix(in srgb, var(--pickle-light) 25%, transparent);
-      font-size: .95rem;
-    }
-    .shield-list li:last-child { border-bottom: none; }
-    .shield-list .shield-icon {
-      flex-shrink: 0; width: 28px; height: 28px;
-      border-radius: 50%;
-      background: color-mix(in srgb, var(--pickle) 12%, transparent);
-      display: flex; align-items: center; justify-content: center;
-      font-size: .85rem; margin-top: 2px;
-    }
-    .code-block {
-      background: #1a1a2e; color: #c8d6e5;
-      border-radius: var(--radius);
-      padding: 24px; overflow-x: auto;
-      font: .88rem/1.7 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      box-shadow: var(--shadow-lg);
-      border: 1px solid #2a2a44;
-    }
-    .code-block .comment { color: #6b6b80; }
-    .code-block .accent { color: var(--pickle-light); font-weight: 600; }
-    .code-block .teal { color: #80cbc4; }
 
     /* ── CTA SECTION ──────────────────── */
     .cta-section { text-align: center; }
@@ -349,14 +287,12 @@
         grid-template-columns: 1fr; gap: 12px;
       }
       .arch-arrow { transform: rotate(90deg); padding: 4px 0; }
-      .security-grid { grid-template-columns: 1fr; }
       .seed-deco { display: none; }
     }
     @media (max-width: 540px) {
       section { padding: 56px 0; }
       .hero { padding: 52px 0 48px; }
       .hero-mascot { width: 140px; height: 140px; }
-      .cap-grid { grid-template-columns: 1fr; }
       nav ul { gap: 4px; }
       .nav-links a { padding: 5px 10px; font-size: .84rem; }
     }
@@ -394,8 +330,7 @@
           <span>PickleShell</span>
         </a>
         <ul class="nav-links">
-          <li><a href="#architecture">How it works</a></li>
-          <li><a href="#capabilities">Capabilities</a></li>
+          <li><a href="#showcase">How it works</a></li>
           <li><a href="#security">Security</a></li>
           <li><a href="https://github.com/pickleshell/pickleshell" class="gh-link">GitHub</a></li>
         </ul>
@@ -422,6 +357,13 @@
         <div class="hero-mascot" aria-hidden="true">
           <img src="pickleshell-logo.png" alt="PickleShell cucumber mascot" width="240" height="240">
         </div>
+      </div>
+    </section>
+
+    <!-- SHOWCASE -->
+    <section class="showcase-band" id="showcase">
+      <div class="wrap">
+        <img src="pickleshell-example1.png" alt="ChatGPT conversation demonstrating PickleShell creating a Git repository and README from an attached cucumber logo" width="960">
       </div>
     </section>
 
@@ -454,42 +396,6 @@
       </div>
     </section>
 
-    <!-- CAPABILITIES -->
-    <section id="capabilities">
-      <div class="wrap">
-        <div class="section-eyebrow"><span class="icon">&#9881;&#65039;</span> Capabilities</div>
-        <h2>What you can do with PickleShell</h2>
-        <p class="section-lead">A focused set of features designed for controlled, single-operator local work.</p>
-
-        <div class="cap-grid">
-          <article class="cap-card">
-            <h3>Session Continuity <span class="badge">Core</span></h3>
-            <p>Pick up an OpenCode conversation with an explicit <code>session_id</code>. No context lost between calls.</p>
-          </article>
-          <article class="cap-card">
-            <h3>Model Selection <span class="badge">Controlled</span></h3>
-            <p>Choose models only from an operator-controlled allowlist. No surprises, no rogue endpoints.</p>
-          </article>
-          <article class="cap-card">
-            <h3>File Transfer <span class="badge">Safe</span></h3>
-            <p>Transfer up to 20 files per request with size, destination, overwrite, and path traversal checks built in.</p>
-          </article>
-          <article class="cap-card">
-            <h3>Workspace Scoping <span class="badge">Scoped</span></h3>
-            <p>All file operations stay within the configured workspace. No accidental writes to <code>/</code>.</p>
-          </article>
-          <article class="cap-card">
-            <h3>Parallel Sessions <span class="badge">Concurrent</span></h3>
-            <p>Independent sessions run in parallel. Duplicate explicit sessions get a clean busy response.</p>
-          </article>
-          <article class="cap-card">
-            <h3>Operator Control <span class="badge">Governed</span></h3>
-            <p>Workspaces and models are operator-selected allowlists, not open menus. The human stays in the loop.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
     <div class="cuke-divider" aria-hidden="true">
       <span class="line"></span>
       <span>&#129362;</span>
@@ -497,49 +403,9 @@
     </div>
 
     <!-- SECURITY -->
-    <section class="security-section" id="security">
+    <section class="showcase-band" id="security">
       <div class="wrap">
-        <div class="section-eyebrow"><span class="icon">&#128737;&#65039;</span> Security</div>
-        <h2>A secure bridge, not a public shell</h2>
-
-        <div class="security-grid">
-          <div>
-            <p class="security-msg">PickleShell is a <strong>trusted single-operator bridge</strong>, not an anonymous public service. Deploy with a dedicated unprivileged service account and keep credentials outside the repository.</p>
-            <ul class="shield-list">
-              <li>
-                <span class="shield-icon" aria-hidden="true">&#10003;</span>
-                <span>No inbound port forwarding or public endpoint</span>
-              </li>
-              <li>
-                <span class="shield-icon" aria-hidden="true">&#10003;</span>
-                <span>Outbound-only tunnel from your local machine</span>
-              </li>
-              <li>
-                <span class="shield-icon" aria-hidden="true">&#10003;</span>
-                <span>Operator-controlled workspaces and model allowlists</span>
-              </li>
-              <li>
-                <span class="shield-icon" aria-hidden="true">&#10003;</span>
-                <span>Path, symlink, and overwrite protection on file transfer</span>
-              </li>
-              <li>
-                <span class="shield-icon" aria-hidden="true">&#10003;</span>
-                <span>Authenticated requests and auditable local execution</span>
-              </li>
-            </ul>
-          </div>
-          <div class="code-block" role="presentation">
-<span class="comment">// Every request follows this path</span>
-<span class="accent">ChatGPT</span>
-  &#8594; <span class="teal">outbound Secure MCP Tunnel</span>
-  &#8594; authenticated Gateway
-  &#8594; model allowlist check
-  &#8594; workspace-relative file boundary
-  &#8594; <span class="accent">OpenCode</span>
-
-<span class="comment">// No inbound ports. No public IP. No surprises.</span>
-          </div>
-        </div>
+        <img src="pickleshell-connect.png" alt="ChatGPT connection dialog for adding the PickleShell app and reviewing its permissions" width="960">
       </div>
     </section>
 
