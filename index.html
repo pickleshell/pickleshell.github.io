@@ -202,21 +202,12 @@
 
     /* ── ARCHITECTURE ──────────────────── */
     .arch-section { background: var(--cream-dark); }
+    .arch-section > .wrap,
+    .purpose-section > .wrap,
+    .cta-section > .wrap { max-width: 960px; }
     .arch-section > .wrap > h2,
-    .arch-section > .wrap > .section-lead {
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
-    .arch-section > .wrap > h2 { max-width: 760px; }
+    .purpose-section > .wrap > h2 { max-width: 760px; }
     .purpose-section { background: var(--white); }
-    .purpose-section > .wrap { max-width: 760px; }
-    .purpose-section > .wrap > h2,
-    .purpose-section > .wrap > .section-lead {
-      margin-left: auto;
-      margin-right: auto;
-      text-align: center;
-    }
     .arch-flow {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -270,7 +261,6 @@
     .showcase-band--connect img  { max-width: min(657px, 100%); }
 
     /* ── CTA SECTION ──────────────────── */
-    .cta-section > .wrap { max-width: 760px; }
     .cta-section h2 { max-width: 600px; }
     .cta-section .section-lead { margin-bottom: 32px; }
 
