@@ -205,10 +205,13 @@
     .arch-section { background: var(--cream-dark); }
     .arch-section > .wrap,
     .purpose-section > .wrap,
+    .usecase-section > .wrap,
     .cta-section > .wrap { max-width: 960px; }
     .arch-section > .wrap > h2,
-    .purpose-section > .wrap > h2 { max-width: 760px; }
+    .purpose-section > .wrap > h2,
+    .usecase-section > .wrap > h2 { max-width: 760px; }
     .purpose-section { background: var(--white); }
+    .usecase-section { background: var(--cream-dark); }
     .arch-flow {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -400,6 +403,16 @@
         <p class="section-lead">ChatGPT is excellent at understanding software tasks, but it normally cannot access the files, tools, and repositories on your machine. PickleShell provides that missing connection.</p>
         <p class="section-lead">Through PickleShell, ChatGPT can send instructions and small files to a local OpenCode agent, inspect the current project, modify files, run commands and tests, read the results, and continue the same conversation.</p>
         <p class="section-lead">The agent runs on your machine and works only inside the workspace you configure. Ask Codex to clone the repository, read <code>AGENTS.md</code>, and guide you through the installation step by step.</p>
+      </div>
+    </section>
+
+    <!-- USE CASE -->
+    <section class="usecase-section" id="use-case">
+      <div class="wrap">
+        <div class="section-eyebrow"><span class="icon">&#128640;</span> Use case</div>
+        <h2>One ChatGPT, many machines</h2>
+        <p class="section-lead">Install PickleShell more than once, giving each connection its own name and tunnel: <code>PickleShell Mars</code>, <code>PickleShell Moon</code>, or <code>PickleShell Starbase</code>. Tell ChatGPT which plugin belongs to which machine, and it can route each task to the right environment.</p>
+        <p class="section-lead">That can mean anything from saving a technical specification on a selected machine to asking the OpenCode agent running there to carry out a complex task directly.</p>
       </div>
     </section>
 
