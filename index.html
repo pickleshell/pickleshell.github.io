@@ -202,6 +202,7 @@
 
     /* ── ARCHITECTURE ──────────────────── */
     .arch-section { background: var(--cream-dark); }
+    .purpose-section { background: var(--white); }
     .arch-flow {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -384,6 +385,16 @@
             <p>Authenticated, workspace-scoped execution</p>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- PURPOSE -->
+    <section class="purpose-section" id="purpose">
+      <div class="wrap">
+        <div class="section-eyebrow"><span class="icon">&#128161;</span> What it is for</div>
+        <h2>Give ChatGPT a way to work with your local repository</h2>
+        <p class="section-lead">ChatGPT can analyze software tasks, but it normally cannot work directly with a repository on your local machine. PickleShell sends instructions and small files to a local OpenCode agent, follows the execution, reads the result, and continues the same conversation.</p>
+        <p class="section-lead">The agent runs on your machine, inside a selected workspace, over a secure outbound-only tunnel. PickleShell is built for developers and experienced users. Ask Codex to clone the repository, read <code>AGENTS.md</code>, and guide you through the setup step by step.</p>
       </div>
     </section>
 
