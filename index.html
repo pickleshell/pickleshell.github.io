@@ -263,8 +263,13 @@
       height: auto;
       border-radius: 4px;
     }
+    .showcase-band--example img,
+    .showcase-band--connect img {
+      margin-left: max(16px, calc((100% - 960px) / 2));
+      margin-right: 0;
+    }
     .showcase-band--example img { max-width: min(900px, calc(100% - 32px)); }
-    .showcase-band--connect img  { max-width: min(1000px, calc(100% - 32px)); }
+    .showcase-band--connect img  { max-width: min(960px, calc(100% - 32px)); }
 
     /* ── CTA SECTION ──────────────────── */
     .cta-section h2 { max-width: 600px; }
