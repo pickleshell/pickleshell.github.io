@@ -215,6 +215,32 @@
     .usecase-section > .wrap > h2,
     .contact-section > .wrap > h2 { max-width: 760px; }
     .purpose-section { background: var(--white); }
+    .purpose-layout {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 48px;
+      align-items: start;
+      margin-top: 8px;
+    }
+    .purpose-text .section-lead { max-width: none; }
+    .purpose-image {
+      flex-shrink: 0;
+      width: 360px;
+    }
+    .purpose-image img {
+      width: 100%;
+      height: auto;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-lg);
+      display: block;
+    }
+    .purpose-image .image-caption {
+      font-size: .82rem;
+      color: var(--ink-muted);
+      text-align: center;
+      margin-top: 10px;
+      line-height: 1.3;
+    }
     .usecase-section { background: var(--cream-dark); }
     .contact-section { background: var(--white); }
     .arch-flow {
@@ -299,6 +325,8 @@
       }
       .arch-arrow { transform: rotate(90deg); padding: 4px 0; }
       .seed-deco { display: none; }
+      .purpose-layout { grid-template-columns: 1fr; }
+      .purpose-image { width: 100%; max-width: 360px; margin: 0 auto; }
     }
     @media (max-width: 540px) {
       section { padding: 56px 0; }
@@ -410,10 +438,18 @@
       <div class="wrap">
         <div class="section-eyebrow"><span class="icon">&#128161;</span> What it is for</div>
         <h2>Put ChatGPT Assistant to work</h2>
-        <p class="section-lead">PickleShell solves a practical problem: ChatGPT can analyze tasks, but it normally cannot work directly with a local repository.</p>
-        <p class="section-lead">Through PickleShell, ChatGPT sends instructions and small files to a local OpenCode agent, follows the execution, reads the result, and can continue in the same session when it passes the session ID.</p>
-        <p class="section-lead">The agent runs on your machine, inside a selected workspace, through a protected outbound-only tunnel. PickleShell removes the human relay between ChatGPT and OpenCode, while you remain the owner and observer.</p>
-        <p class="section-lead">PickleShell is for developers and experienced users. Installation is designed to be guided by Codex: ask it to clone the repository, read <code>AGENTS.md</code>, and walk you through the setup step by step. <code>AGENTS.md</code> covers the architecture, installation, tunnel configuration, plugin setup, and troubleshooting.</p>
+        <div class="purpose-layout">
+          <div class="purpose-text">
+            <p class="section-lead">PickleShell solves a practical problem: ChatGPT can analyze tasks, but it normally cannot work directly with a local repository.</p>
+            <p class="section-lead">Through PickleShell, ChatGPT sends instructions and small files to a local OpenCode agent, follows the execution, reads the result, and can continue in the same session when it passes the session ID.</p>
+            <p class="section-lead">The agent runs on your machine, inside a selected workspace, through a protected outbound-only tunnel. PickleShell removes the human relay between ChatGPT and OpenCode, while you remain the owner and observer.</p>
+            <p class="section-lead">PickleShell is for developers and experienced users. Installation is designed to be guided by Codex: ask it to clone the repository, read <code>AGENTS.md</code>, and walk you through the setup step by step. <code>AGENTS.md</code> covers the architecture, installation, tunnel configuration, plugin setup, and troubleshooting.</p>
+          </div>
+          <div class="purpose-image">
+            <img src="pickleshell-chatgpt-session.png" alt="Compact overview of a typical PickleShell session in ChatGPT" width="360" height="418">
+            <p class="image-caption">A typical PickleShell session in ChatGPT.</p>
+          </div>
+        </div>
       </div>
     </section>
 
