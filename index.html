@@ -259,6 +259,19 @@
       height: auto;
       display: block;
     }
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 48px;
+      align-items: start;
+      margin-top: 8px;
+    }
+    .contact-text .section-lead { max-width: none; }
+    .contact-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
     .usecase-section { background: var(--cream-dark); }
     .contact-section { background: var(--white); }
     .arch-flow {
@@ -347,6 +360,8 @@
       .purpose-image { width: 100%; max-width: 300px; margin: 0 auto; }
       .usecase-layout { grid-template-columns: 1fr; }
       .usecase-image { width: 100%; max-width: 300px; margin: 24px auto 0; }
+      .contact-layout { grid-template-columns: 1fr; }
+      .contact-image { max-width: 300px; margin: 24px auto 0; }
     }
     @media (max-width: 540px) {
       section { padding: 56px 0; }
@@ -500,10 +515,17 @@
       <div class="wrap">
         <div class="section-eyebrow"><span class="icon">&#128172;</span> Contact</div>
         <h2>Have a question or found a problem?</h2>
-        <p class="section-lead">Open an issue on GitHub to report a bug, suggest an improvement, or ask for help. Include the relevant setup details and steps to reproduce the problem.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="https://github.com/pickleshell/pickleshell/issues/new">Create an issue</a>
-          <a class="btn btn-secondary" href="https://github.com/pickleshell/pickleshell/issues">Browse issues</a>
+        <div class="contact-layout">
+          <div class="contact-text">
+            <p class="section-lead">Open an issue on GitHub to report a bug, suggest an improvement, or ask for help. Include the relevant setup details and steps to reproduce the problem.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="https://github.com/pickleshell/pickleshell/issues/new">Create an issue</a>
+              <a class="btn btn-secondary" href="https://github.com/pickleshell/pickleshell/issues">Browse issues</a>
+            </div>
+          </div>
+          <div class="contact-image">
+            <img src="pickleshell-support.png" alt="PickleShell assistant diagnosing a problem on a local computer" width="300" height="782">
+          </div>
         </div>
       </div>
     </section>
@@ -513,11 +535,18 @@
       <div class="wrap">
         <div class="section-eyebrow"><span class="icon">&#128640;</span> Get started</div>
         <h2>Ready to bridge ChatGPT and your local agent?</h2>
-        <p class="section-lead">Read the deployment guide, configure the tunnel, refresh the PickleShell plugin in ChatGPT, and run the smoke checks before touching a production workspace.</p>
-        <div class="actions">
-          <a class="btn btn-primary" href="https://github.com/pickleshell/pickleshell/blob/main/docs/chatgpt.md">ChatGPT setup</a>
-          <a class="btn btn-secondary" href="https://github.com/pickleshell/pickleshell/blob/main/docs/deployment.md">Deployment guide</a>
-          <a class="btn btn-secondary" href="https://github.com/pickleshell/pickleshell/blob/main/SECURITY.md">Security model</a>
+        <div class="contact-layout">
+          <div class="contact-text">
+            <p class="section-lead">Read the deployment guide, configure the tunnel, refresh the PickleShell plugin in ChatGPT, and run the smoke checks before touching a production workspace.</p>
+            <div class="actions">
+              <a class="btn btn-primary" href="https://github.com/pickleshell/pickleshell/blob/main/docs/chatgpt.md">ChatGPT setup</a>
+              <a class="btn btn-secondary" href="https://github.com/pickleshell/pickleshell/blob/main/docs/deployment.md">Deployment guide</a>
+              <a class="btn btn-secondary" href="https://github.com/pickleshell/pickleshell/blob/main/SECURITY.md">Security model</a>
+            </div>
+          </div>
+          <div class="contact-image">
+            <img src="pickleshell-bridge.png" alt="PickleShell assistant completing a secure bridge to a local agent" width="300" height="494">
+          </div>
         </div>
       </div>
     </section>
