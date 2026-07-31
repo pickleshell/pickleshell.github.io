@@ -241,6 +241,24 @@
       margin-top: 10px;
       line-height: 1.3;
     }
+    .usecase-section > .wrap { max-width: 960px; }
+    .usecase-layout {
+      display: grid;
+      grid-template-columns: 1fr 300px;
+      gap: 48px;
+      align-items: start;
+      margin-top: 8px;
+    }
+    .usecase-text .section-lead { max-width: none; }
+    .usecase-image {
+      flex-shrink: 0;
+      width: 300px;
+    }
+    .usecase-image img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
     .usecase-section { background: var(--cream-dark); }
     .contact-section { background: var(--white); }
     .arch-flow {
@@ -327,6 +345,8 @@
       .seed-deco { display: none; }
       .purpose-layout { grid-template-columns: 1fr; }
       .purpose-image { width: 100%; max-width: 300px; margin: 0 auto; }
+      .usecase-layout { grid-template-columns: 1fr; }
+      .usecase-image { width: 100%; max-width: 300px; margin: 24px auto 0; }
     }
     @media (max-width: 540px) {
       section { padding: 56px 0; }
@@ -458,8 +478,15 @@
       <div class="wrap">
         <div class="section-eyebrow"><span class="icon">&#128640;</span> Use Case</div>
         <h2>Let your ChatGPT Assistant control your empire</h2>
-        <p class="section-lead">Create three PickleShell tunnels to three different machines, then give the plugins unique names: <code>PickleShell Mars</code>, <code>PickleShell Moon</code>, and <code>PickleShell Starbase</code>. The first tunnel connects to a machine on Mars, the second to a machine on the Moon, and the third to a machine at Starbase. Tell your ChatGPT Assistant which named plugin belongs to which machine, and it can route each task to the right destination.</p>
-        <p class="section-lead">With this setup, your ChatGPT Assistant can manage colonies on Mars and the Moon, as well as coordinate launches from Starbase to them — the big rockets Elon launches. The same pattern is useful today for everything from saving a technical specification to asking the OpenCode agent on a selected machine to carry out a complex task directly from ChatGPT.</p>
+        <div class="usecase-layout">
+          <div class="usecase-text">
+            <p class="section-lead">Create three PickleShell tunnels to three different machines, then give the plugins unique names: <code>PickleShell Mars</code>, <code>PickleShell Moon</code>, and <code>PickleShell Starbase</code>. The first tunnel connects to a machine on Mars, the second to a machine on the Moon, and the third to a machine at Starbase. Tell your ChatGPT Assistant which named plugin belongs to which machine, and it can route each task to the right destination.</p>
+            <p class="section-lead">With this setup, your ChatGPT Assistant can manage colonies on Mars and the Moon, as well as coordinate launches from Starbase to them — the big rockets Elon launches. The same pattern is useful today for everything from saving a technical specification to asking the OpenCode agent on a selected machine to carry out a complex task directly from ChatGPT.</p>
+          </div>
+          <div class="usecase-image">
+            <img src="pickleshell-control-your-empire.png" alt="PickleShell assistant coordinating computers, servers, browser, files, and code" width="300" height="300">
+          </div>
+        </div>
       </div>
     </section>
 
