@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Quick notes on PickleShell's growth from a small personal bridge to a distributed AI workstation.">
+  <title>Quick Notes &mdash; PickleShell</title>
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --pickle: #7cb342;
+      --pickle-light: #aed581;
+      --pickle-dark: #558b2f;
+      --teal: #00796b;
+      --teal-deep: #004d40;
+      --cream: #fefcf3;
+      --cream-dark: #f5f0e0;
+      --ink: #1a1a2e;
+      --ink-muted: #6b6b80;
+      --white: #ffffff;
+      --max: 760px;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --cream: #111122;
+        --cream-dark: #1a1a30;
+        --ink: #e8e8f0;
+        --ink-muted: #8888a0;
+        --white: #1e1e34;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      color: var(--ink);
+      background: var(--cream);
+      font: 17px/1.65 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+    }
+    a { color: var(--teal); text-decoration-skip-ink: auto; }
+    a:focus-visible { outline: 3px solid var(--pickle); outline-offset: 3px; border-radius: 4px; }
+    .wrap { width: min(var(--max), calc(100% - 32px)); margin: 0 auto; }
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: color-mix(in srgb, var(--cream) 85%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid color-mix(in srgb, var(--pickle-light) 25%, transparent);
+    }
+    nav { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; gap: 16px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--ink); font-weight: 800; font-size: 1.15rem; letter-spacing: -.02em; text-decoration: none; }
+    .brand img { width: 36px; height: 36px; border-radius: 8px; }
+    .nav-links { display: flex; gap: 8px; list-style: none; }
+    .nav-links a { padding: 6px 14px; border-radius: 999px; color: var(--teal); font-size: .92rem; font-weight: 600; text-decoration: none; transition: background .2s, color .2s; }
+    .nav-links a:hover, .nav-links a[aria-current="page"] { background: var(--pickle-light); color: var(--teal-deep); }
+    .nav-links .gh-link { background: var(--ink); color: var(--cream); }
+    .nav-links .gh-link:hover { background: var(--teal-deep); color: var(--cream); }
+    main { padding: 72px 0 88px; }
+    .intro { border-bottom: 1px solid color-mix(in srgb, var(--pickle-light) 35%, transparent); padding-bottom: 40px; }
+    .eyebrow { color: var(--pickle-dark); font-size: .78rem; font-weight: 750; letter-spacing: .08em; text-transform: uppercase; }
+    h1 { font-size: clamp(2.4rem, 6vw, 4rem); line-height: 1.08; letter-spacing: -.035em; margin: 12px 0 20px; }
+    .lead { max-width: 650px; color: var(--ink-muted); font-size: 1.15rem; line-height: 1.6; }
+    .entries { padding-top: 8px; }
+    article { border-bottom: 1px solid color-mix(in srgb, var(--pickle-light) 35%, transparent); padding: 28px 0; }
+    article:last-child { border-bottom: 0; }
+    time { display: block; color: var(--pickle-dark); font-size: .9rem; font-weight: 750; letter-spacing: .02em; margin-bottom: 8px; }
+    article p { color: var(--ink); }
+    .closing { color: var(--ink-muted); font-style: italic; margin-top: 28px; }
+    footer { border-top: 1px solid color-mix(in srgb, var(--pickle-light) 20%, transparent); color: var(--ink-muted); font-size: .88rem; padding: 32px 0 48px; text-align: center; }
+    footer a { color: var(--pickle-dark); font-weight: 600; }
+    @media (max-width: 540px) {
+      nav { align-items: flex-start; }
+      .nav-links { flex-wrap: wrap; justify-content: flex-end; gap: 4px; }
+      .nav-links a { font-size: .84rem; padding: 5px 10px; }
+      main { padding: 52px 0 64px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Primary navigation">
+        <a class="brand" href="index.html#top">
+          <img src="pickleshell-logo.png" alt="" width="36" height="36">
+          <span>PickleShell</span>
+        </a>
+        <ul class="nav-links">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="quick-notes.html" aria-current="page">Quick Notes</a></li>
+          <li><a href="https://github.com/pickleshell/pickleshell" class="gh-link">GitHub</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">A work in progress</p>
+        <h1 id="page-title">Quick Notes</h1>
+        <p class="lead">Short notes on how PickleShell is growing from a personal bridge into a distributed AI workstation.</p>
+      </section>
+
+      <section class="entries" aria-label="Quick notes on project development">
+        <article id="the-first-idea">
+          <time datetime="2026-07-23">23 July 2026</time>
+          <p>PickleShell started with a simple idea: give ChatGPT a safe way to work with a real local machine instead of stopping at advice. The first version was still a small personal experiment, but the direction was clear.</p>
+        </article>
+        <article id="the-repository">
+          <time datetime="2026-07-26">26 July 2026</time>
+          <p>The idea became a repository. PickleShell's secure monorepo appeared with the Gateway, MCP server, deployment documentation, security boundaries, and the first working bridge between ChatGPT and a local agent.</p>
+        </article>
+        <article id="the-first-release">
+          <time datetime="2026-07-27">27 July 2026</time>
+          <p>The first public release, v0.1.0, made long-running work practical. A request could return immediately, report progress through polling, be cancelled safely, and later provide its complete result instead of making ChatGPT wait on one fragile connection.</p>
+        </article>
+        <article id="reliability-as-product">
+          <time datetime="2026-07-27">27 July 2026</time>
+          <p>Reliability became part of the product rather than an afterthought. Explicit idempotency, structured metadata, session locking, safe file transfer, 209 concurrency tests, and 40 file-transfer tests gave the first release a much stronger foundation.</p>
+        </article>
+        <article id="the-public-home">
+          <time datetime="2026-07-27">27 July 2026</time>
+          <p>PickleShell got its public home on the web. The site began as a small explanation of the idea: ChatGPT can reason about a task, while PickleShell helps carry that task into a controlled local workspace.</p>
+        </article>
+        <article id="beyond-one-machine">
+          <time datetime="2026-07-28">28 July 2026</time>
+          <p>The project grew beyond a single-machine story. The multi-machine use case made the larger ambition visible: one ChatGPT session coordinating different capabilities and destinations while each workstation remains locally controlled.</p>
+        </article>
+        <article id="multiple-workstations">
+          <time datetime="2026-07-29">29 July 2026</time>
+          <p>A new workstation connection changed the shape of the project. PickleShell was no longer just a local bridge on one computer; it was becoming a way to name, reach, and coordinate multiple workstations.</p>
+        </article>
+        <article id="the-browser">
+          <time datetime="2026-07-30">30 July 2026</time>
+          <p>The Browser arrived with v0.1.1. Playwright gave PickleShell a new sense: the assistant could not only inspect code and run agent tasks, but also interact with the web and verify browser-facing behavior.</p>
+        </article>
+        <article id="from-the-car">
+          <time datetime="2026-08-01">1 August 2026</time>
+          <p>The idea proved itself far away from a desk. Sitting in a car with only a mobile phone, the operator used ChatGPT and PickleShell to guide agents through two difficult server fixes. The human stayed in control without becoming a manual relay, exactly the problem PickleShell was created to solve.</p>
+        </article>
+        <article id="codex-adapter">
+          <time datetime="2026-08-02">2 August 2026</time>
+          <p>PickleShell learned to speak to Codex natively. The new adapter kept the same MCP contract while making the underlying agent replaceable, so the bridge could evolve without forcing the public interface to change.</p>
+        </article>
+        <article id="the-terminal">
+          <time datetime="2026-08-03">3 August 2026</time>
+          <p>The Terminal became a real interactive capability rather than a one-shot command runner. Persistent PTYs, reconnect behavior, lifecycle handling, signals, resizing, and isolation brought PickleShell closer to a complete workstation.</p>
+        </article>
+        <article id="the-system-gate">
+          <time datetime="2026-08-04">4 August 2026</time>
+          <p>A clean installation on a fresh workstation passed the full system gate: Gateway, Terminal, tunnel, PTY reconnect, cgroup behavior, and Chromium E2E. The architecture had now been tested as one reproducible system rather than as a collection of successful components.</p>
+        </article>
+        <article id="security-maintenance">
+          <time datetime="2026-08-04">4 August 2026</time>
+          <p>The project paused to clean its foundations. Vulnerable MCP dependencies were updated, all dependency audits returned zero reported vulnerabilities, and security maintenance became part of the normal development rhythm.</p>
+        </article>
+      </section>
+
+      <p class="closing">The notes will keep growing as PickleShell learns to do more.</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      PickleShell &middot; <a href="index.html">Home</a> &middot; <a href="https://github.com/pickleshell/pickleshell">GitHub</a>
+      <br>
+      <small>A secure bridge from ChatGPT to a local OpenCode agent.</small>
+    </div>
+  </footer>
+</body>
+</html>
