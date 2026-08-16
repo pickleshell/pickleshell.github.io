@@ -1,0 +1,238 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="index, follow">
+  <meta name="description" content="Compare 50 coding-agent benchmark candidates across quality, execution time, access channel, and pricing.">
+  <title>Model Comparison — PickleShell</title>
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --pickle: #7cb342; --pickle-light: #aed581; --pickle-dark: #558b2f;
+      --teal: #00796b; --teal-deep: #004d40; --cream: #fefcf3;
+      --cream-dark: #f5f0e0; --ink: #1a1a2e; --ink-mid: #3a3a52;
+      --ink-muted: #6b6b80; --white: #fff; --max: 1180px;
+      --radius: 16px; --radius-sm: 10px; --shadow: 0 2px 12px rgba(26,26,46,.07);
+    }
+    @media (prefers-color-scheme: dark) {
+      :root { --cream:#111122; --cream-dark:#1a1a30; --ink:#e8e8f0; --ink-mid:#b8b8cc; --ink-muted:#9898ad; --white:#1e1e34; --shadow:0 2px 12px rgba(0,0,0,.25); }
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { margin:0; color:var(--ink); background:var(--cream); font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; -webkit-font-smoothing:antialiased; }
+    a { color:var(--teal); text-decoration-skip-ink:auto; }
+    a:focus-visible, button:focus-visible { outline:3px solid var(--pickle); outline-offset:3px; border-radius:4px; }
+    .wrap { width:min(var(--max),calc(100% - 32px)); margin:0 auto; }
+    .skip-link { position:absolute; top:-100%; left:16px; background:var(--pickle-dark); color:var(--white); padding:8px 16px; border-radius:0 0 8px 8px; font-weight:700; z-index:200; }
+    .skip-link:focus { top:0; }
+    header { position:sticky; top:0; z-index:100; background:color-mix(in srgb,var(--cream) 88%,transparent); backdrop-filter:blur(12px); border-bottom:1px solid color-mix(in srgb,var(--pickle-light) 25%,transparent); }
+    nav { display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px; }
+    .brand { display:inline-flex; align-items:center; gap:10px; color:var(--ink); font-weight:800; font-size:1.15rem; text-decoration:none; }
+    .brand img { width:36px; height:36px; border-radius:8px; }
+    .nav-links { display:flex; gap:8px; margin:0; padding:0; list-style:none; }
+    .nav-links a { display:block; padding:6px 14px; border-radius:999px; font-size:.92rem; font-weight:650; text-decoration:none; }
+    .nav-links a:hover { background:var(--pickle-light); color:var(--teal-deep); }
+    .hero { padding:64px 0 36px; }
+    .eyebrow { color:var(--pickle-dark); font-size:.8rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
+    h1 { max-width:800px; margin:10px 0 16px; font-size:clamp(2.25rem,5vw,3.7rem); line-height:1.07; letter-spacing:-.04em; }
+    .lead { max-width:790px; margin:0; color:var(--ink-muted); font-size:1.08rem; }
+    .verified { display:inline-flex; align-items:center; gap:8px; margin-top:22px; padding:8px 14px; border:1px solid color-mix(in srgb,var(--pickle) 45%,transparent); border-radius:999px; background:color-mix(in srgb,var(--pickle) 9%,transparent); color:var(--pickle-dark); font-weight:800; }
+    .verified::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--pickle); }
+    .summary { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:30px auto; }
+    .summary-card { padding:18px; border:1px solid color-mix(in srgb,var(--pickle-light) 35%,transparent); border-radius:var(--radius); background:var(--white); box-shadow:var(--shadow); }
+    .summary-card strong { display:block; font-size:1.55rem; line-height:1.1; }
+    .summary-card span { color:var(--ink-muted); font-size:.86rem; }
+    .notice { margin:0 0 22px; padding:16px 18px; border-left:4px solid var(--pickle); border-radius:var(--radius-sm); background:var(--cream-dark); color:var(--ink-mid); }
+    .table-tools { display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:12px; }
+    .table-tools h2 { margin:0; font-size:1.35rem; }
+    .table-tools p { margin:3px 0 0; color:var(--ink-muted); font-size:.88rem; }
+    .table-scroll { overflow:auto; border:1px solid color-mix(in srgb,var(--pickle-light) 35%,transparent); border-radius:var(--radius); background:var(--white); box-shadow:var(--shadow); scrollbar-gutter:stable; }
+    table { width:100%; min-width:1220px; border-collapse:separate; border-spacing:0; font-size:.88rem; }
+    caption { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); }
+    th { position:sticky; top:0; z-index:2; padding:0; background:var(--cream-dark); border-bottom:2px solid color-mix(in srgb,var(--pickle) 40%,transparent); text-align:left; }
+    th button { width:100%; min-height:52px; padding:10px 9px; border:0; background:transparent; color:var(--ink); font:750 .76rem/1.25 system-ui,sans-serif; text-align:left; cursor:pointer; }
+    th button:hover { background:color-mix(in srgb,var(--pickle) 10%,transparent); }
+    .sort-indicator { display:inline-block; min-width:1em; color:var(--pickle-dark); }
+    td { padding:12px 9px; border-bottom:1px solid color-mix(in srgb,var(--ink-muted) 12%,transparent); vertical-align:top; }
+    tbody tr:last-child td { border-bottom:0; }
+    tbody tr:hover td { background:color-mix(in srgb,var(--pickle) 5%,var(--white)); }
+    .model { font-weight:750; color:var(--ink); white-space:nowrap; }
+    .candidate-id { display:block; color:var(--ink-muted); font-size:.72rem; font-weight:500; white-space:normal; }
+    .score { text-align:center; font-variant-numeric:tabular-nums; }
+    .overall { color:var(--teal); font-weight:850; }
+    .number { font-variant-numeric:tabular-nums; white-space:nowrap; }
+    .badge { display:inline-block; margin-top:4px; padding:3px 7px; border-radius:999px; background:var(--cream-dark); color:var(--ink-muted); font-size:.68rem; font-weight:750; line-height:1.2; text-transform:capitalize; }
+    .badge.success { background:color-mix(in srgb,var(--pickle) 15%,transparent); color:var(--pickle-dark); }
+    .na { color:var(--ink-muted); }
+    .channel { white-space:nowrap; }
+    .price { min-width:205px; }
+    .price strong { display:block; color:var(--ink); font-size:.77rem; }
+    .price small { display:block; color:var(--ink-muted); line-height:1.42; }
+    .sources { margin:34px 0 0; padding:24px; border-radius:var(--radius); background:var(--cream-dark); }
+    .sources h2 { margin:0 0 8px; font-size:1.2rem; }
+    .sources p { margin:8px 0; color:var(--ink-muted); }
+    .source-links { display:flex; flex-wrap:wrap; gap:8px 14px; margin:12px 0 0; padding:0; list-style:none; }
+    .source-links a { font-weight:700; }
+    footer { margin-top:56px; padding:30px 0 44px; border-top:1px solid color-mix(in srgb,var(--pickle-light) 20%,transparent); color:var(--ink-muted); text-align:center; font-size:.86rem; }
+    @media (max-width:760px) {
+      .hero { padding-top:44px; }
+      .summary { grid-template-columns:repeat(2,1fr); }
+      .table-tools { align-items:start; flex-direction:column; gap:8px; }
+      .table-scroll { border-radius:var(--radius-sm); }
+      table { min-width:1120px; }
+      th button { min-height:48px; }
+    }
+    @media (max-width:480px) {
+      .wrap { width:min(100% - 20px,var(--max)); }
+      .nav-links a { padding:6px 10px; font-size:.84rem; }
+      .summary { gap:8px; }
+      .summary-card { padding:14px; }
+      .summary-card strong { font-size:1.3rem; }
+    }
+    @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#comparison">Skip to comparison</a>
+  <header>
+    <div class="wrap">
+      <nav aria-label="Primary navigation">
+        <a class="brand" href="index.html"><img src="pickleshell-logo.png" alt="" width="36" height="36"><span>PickleShell</span></a>
+        <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="#sources">Sources</a></li></ul>
+      </nav>
+    </div>
+  </header>
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div class="eyebrow">Phase 1 benchmark</div>
+        <h1>Model comparison grounded in the patches.</h1>
+        <p class="lead">Fifty coding-agent candidates received the same ledger-reconciliation task. Quality scores review visible code and are constrained by recorded public and hidden correctness; availability outcomes remain separate from patch quality.</p>
+        <div class="verified">Prices verified: August 16, 2026</div>
+      </div>
+    </section>
+    <div class="wrap">
+      <section class="summary" aria-label="Benchmark summary">
+        <div class="summary-card"><strong>50</strong><span>tested candidates</span></div>
+        <div class="summary-card"><strong>28</strong><span>scored patches</span></div>
+        <div class="summary-card"><strong>22</strong><span>N/A availability outcomes</span></div>
+        <div class="summary-card"><strong>5</strong><span>quality dimensions</span></div>
+      </section>
+      <aside class="notice"><strong>Price units are intentionally separate.</strong> Free endpoint access, USD per 1M tokens, Codex credits per 1M tokens, and research-preview access are not directly comparable. Price sorting groups by type and only orders numeric rates within the same unit.</aside>
+      <section id="comparison" aria-labelledby="comparison-title">
+        <div class="table-tools"><div><h2 id="comparison-title">Complete candidate results</h2><p id="sort-help">Activate any column heading to sort. Activate it again to reverse direction; N/A scores always remain last.</p></div><p><span id="row-count">50</span> rows</p></div>
+        <div class="table-scroll" role="region" aria-label="Sortable model comparison table" tabindex="0">
+          <table>
+            <caption>All 50 phase-1 benchmark candidates with quality, speed, access, and price information.</caption>
+            <thead><tr>
+              <th scope="col" aria-sort="ascending"><button type="button" data-key="rank" data-type="number">Rank / status <span class="sort-indicator" aria-hidden="true">▲</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-key="model" data-type="text">Model <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-key="simplicity" data-type="number">Simplicity <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-key="readability" data-type="number">Readability <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-key="noExtraCode" data-type="number">No extra code <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-key="reliability" data-type="number">Reliability <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-key="edgeCases" data-type="number">Edge cases <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-key="overall" data-type="number">Overall <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-key="seconds" data-type="number">Time (s) <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-key="channel" data-type="text">Access channel <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-key="price" data-type="price">Price <span class="sort-indicator" aria-hidden="true">↕</span></button></th>
+            </tr></thead>
+            <tbody id="results-body"></tbody>
+          </table>
+        </div>
+      </section>
+      <section class="sources" id="sources">
+        <h2>Pricing notes and official sources</h2>
+        <p>OpenCode Free labels describe the tested endpoints and are not a permanent availability or pricing guarantee. DeepSeek V4 Pro and Flash use separate peak/off-peak rates; peak-hour windows and context-length thresholds can change which rate applies, so consult the current rate card before estimating a run.</p>
+        <p>Cache-write is shown where supplied. A dash means no separate verified cache-write value was provided for this comparison.</p>
+        <ul class="source-links">
+          <li><a href="https://opencode.ai/docs/go/" target="_blank" rel="noopener noreferrer">OpenCode Go <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://opencode.ai/docs/zen/" target="_blank" rel="noopener noreferrer">OpenCode Zen <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://developers.openai.com/codex/pricing/" target="_blank" rel="noopener noreferrer">Codex rate card <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://developers.openai.com/api/docs/models/gpt-5.4" target="_blank" rel="noopener noreferrer">GPT-5.4 <span aria-hidden="true">↗</span></a></li>
+          <li><a href="https://developers.openai.com/api/docs/models/gpt-5.4-mini" target="_blank" rel="noopener noreferrer">GPT-5.4 Mini <span aria-hidden="true">↗</span></a></li>
+        </ul>
+      </section>
+    </div>
+  </main>
+  <footer><div class="wrap">PickleShell model benchmark · Quality evidence and access conditions shown separately.</div></footer>
+  <script id="candidate-data" type="application/json">[{"candidateDir":"48-gpt-5-6-terra","model":"gpt-5.6-terra","rawModel":"gpt-5.6-terra","rank":1,"status":"success","simplicity":9,"readability":9,"noExtraCode":9,"reliability":10,"edgeCases":10,"overall":9.4,"seconds":52.637,"channel":"Codex","price":{"kind":"credits","label":"Codex credits / 1M tokens","input":"62.5","cached":"6.25","output":"375","sortGroup":3,"sortValue":62.5},"originalIndex":0},{"candidateDir":"47-gpt-5-6-sol","model":"gpt-5.6-sol","rawModel":"gpt-5.6-sol","rank":2,"status":"success","simplicity":9,"readability":9,"noExtraCode":9,"reliability":10,"edgeCases":10,"overall":9.4,"seconds":83.836,"channel":"Codex","price":{"kind":"credits","label":"Codex credits / 1M tokens","input":"125","cached":"12.5","output":"750","sortGroup":3,"sortValue":125},"originalIndex":1},{"candidateDir":"49-gpt-5-4","model":"gpt-5.4","rawModel":"gpt-5.4","rank":3,"status":"success","simplicity":9,"readability":9,"noExtraCode":10,"reliability":8,"edgeCases":9,"overall":9,"seconds":48.633,"channel":"Codex","price":{"kind":"credits","label":"Codex credits / 1M tokens","input":"62.5","cached":"6.25","output":"375","sortGroup":3,"sortValue":62.5},"originalIndex":2},{"candidateDir":"19-big-pickle","model":"big-pickle","rawModel":"opencode/big-pickle","rank":4,"status":"success","simplicity":9,"readability":9,"noExtraCode":9,"reliability":8,"edgeCases":9,"overall":8.8,"seconds":68.472,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":3},{"candidateDir":"04-deepseek-v4-pro","model":"deepseek-v4-pro","rawModel":"opencode-go/deepseek-v4-pro","rank":5,"status":"success","simplicity":9,"readability":9,"noExtraCode":9,"reliability":8,"edgeCases":9,"overall":8.8,"seconds":141.098,"channel":"OpenCode Go","price":{"kind":"usd-tiered","label":"USD / 1M tokens","input":".66","cached":".022","output":"1.98","peakInput":"1.32","peakCached":".044","peakOutput":"3.96","sortGroup":2,"sortValue":0.66},"originalIndex":4},{"candidateDir":"14-hy3","model":"hy3","rawModel":"opencode-go/hy3","rank":6,"status":"success","simplicity":9,"readability":9,"noExtraCode":10,"reliability":7,"edgeCases":8,"overall":8.6,"seconds":53.079,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":".14","cached":".035","output":".58","write":"—","note":"","sortGroup":2,"sortValue":0.14},"originalIndex":5},{"candidateDir":"01-gpt-5-6-luna","model":"gpt-5.6-luna","rawModel":"opencode-go/gpt-5.6-luna","rank":7,"status":"success","simplicity":8,"readability":8,"noExtraCode":7,"reliability":10,"edgeCases":10,"overall":8.6,"seconds":53.378,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":".20","cached":".02","output":"1.20","write":".25","note":"","sortGroup":2,"sortValue":0.2},"originalIndex":6},{"candidateDir":"09-grok-4-5","model":"grok-4.5","rawModel":"opencode-go/grok-4.5","rank":8,"status":"success","simplicity":9,"readability":9,"noExtraCode":9,"reliability":7,"edgeCases":8,"overall":8.4,"seconds":37.682,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":"2","cached":".30","output":"6","write":"—","note":"","sortGroup":2,"sortValue":2},"originalIndex":7},{"candidateDir":"27-hy3-free","model":"hy3-free","rawModel":"opencode/hy3-free","rank":9,"status":"success","simplicity":9,"readability":9,"noExtraCode":9,"reliability":7,"edgeCases":8,"overall":8.4,"seconds":65.815,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":8},{"candidateDir":"02-qwen3-7-plus","model":"qwen3.7-plus","rawModel":"opencode-go/qwen3.7-plus","rank":10,"status":"success","simplicity":9,"readability":9,"noExtraCode":9,"reliability":7,"edgeCases":8,"overall":8.4,"seconds":74.826,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":".40","cached":".04","output":"1.60","write":".50","note":"","sortGroup":2,"sortValue":0.4},"originalIndex":9},{"candidateDir":"50-gpt-5-4-mini","model":"gpt-5.4-mini","rawModel":"gpt-5.4-mini","rank":11,"status":"success","simplicity":8,"readability":9,"noExtraCode":8,"reliability":8,"edgeCases":9,"overall":8.4,"seconds":137.074,"channel":"Codex","price":{"kind":"credits","label":"Codex credits / 1M tokens","input":"18.75","cached":"1.875","output":"113","sortGroup":3,"sortValue":18.75},"originalIndex":10},{"candidateDir":"10-kimi-k3","model":"kimi-k3","rawModel":"opencode-go/kimi-k3","rank":12,"status":"success","simplicity":9,"readability":9,"noExtraCode":9,"reliability":7,"edgeCases":8,"overall":8.4,"seconds":230.178,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":"3","cached":".30","output":"15","write":"—","note":"","sortGroup":2,"sortValue":3},"originalIndex":11},{"candidateDir":"18-gpt-5-3-codex-spark","model":"gpt-5.3-codex-spark","rawModel":"gpt-5.3-codex-spark","rank":13,"status":"success","simplicity":8,"readability":8,"noExtraCode":7,"reliability":8,"edgeCases":9,"overall":8,"seconds":42.152,"channel":"Codex","price":{"kind":"preview","label":"Research preview","sortGroup":1,"sortValue":0},"originalIndex":12},{"candidateDir":"03-kimi-k2-7-code","model":"kimi-k2.7-code","rawModel":"opencode-go/kimi-k2.7-code","rank":14,"status":"success","simplicity":8,"readability":8,"noExtraCode":8,"reliability":7,"edgeCases":9,"overall":8,"seconds":121.96,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":".95","cached":".19","output":"4","write":"—","note":"","sortGroup":2,"sortValue":0.95},"originalIndex":13},{"candidateDir":"15-glm-5-1","model":"glm-5.1","rawModel":"opencode-go/glm-5.1","rank":15,"status":"success","simplicity":8,"readability":8,"noExtraCode":9,"reliability":7,"edgeCases":8,"overall":8,"seconds":156.355,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":"1.40","cached":".26","output":"4.40","write":"—","note":"","sortGroup":2,"sortValue":1.4},"originalIndex":14},{"candidateDir":"11-deepseek-v4-flash","model":"deepseek-v4-flash","rawModel":"opencode-go/deepseek-v4-flash","rank":16,"status":"success","simplicity":8,"readability":8,"noExtraCode":7,"reliability":8,"edgeCases":8,"overall":7.8,"seconds":91.645,"channel":"OpenCode Go","price":{"kind":"usd-tiered","label":"USD / 1M tokens","input":".22","cached":".007","output":".66","peakInput":".44","peakCached":".014","peakOutput":"1.32","sortGroup":2,"sortValue":0.22},"originalIndex":15},{"candidateDir":"05-glm-5-2","model":"glm-5.2","rawModel":"opencode-go/glm-5.2","rank":17,"status":"success","simplicity":8,"readability":8,"noExtraCode":8,"reliability":7,"edgeCases":8,"overall":7.8,"seconds":91.99,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":"1.40","cached":".26","output":"4.40","write":"—","note":"","sortGroup":2,"sortValue":1.4},"originalIndex":16},{"candidateDir":"22-deepseek-v4-flash-free","model":"deepseek-v4-flash-free","rawModel":"opencode/deepseek-v4-flash-free","rank":18,"status":"success","simplicity":7,"readability":8,"noExtraCode":6,"reliability":9,"edgeCases":9,"overall":7.8,"seconds":93.522,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":17},{"candidateDir":"46-gpt-5-6-luna","model":"gpt-5.6-luna","rawModel":"gpt-5.6-luna","rank":19,"status":"success","simplicity":6,"readability":7,"noExtraCode":5,"reliability":10,"edgeCases":10,"overall":7.6,"seconds":84.371,"channel":"Codex","price":{"kind":"credits","label":"Codex credits / 1M tokens","input":"25","cached":"2.5","output":"150","sortGroup":3,"sortValue":25},"originalIndex":18},{"candidateDir":"06-minimax-m3","model":"minimax-m3","rawModel":"opencode-go/minimax-m3","rank":20,"status":"success","simplicity":8,"readability":8,"noExtraCode":7,"reliability":7,"edgeCases":8,"overall":7.6,"seconds":235.614,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":".30","cached":".06","output":"1.20","write":"—","note":"","sortGroup":2,"sortValue":0.3},"originalIndex":19},{"candidateDir":"35-nemotron-3-ultra-free","model":"nemotron-3-ultra-free","rawModel":"opencode/nemotron-3-ultra-free","rank":21,"status":"agent error with partial patch","simplicity":7,"readability":7,"noExtraCode":6,"reliability":8,"edgeCases":9,"overall":7.4,"seconds":99.421,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":20},{"candidateDir":"07-mimo-v2-5-pro","model":"mimo-v2.5-pro","rawModel":"opencode-go/mimo-v2.5-pro","rank":22,"status":"success","simplicity":7,"readability":7,"noExtraCode":6,"reliability":7,"edgeCases":8,"overall":7,"seconds":98.725,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":".435","cached":".003625","output":".87","write":"—","note":"","sortGroup":2,"sortValue":0.435},"originalIndex":21},{"candidateDir":"20-laguna-s-2-1-free","model":"laguna-s-2.1-free","rawModel":"opencode/laguna-s-2.1-free","rank":23,"status":"success","simplicity":7,"readability":7,"noExtraCode":6,"reliability":7,"edgeCases":8,"overall":7,"seconds":450.765,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":22},{"candidateDir":"17-minimax-m2-7","model":"minimax-m2.7","rawModel":"opencode-go/minimax-m2.7","rank":24,"status":"evaluated failure","simplicity":10,"readability":10,"noExtraCode":10,"reliability":2,"edgeCases":2,"overall":6.8,"seconds":36.705,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":".30","cached":".06","output":"1.20","write":".375","note":"","sortGroup":2,"sortValue":0.3},"originalIndex":23},{"candidateDir":"13-mimo-v2-5","model":"mimo-v2.5","rawModel":"opencode-go/mimo-v2.5","rank":25,"status":"evaluated failure","simplicity":10,"readability":10,"noExtraCode":10,"reliability":2,"edgeCases":2,"overall":6.8,"seconds":55.47,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":".14","cached":".0028","output":".28","write":"—","note":"","sortGroup":2,"sortValue":0.14},"originalIndex":24},{"candidateDir":"16-kimi-k2-6","model":"kimi-k2.6","rawModel":"opencode-go/kimi-k2.6","rank":26,"status":"success","simplicity":6,"readability":7,"noExtraCode":5,"reliability":7,"edgeCases":8,"overall":6.6,"seconds":159.868,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":".95","cached":".16","output":"4","write":"—","note":"","sortGroup":2,"sortValue":0.95},"originalIndex":25},{"candidateDir":"33-nemotron-3-5-lightning-free","model":"nemotron-3.5-lightning-free","rawModel":"opencode/nemotron-3.5-lightning-free","rank":27,"status":"success","simplicity":7,"readability":7,"noExtraCode":6,"reliability":6,"edgeCases":7,"overall":6.6,"seconds":202.094,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":26},{"candidateDir":"28-mimo-v2-5-free","model":"mimo-v2.5-free","rawModel":"opencode/mimo-v2.5-free","rank":28,"status":"evaluated failure","simplicity":8,"readability":8,"noExtraCode":8,"reliability":4,"edgeCases":4,"overall":6.4,"seconds":79.247,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":27},{"candidateDir":"08-qwen3-7-max","model":"qwen3.7-max","rawModel":"opencode-go/qwen3.7-max","rank":null,"status":"timeout","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":600.007,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":"2.50","cached":".50","output":"7.50","write":"3.125","note":"","sortGroup":2,"sortValue":2.5},"originalIndex":28},{"candidateDir":"12-qwen3-6-plus","model":"qwen3.6-plus","rawModel":"opencode-go/qwen3.6-plus","rank":null,"status":"timeout","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":600.008,"channel":"OpenCode Go","price":{"kind":"usd","label":"USD / 1M tokens","input":".50","cached":".05","output":"3","write":".625","note":"","sortGroup":2,"sortValue":0.5},"originalIndex":29},{"candidateDir":"21-grok-code","model":"grok-code","rawModel":"opencode/grok-code","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.567,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":30},{"candidateDir":"23-qwen3-6-plus-free","model":"qwen3.6-plus-free","rawModel":"opencode/qwen3.6-plus-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.523,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":31},{"candidateDir":"24-kimi-k2-5-free","model":"kimi-k2.5-free","rawModel":"opencode/kimi-k2.5-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.524,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":32},{"candidateDir":"25-glm-5-free","model":"glm-5-free","rawModel":"opencode/glm-5-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.498,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":33},{"candidateDir":"26-hy3-preview-free","model":"hy3-preview-free","rawModel":"opencode/hy3-preview-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.549,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":34},{"candidateDir":"29-mimo-v2-pro-free","model":"mimo-v2-pro-free","rawModel":"opencode/mimo-v2-pro-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.523,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":35},{"candidateDir":"30-minimax-m3-free","model":"minimax-m3-free","rawModel":"opencode/minimax-m3-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.54,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":36},{"candidateDir":"31-north-mini-code-free","model":"north-mini-code-free","rawModel":"opencode/north-mini-code-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.545,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":37},{"candidateDir":"32-longcat-2-0-free","model":"longcat-2.0-free","rawModel":"opencode/longcat-2.0-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.505,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":38},{"candidateDir":"34-nemotron-3-super-free","model":"nemotron-3-super-free","rawModel":"opencode/nemotron-3-super-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.602,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":39},{"candidateDir":"36-trinity-large-preview-free","model":"trinity-large-preview-free","rawModel":"opencode/trinity-large-preview-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.562,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":40},{"candidateDir":"37-ring-2-6-1t-free","model":"ring-2.6-1t-free","rawModel":"opencode/ring-2.6-1t-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.563,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":41},{"candidateDir":"38-ling-3-0-flash-free","model":"ling-3.0-flash-free","rawModel":"opencode/ling-3.0-flash-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.554,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":42},{"candidateDir":"39-ling-3-0-tiny-free","model":"ling-3.0-tiny-free","rawModel":"opencode/ling-3.0-tiny-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.588,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":43},{"candidateDir":"40-ling-2-6-flash-free","model":"ling-2.6-flash-free","rawModel":"opencode/ling-2.6-flash-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.586,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":44},{"candidateDir":"41-mimo-v2-flash-free","model":"mimo-v2-flash-free","rawModel":"opencode/mimo-v2-flash-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.566,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":45},{"candidateDir":"42-mimo-v2-omni-free","model":"mimo-v2-omni-free","rawModel":"opencode/mimo-v2-omni-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.536,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":46},{"candidateDir":"43-minimax-m2-5-free","model":"minimax-m2.5-free","rawModel":"opencode/minimax-m2.5-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.555,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":47},{"candidateDir":"44-minimax-m2-1-free","model":"minimax-m2.1-free","rawModel":"opencode/minimax-m2.1-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.699,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":48},{"candidateDir":"45-glm-4-7-free","model":"glm-4.7-free","rawModel":"opencode/glm-4.7-free","rank":null,"status":"provider error","simplicity":null,"readability":null,"noExtraCode":null,"reliability":null,"edgeCases":null,"overall":null,"seconds":2.732,"channel":"OpenCode Free","price":{"kind":"free","label":"Free","sortGroup":0,"sortValue":0},"originalIndex":49}]</script>
+  <script>
+    const candidates = JSON.parse(document.getElementById('candidate-data').textContent);
+    const body = document.getElementById('results-body');
+    const headers = [...document.querySelectorAll('th')];
+    const state = { key: 'rank', direction: 'ascending', type: 'number' };
+
+    function escapeHtml(value) {
+      return String(value).replace(/[&<>'"]/g, char => ({ '&':'&amp;', '<':'&lt;', '>':'&gt;', "'":'&#39;', '"':'&quot;' })[char]);
+    }
+    function score(value, overall = false) {
+      return value === null ? '<span class="na">N/A</span>' : '<span class="' + (overall ? 'overall' : '') + '">' + value.toFixed(overall ? 1 : 0) + '</span>';
+    }
+    function priceMarkup(price) {
+      if (price.kind === 'free' || price.kind === 'preview') return '<div class="price"><strong>' + escapeHtml(price.label) + '</strong><small>' + (price.kind === 'free' ? 'Tested endpoint' : 'No rate comparison') + '</small></div>';
+      if (price.kind === 'credits') return '<div class="price"><strong>' + escapeHtml(price.label) + '</strong><small>Input ' + price.input + ' · Cached ' + price.cached + ' · Output ' + price.output + '</small></div>';
+      if (price.kind === 'usd-tiered') return '<div class="price"><strong>' + escapeHtml(price.label) + '</strong><small>Off-peak I/C/O ' + price.input + '/' + price.cached + '/' + price.output + '<br>Peak I/C/O ' + price.peakInput + '/' + price.peakCached + '/' + price.peakOutput + '</small></div>';
+      return '<div class="price"><strong>' + escapeHtml(price.label) + '</strong><small>I/C/O/W ' + price.input + '/' + price.cached + '/' + price.output + '/' + price.write + '</small></div>';
+    }
+    function compareValues(a, b, key, type, direction) {
+      const av = key === 'price' ? a.price : a[key];
+      const bv = key === 'price' ? b.price : b[key];
+      const aMissing = av === null || av === undefined;
+      const bMissing = bv === null || bv === undefined;
+      if (aMissing !== bMissing) return aMissing ? 1 : -1;
+      if (aMissing && bMissing) return a.originalIndex - b.originalIndex;
+      let result = 0;
+      if (type === 'price') {
+        result = av.sortGroup - bv.sortGroup || av.sortValue - bv.sortValue;
+      } else if (type === 'number') {
+        result = av - bv;
+      } else {
+        result = String(av).localeCompare(String(bv), undefined, { numeric:true, sensitivity:'base' });
+      }
+      if (direction === 'descending') result *= -1;
+      return result || a.originalIndex - b.originalIndex;
+    }
+    function sortedRows() {
+      return [...candidates].sort((a, b) => compareValues(a, b, state.key, state.type, state.direction));
+    }
+    function render() {
+      body.innerHTML = sortedRows().map(row => {
+        const rank = row.rank === null ? '<span class="na">N/A</span>' : '<strong>#' + row.rank + '</strong>';
+        const statusClass = row.status === 'success' ? ' success' : '';
+        return '<tr>' +
+          '<td>' + rank + '<span class="badge' + statusClass + '">' + escapeHtml(row.status) + '</span></td>' +
+          '<td><span class="model">' + escapeHtml(row.model) + '</span><span class="candidate-id">' + escapeHtml(row.candidateDir) + '</span></td>' +
+          '<td class="score">' + score(row.simplicity) + '</td>' +
+          '<td class="score">' + score(row.readability) + '</td>' +
+          '<td class="score">' + score(row.noExtraCode) + '</td>' +
+          '<td class="score">' + score(row.reliability) + '</td>' +
+          '<td class="score">' + score(row.edgeCases) + '</td>' +
+          '<td class="score">' + score(row.overall, true) + '</td>' +
+          '<td class="number">' + row.seconds.toFixed(3) + '</td>' +
+          '<td class="channel">' + escapeHtml(row.channel) + '</td>' +
+          '<td>' + priceMarkup(row.price) + '</td></tr>';
+      }).join('');
+    }
+    function updateHeaders(activeButton) {
+      headers.forEach(header => {
+        const button = header.querySelector('button');
+        const active = button === activeButton;
+        header.setAttribute('aria-sort', active ? state.direction : 'none');
+        button.querySelector('.sort-indicator').textContent = active ? (state.direction === 'ascending' ? '▲' : '▼') : '↕';
+      });
+    }
+    document.querySelectorAll('th button').forEach(button => button.addEventListener('click', () => {
+      const nextKey = button.dataset.key;
+      if (state.key === nextKey) state.direction = state.direction === 'ascending' ? 'descending' : 'ascending';
+      else { state.key = nextKey; state.direction = nextKey === 'overall' ? 'descending' : 'ascending'; state.type = button.dataset.type; }
+      updateHeaders(button);
+      render();
+    }));
+    render();
+  </script>
+</body>
+</html>
