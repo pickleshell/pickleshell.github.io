@@ -154,28 +154,35 @@
     }
     .btn-secondary:hover { border-color: var(--pickle); background: color-mix(in srgb, var(--pickle) 8%, var(--white)); }
 
-    .additional-repos { padding: 0 0 40px; }
+    .additional-repos {
+      padding: 34px 0 40px;
+      background: var(--cream-dark);
+      border-block: 1px solid color-mix(in srgb, var(--pickle-light) 30%, transparent);
+    }
     .additional-repos .wrap {
-      display: flex; align-items: center; justify-content: center; gap: 14px;
-      padding-top: 20px;
-      border-top: 1px solid color-mix(in srgb, var(--pickle-light) 30%, transparent);
+      display: grid; grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
+      align-items: start; gap: 32px;
     }
     .additional-repos-label {
-      color: var(--ink-muted); font-size: .82rem; font-weight: 750;
-      letter-spacing: .04em; text-transform: uppercase;
+      margin: 5px 0 0; color: var(--ink); font-size: 1rem; font-weight: 800;
+      letter-spacing: -.01em;
     }
-    .repo-list { display: flex; flex-wrap: wrap; gap: 8px; list-style: none; }
+    .repo-list { max-width: 620px; list-style: none; }
+    .repo-list li { border-bottom: 1px solid color-mix(in srgb, var(--pickle) 28%, transparent); }
+    .repo-list li:first-child { border-top: 1px solid color-mix(in srgb, var(--pickle) 28%, transparent); }
     .repo-list a {
-      display: inline-flex; align-items: center; gap: 5px;
-      padding: 7px 13px; border-radius: 999px;
-      border: 1px solid color-mix(in srgb, var(--pickle) 45%, transparent);
-      background: var(--white); color: var(--teal-deep);
-      font-size: .88rem; font-weight: 700; text-decoration: none;
-      transition: transform .18s ease, border-color .2s, background .2s;
+      display: flex; align-items: baseline; justify-content: space-between; gap: 12px;
+      padding: 11px 2px; color: var(--pickle-dark);
+      font-size: .94rem; font-weight: 750; text-decoration-thickness: 1.5px;
+      text-underline-offset: 3px;
+      transition: color .2s, padding-left .2s;
     }
     .repo-list a:hover {
-      transform: translateY(-1px); border-color: var(--pickle);
-      background: color-mix(in srgb, var(--pickle) 8%, var(--white));
+      padding-left: 6px; color: var(--teal-deep);
+    }
+    @media (prefers-color-scheme: dark) {
+      .repo-list a { color: var(--pickle-light); }
+      .repo-list a:hover { color: var(--seed); }
     }
 
     .hero-mascot {
@@ -398,10 +405,10 @@
       .hero-mascot { width: 140px; height: 140px; }
       nav ul { gap: 4px; }
       .nav-links a { padding: 5px 10px; font-size: .84rem; }
-      .additional-repos .wrap { flex-direction: column; gap: 10px; }
-      .repo-list { width: 100%; justify-content: center; }
-      .repo-list li { flex: 1; max-width: 180px; }
-      .repo-list a { justify-content: center; width: 100%; }
+      .additional-repos { padding: 28px 0 34px; }
+      .additional-repos .wrap { grid-template-columns: 1fr; gap: 14px; }
+      .additional-repos-label { margin: 0; }
+      .repo-list { width: 100%; max-width: none; }
     }
 
     /* ── REDUCED MOTION ────────────────── */
@@ -470,12 +477,12 @@
 
     <aside class="additional-repos" aria-labelledby="additional-repos-title">
       <div class="wrap">
-        <span class="additional-repos-label" id="additional-repos-title">Additional repositories</span>
+        <h2 class="additional-repos-label" id="additional-repos-title">Additional repositories</h2>
         <ul class="repo-list">
           <li><a href="https://github.com/pickleshell/skills" target="_blank" rel="noopener noreferrer" aria-label="Skills repository on GitHub (opens in a new tab)">Skills <span aria-hidden="true">&#8599;</span></a></li>
           <li><a href="https://github.com/pickleshell/models-test" target="_blank" rel="noopener noreferrer" aria-label="Models Test repository on GitHub (opens in a new tab)">Models Test <span aria-hidden="true">&#8599;</span></a></li>
-          <li><a href="model-comparison.html">Model comparison — Phase 1</a></li>
-          <li><a href="model-comparison-phase2.html">Model comparison — Phase 2 (historical / provisional)</a></li>
+          <li><a href="model-comparison.html">Model comparison — Test V1 / Phase 1</a></li>
+          <li><a href="model-comparison-phase2.html">Model comparison — Test V1 / Phase 2 (historical / provisional)</a></li>
         </ul>
       </div>
     </aside>

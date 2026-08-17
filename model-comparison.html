@@ -32,13 +32,16 @@
     nav { display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px; }
     .brand { display:inline-flex; align-items:center; gap:10px; color:var(--ink); font-weight:800; font-size:1.15rem; text-decoration:none; }
     .brand img { width:36px; height:36px; border-radius:8px; }
-    .nav-links { display:flex; gap:8px; margin:0; padding:0; list-style:none; }
+    .nav-links { display:flex; align-items:center; gap:6px; margin:0; padding:0; list-style:none; overflow-x:auto; }
     .nav-links a { display:block; padding:6px 14px; border-radius:999px; font-size:.92rem; font-weight:650; text-decoration:none; }
-    .nav-links a:hover { background:var(--pickle-light); color:var(--teal-deep); }
+    .nav-links a:hover,.nav-links a[aria-current="page"] { background:var(--pickle-light); color:var(--teal-deep); }
+    .nav-links .planned { display:block; padding:6px 10px; color:var(--ink-muted); font-size:.84rem; font-weight:700; white-space:nowrap; }
     .hero { padding:64px 0 36px; }
     .eyebrow { color:var(--pickle-dark); font-size:.8rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; }
     h1 { max-width:800px; margin:10px 0 16px; font-size:clamp(2.25rem,5vw,3.7rem); line-height:1.07; letter-spacing:-.04em; }
     .lead { max-width:790px; margin:0; color:var(--ink-muted); font-size:1.08rem; }
+    .benchmark-context { max-width:790px; margin:14px 0 0; color:var(--ink-mid); font-size:.94rem; }
+    .benchmark-context a { font-weight:750; }
     .verified { display:inline-flex; align-items:center; gap:8px; margin-top:22px; padding:8px 14px; border:1px solid color-mix(in srgb,var(--pickle) 45%,transparent); border-radius:999px; background:color-mix(in srgb,var(--pickle) 9%,transparent); color:var(--pickle-dark); font-weight:800; }
     .verified::before { content:""; width:8px; height:8px; border-radius:50%; background:var(--pickle); }
     .summary { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:30px auto; }
@@ -78,6 +81,10 @@
     .source-links a { font-weight:700; }
     footer { margin-top:56px; padding:30px 0 44px; border-top:1px solid color-mix(in srgb,var(--pickle-light) 20%,transparent); color:var(--ink-muted); text-align:center; font-size:.86rem; }
     @media (max-width:760px) {
+      nav { align-items:center; }
+      .brand span { display:none; }
+      .nav-links { margin-left:auto; }
+      .nav-links a,.nav-links .planned { padding:6px 8px; font-size:.78rem; }
       .hero { padding-top:44px; }
       .summary { grid-template-columns:repeat(2,1fr); }
       .table-tools { align-items:start; flex-direction:column; gap:8px; }
@@ -101,16 +108,17 @@
     <div class="wrap">
       <nav aria-label="Primary navigation">
         <a class="brand" href="index.html"><img src="pickleshell-logo.png" alt="" width="36" height="36"><span>PickleShell</span></a>
-        <ul class="nav-links"><li><a href="index.html">Home</a></li><li><a href="#sources">Sources</a></li></ul>
+        <ul class="nav-links"><li><a href="model-comparison.html" aria-current="page">Test V1 / Phase 1</a></li><li><a href="model-comparison-phase2.html">Test V1 / Phase 2</a></li><li><span class="planned">Test V2 / Phase 3 planned</span></li></ul>
       </nav>
     </div>
   </header>
   <main>
     <section class="hero">
       <div class="wrap">
-        <div class="eyebrow">Phase 1 benchmark</div>
+        <div class="eyebrow">Test V1 / Phase 1</div>
         <h1>Model comparison grounded in the patches.</h1>
         <p class="lead">Fifty-three coding-agent candidates received the same ledger-reconciliation task. Quality scores review visible code and are constrained by recorded public and hidden correctness; availability outcomes remain separate from patch quality.</p>
+        <p class="benchmark-context">You are viewing Test V1 / Phase 1. Continue to the <a href="model-comparison-phase2.html">Test V1 / Phase 2 aggregate</a>. Test V2 begins with Phase 3, which is planned; no Phase 3 results exist yet.</p>
         <div class="verified">Prices verified: August 16, 2026</div>
       </div>
     </section>
