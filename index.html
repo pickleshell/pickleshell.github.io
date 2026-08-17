@@ -160,14 +160,14 @@
       border-block: 1px solid color-mix(in srgb, var(--pickle-light) 30%, transparent);
     }
     .additional-repos .wrap {
-      display: grid; grid-template-columns: minmax(180px, 240px) minmax(0, 1fr);
-      align-items: start; gap: 32px;
+      display: grid; grid-template-columns: 1fr;
+      align-items: start; justify-items: start; gap: 14px;
     }
     .additional-repos-label {
-      margin: 5px 0 0; color: var(--ink); font-size: 1rem; font-weight: 800;
+      margin: 0; color: var(--ink); font-size: 1rem; font-weight: 800;
       letter-spacing: -.01em;
     }
-    .repo-list { max-width: 620px; list-style: none; }
+    .repo-list { width: 100%; max-width: 620px; list-style: none; }
     .repo-list li { border-bottom: 1px solid color-mix(in srgb, var(--pickle) 28%, transparent); }
     .repo-list li:first-child { border-top: 1px solid color-mix(in srgb, var(--pickle) 28%, transparent); }
     .repo-list a {
