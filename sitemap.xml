@@ -6,4 +6,25 @@
   <url>
     <loc>https://pickleshell.github.io/quick-notes.html</loc>
   </url>
+  <url>
+    <loc>https://pickleshell.github.io/model-comparison.html</loc>
+  </url>
+  <url>
+    <loc>https://pickleshell.github.io/model-comparison-phase2.html</loc>
+  </url>
+  <url>
+    <loc>https://pickleshell.github.io/model-comparison-phase2-bug-fixing.html</loc>
+  </url>
+  <url>
+    <loc>https://pickleshell.github.io/model-comparison-phase2-feature-implementation.html</loc>
+  </url>
+  <url>
+    <loc>https://pickleshell.github.io/model-comparison-phase2-refactoring.html</loc>
+  </url>
+  <url>
+    <loc>https://pickleshell.github.io/model-comparison-phase2-repository-navigation.html</loc>
+  </url>
+  <url>
+    <loc>https://pickleshell.github.io/model-comparison-phase2-tests-edge-cases.html</loc>
+  </url>
 </urlset>

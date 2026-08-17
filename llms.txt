@@ -15,6 +15,8 @@ and the user remains the owner and observer.
 
 - Website: https://pickleshell.github.io/
 - Quick Notes: https://pickleshell.github.io/quick-notes.html
+- Model comparison, Phase 1: https://pickleshell.github.io/model-comparison.html
+- Model comparison, Phase 2 (historical / provisional): https://pickleshell.github.io/model-comparison-phase2.html
 - Repository: https://github.com/pickleshell/pickleshell
 - Deployment guide: https://github.com/pickleshell/pickleshell/blob/main/docs/deployment.md
 - ChatGPT setup: https://github.com/pickleshell/pickleshell/blob/main/docs/chatgpt.md
