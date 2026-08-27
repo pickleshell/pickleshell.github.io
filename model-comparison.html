@@ -48,6 +48,14 @@
     .summary-card { padding:18px; border:1px solid color-mix(in srgb,var(--pickle-light) 35%,transparent); border-radius:var(--radius); background:var(--white); box-shadow:var(--shadow); }
     .summary-card strong { display:block; font-size:1.55rem; line-height:1.1; }
     .summary-card span { color:var(--ink-muted); font-size:.86rem; }
+    .phase2-snapshot { margin:0 0 30px; }
+    .phase2-snapshot .table-tools { margin-bottom:12px; }
+    .phase2-snapshot .table-scroll { max-width:100%; }
+    .phase2-snapshot table { min-width:860px; }
+    .phase2-snapshot th { padding:10px 9px; font:750 .76rem/1.25 system-ui,sans-serif; }
+    .phase2-snapshot .result { font-weight:750; white-space:nowrap; }
+    .phase2-snapshot .result.pass { color:var(--pickle-dark); }
+    .phase2-snapshot .result.fail { color:var(--ink-mid); }
     .notice { margin:0 0 22px; padding:16px 18px; border-left:4px solid var(--pickle); border-radius:var(--radius-sm); background:var(--cream-dark); color:var(--ink-mid); }
     .table-tools { display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:12px; }
     .table-tools h2 { margin:0; font-size:1.35rem; }
@@ -128,6 +136,30 @@
         <div class="summary-card"><strong>31</strong><span>scored patches</span></div>
         <div class="summary-card"><strong>22</strong><span>N/A availability outcomes</span></div>
         <div class="summary-card"><strong>5</strong><span>quality dimensions</span></div>
+      </section>
+      <section class="phase2-snapshot" aria-labelledby="phase2-snapshot-title">
+        <div class="table-tools"><div><h2 id="phase2-snapshot-title">Phase 2 Patch snapshot</h2><p>Current snapshot; this table will expand as more models complete.</p></div><p>6 completed models</p></div>
+        <div class="table-scroll" role="region" aria-label="Phase 2 Patch summary table" tabindex="0">
+          <table>
+            <caption>Current completed Phase 2 Patch model summaries.</caption>
+            <thead><tr>
+              <th scope="col">Model</th>
+              <th scope="col">Patch result</th>
+              <th scope="col" class="score">Our score</th>
+              <th scope="col" class="score">External judge score</th>
+              <th scope="col">Solution time</th>
+              <th scope="col">Solution cost</th>
+            </tr></thead>
+            <tbody>
+              <tr><td class="model">Claude Opus 5</td><td><span class="result pass">Public pass · Hidden pass</span></td><td class="score overall">9.75 / 10</td><td class="score na">—</td><td class="number">90.360 s</td><td class="number">$0.30080325</td></tr>
+              <tr><td class="model">Claude Sonnet 5</td><td><span class="result pass">Public pass · Hidden pass</span></td><td class="score overall">9.75 / 10</td><td class="score">10.0 / 10</td><td class="number">89.839 s</td><td class="number">$0.1478449</td></tr>
+              <tr><td class="model">Big Pickle</td><td><span class="result fail">Public pass · Hidden fail</span></td><td class="score overall">8.25 / 10</td><td class="score">8.50 / 10</td><td class="number">13.167 s</td><td class="number">$0</td></tr>
+              <tr><td class="model">Kimi K2.6</td><td><span class="result fail">Public pass · Hidden fail</span></td><td class="score overall">8.25 / 10</td><td class="score">8.75 / 10</td><td class="number">101.322 s</td><td class="number">$0.04194609</td></tr>
+              <tr><td class="model">Claude Haiku 4.5</td><td><span class="result fail">Public pass · Hidden fail</span></td><td class="score overall">7.75 / 10</td><td class="score">7.25 / 10</td><td class="number">25.494 s</td><td class="number">$0.02885935</td></tr>
+              <tr><td class="model">GPT-5.6 Luna</td><td><span class="result pass">Public pass · Hidden pass</span></td><td class="score overall">9.75 / 10</td><td class="score">10.0 / 10</td><td class="number">48.568 s</td><td class="number">$0.00775616</td></tr>
+            </tbody>
+          </table>
+        </div>
       </section>
       <aside class="notice"><strong>Price units are intentionally separate.</strong> Free endpoint access, USD per 1M tokens, Codex credits per 1M tokens, and research-preview access are not directly comparable. Price sorting groups by type and only orders numeric rates within the same unit.</aside>
       <section id="comparison" aria-labelledby="comparison-title">
