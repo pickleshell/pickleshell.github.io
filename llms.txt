@@ -15,9 +15,10 @@ and the user remains the owner and observer.
 
 - Website: https://pickleshell.github.io/
 - Quick Notes: https://pickleshell.github.io/quick-notes.html
-- Model comparison, Test V1 / Phase 1: https://pickleshell.github.io/model-comparison.html
-- Model comparison, Test V1 / Phase 2 (historical / provisional): https://pickleshell.github.io/model-comparison-phase2.html
-- Test V2 / Phase 3: planned; results do not exist yet
+- Model benchmarks overview: https://pickleshell.github.io/model-benchmarks.html
+- Ledger patch benchmark: https://pickleshell.github.io/model-comparison.html
+- Retry-policy patch benchmark (current isolated results): https://pickleshell.github.io/model-comparison-phase2-patch-current.html
+- Historical multi-task evidence (provisional, not blind): https://pickleshell.github.io/model-comparison-phase2.html
 - Repository: https://github.com/pickleshell/pickleshell
 - Deployment guide: https://github.com/pickleshell/pickleshell/blob/main/docs/deployment.md
 - ChatGPT setup: https://github.com/pickleshell/pickleshell/blob/main/docs/chatgpt.md
