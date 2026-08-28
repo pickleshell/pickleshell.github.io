@@ -18,6 +18,10 @@ and the user remains the owner and observer.
 - Model benchmarks overview: https://pickleshell.github.io/model-benchmarks.html
 - Ledger patch benchmark: https://pickleshell.github.io/model-comparison.html
 - Retry-policy patch benchmark (current isolated results): https://pickleshell.github.io/model-comparison-phase2-patch-current.html
+- Bug-fixing test definition: https://pickleshell.github.io/llm-test-bug-fixing.html
+- Feature-implementation test definition: https://pickleshell.github.io/llm-test-feature-implementation.html
+- Refactoring test definition: https://pickleshell.github.io/llm-test-refactoring.html
+- Repository-navigation test definition: https://pickleshell.github.io/llm-test-repository-navigation.html
 - Historical multi-task evidence (provisional, not blind): https://pickleshell.github.io/model-comparison-phase2.html
 - Repository: https://github.com/pickleshell/pickleshell
 - Deployment guide: https://github.com/pickleshell/pickleshell/blob/main/docs/deployment.md
