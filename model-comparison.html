@@ -65,6 +65,14 @@
     .task-brief ul { max-width:900px; margin:0; padding-left:22px; color:var(--ink-mid); }
     .task-brief li + li { margin-top:6px; }
     .task-file { display:inline-block; margin-top:16px; padding:6px 10px; border-radius:8px; background:var(--cream-dark); color:var(--ink-mid); font:700 .8rem/1.4 ui-monospace,SFMono-Regular,Consolas,monospace; }
+    .score-guide { margin:0 0 22px; }
+    .score-guide h2 { margin:0 0 4px; font-size:1.2rem; }
+    .score-intro,.score-rank { margin:0; color:var(--ink-mid); font-size:.92rem; }
+    .criteria-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:10px; margin:14px 0; }
+    .criterion { padding:14px 16px; border:1px solid color-mix(in srgb,var(--pickle-light) 35%,transparent); border-radius:var(--radius-sm); background:var(--white); }
+    .criterion h3 { margin:0 0 5px; color:var(--teal); font-size:.95rem; }
+    .criterion p { margin:0; color:var(--ink-mid); font-size:.86rem; }
+    .score-rank strong { color:var(--teal); }
     .table-tools { display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:12px; }
     .table-tools h2 { margin:0; font-size:1.35rem; }
     .table-tools p { margin:3px 0 0; color:var(--ink-muted); font-size:.88rem; }
@@ -102,7 +110,7 @@
       .nav-links { margin-left:auto; }
       .nav-links a,.nav-links .planned { padding:6px 8px; font-size:.78rem; }
       .hero { padding-top:44px; }
-      .summary { grid-template-columns:repeat(2,1fr); }
+      .summary,.criteria-grid { grid-template-columns:repeat(2,1fr); }
       .table-tools { align-items:start; flex-direction:column; gap:8px; }
       .table-scroll { border-radius:var(--radius-sm); }
       table { min-width:1120px; }
@@ -111,7 +119,7 @@
     @media (max-width:480px) {
       .wrap { width:min(100% - 20px,var(--max)); }
       .nav-links a { padding:6px 10px; font-size:.84rem; }
-      .summary { gap:8px; }
+      .summary,.criteria-grid { grid-template-columns:1fr; gap:8px; }
       .summary-card { padding:14px; }
       .summary-card strong { font-size:1.3rem; }
     }
@@ -160,6 +168,18 @@
         <span class="task-file">Allowed file: fixtures/phase1-ledger/src/reconcile.js</span>
       </section>
       <aside class="notice"><strong>Price units are intentionally separate.</strong> Free endpoint access, USD per 1M tokens, Codex credits per 1M tokens, and research-preview access are not directly comparable. Price sorting groups by type and only orders numeric rates within the same unit.</aside>
+      <section class="score-guide" aria-labelledby="score-guide-title">
+        <h2 id="score-guide-title">How each reviewed patch is scored</h2>
+        <p class="score-intro">Each quality column receives a score from 0 to 10. Higher scores indicate stronger performance; N/A means that no valid patch was available for review.</p>
+        <div class="criteria-grid">
+          <article class="criterion"><h3>Simplicity</h3><p>How direct and economical the solution is. Unnecessary branches, abstractions, or complicated control flow lower the score.</p></article>
+          <article class="criterion"><h3>Readability</h3><p>How clearly the code communicates its intent through structure, naming, and idiomatic JavaScript.</p></article>
+          <article class="criterion"><h3>No extra code</h3><p>Whether the patch stays focused on the required repair without unrelated helpers, rewrites, or changes outside the task.</p></article>
+          <article class="criterion"><h3>Reliability</h3><p>How consistently the implementation satisfies the documented ledger contract and avoids brittle behavior.</p></article>
+          <article class="criterion"><h3>Edge cases</h3><p>How correctly the patch handles malformed money, duplicates, orphan refunds, UTC dates, and other boundary inputs.</p></article>
+        </div>
+        <p class="score-rank"><strong>Overall</strong> is the arithmetic mean of the five quality scores. <strong>Rank</strong> follows Overall, while unavailable outcomes remain separate from patch quality.</p>
+      </section>
       <section id="comparison" aria-labelledby="comparison-title">
         <div class="table-tools"><div><h2 id="comparison-title">Complete candidate results</h2><p id="sort-help">Activate any column heading to sort. Activate it again to reverse direction; N/A scores always remain last.</p></div><p><span id="row-count">53</span> rows</p></div>
         <div class="table-scroll" role="region" aria-label="Sortable model comparison table" tabindex="0">
