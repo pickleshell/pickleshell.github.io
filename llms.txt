@@ -22,6 +22,7 @@ and the user remains the owner and observer.
 - Feature-implementation test definition: https://pickleshell.github.io/llm-test-feature-implementation.html
 - Refactoring test definition: https://pickleshell.github.io/llm-test-refactoring.html
 - Repository-navigation test definition: https://pickleshell.github.io/llm-test-repository-navigation.html
+- Tests-and-edge-cases test definition: https://pickleshell.github.io/llm-test-tests-edge-cases.html
 - Historical multi-task evidence (provisional, not blind): https://pickleshell.github.io/model-comparison-phase2.html
 - Repository: https://github.com/pickleshell/pickleshell
 - Deployment guide: https://github.com/pickleshell/pickleshell/blob/main/docs/deployment.md
