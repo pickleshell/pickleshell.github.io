@@ -171,6 +171,8 @@
       <section class="score-guide" aria-labelledby="score-guide-title">
         <h2 id="score-guide-title">How each reviewed patch is scored</h2>
         <p class="score-intro">Each quality column receives a score from 0 to 10. Higher scores indicate stronger performance; N/A means that no valid patch was available for review.</p>
+        <p class="score-intro"><strong>Review policy.</strong> GPT-5.6 Sol was the single canonical expert reviewer to keep benchmark costs controlled. Independent Gemini cross-checks broadly agreed with its scoring. Claude Opus 4.8 was removed from future judging after repeatedly missing seeded hidden defects while evaluating candidate patches.</p>
+        <p class="score-intro"><strong>Independent verification.</strong> The test results, submitted patches, evaluation artifacts, and testing pipeline are publicly available. You can inspect the evidence, reproduce the process, and make your own independent assessment.</p>
         <div class="criteria-grid">
           <article class="criterion"><h3>Simplicity</h3><p>How direct and economical the solution is. Unnecessary branches, abstractions, or complicated control flow lower the score.</p></article>
           <article class="criterion"><h3>Readability</h3><p>How clearly the code communicates its intent through structure, naming, and idiomatic JavaScript.</p></article>
