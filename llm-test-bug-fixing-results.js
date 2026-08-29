@@ -1,4 +1,6 @@
 const completed = [
+  ['69-ling-3-0-flash-fin-free','Ling 3.0 Flash Fin Free','Pass',[10,10,9,10],183.155,0,'OpenCode'],
+  ['70-muse-spark-1-2-free','Muse Spark 1.2 Free','Pass',[10,10,8,10],160.390,0,'OpenCode'],
   ['01-gpt-5-6-luna','GPT-5.6 Luna','Pass',[10,10,9,10],63.463,.01130497,'OpenCode Go'],
   ['02-qwen3-7-plus','Qwen 3.7 Plus','Pass',[10,10,9,10],115.969,.02319824,'OpenCode Go'],
   ['03-kimi-k2-7-code','Kimi K2.7 Code','Pass',[10,10,9,10],197.082,.0907615,'OpenCode Go'],
