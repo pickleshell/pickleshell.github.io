@@ -1053,6 +1053,10 @@ const phase2v2Rows = {
     '">' +
     v +
     "</span>";
+  const displayLabel = (label) =>
+    nomination === "tests-edge-cases"
+      ? label.replace(/\s+\([^()]+\)$/, "")
+      : label;
   let key = "overall",
     direction = -1;
   const compare = (a, b) => {
@@ -1078,7 +1082,7 @@ const phase2v2Rows = {
           '">' +
           esc(r.status) +
           '</span></td><td><span class="model">' +
-          esc(r.label) +
+          esc(displayLabel(r.label)) +
           '</span><span class="candidate-id">' +
           esc(r.id) +
           '</span></td><td class="score">' +
