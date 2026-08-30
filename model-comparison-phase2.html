@@ -1,23 +1,2147 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="index, follow"><meta name="description" content="PickleShell Phase 2 Historical / Provisional coding-agent benchmark results."><title>Historical Five-task Benchmark: Aggregate Results — PickleShell</title><link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32"><link rel="apple-touch-icon" href="apple-touch-icon.png"><style>
-    :root { --pickle:#7cb342; --pickle-light:#aed581; --pickle-dark:#558b2f; --teal:#00796b; --teal-deep:#004d40; --cream:#fefcf3; --cream-dark:#f5f0e0; --ink:#1a1a2e; --ink-mid:#3a3a52; --ink-muted:#6b6b80; --white:#fff; --max:1180px; --radius:16px; --radius-sm:10px; --shadow:0 2px 12px rgba(26,26,46,.07); }
-    @media (prefers-color-scheme:dark) { :root { --cream:#111122; --cream-dark:#1a1a30; --ink:#e8e8f0; --ink-mid:#b8b8cc; --ink-muted:#9898ad; --white:#1e1e34; --shadow:0 2px 12px rgba(0,0,0,.25); } }
-    *,*::before,*::after { box-sizing:border-box; } html { scroll-behavior:smooth; } body { margin:0; color:var(--ink); background:var(--cream); font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif; -webkit-font-smoothing:antialiased; } a { color:var(--teal); text-decoration-skip-ink:auto; } a:focus-visible,button:focus-visible { outline:3px solid var(--pickle); outline-offset:3px; border-radius:4px; } .wrap { width:min(var(--max),calc(100% - 32px)); margin:0 auto; } .skip-link { position:absolute; top:-100%; left:16px; background:var(--pickle-dark); color:var(--white); padding:8px 16px; border-radius:0 0 8px 8px; font-weight:700; z-index:200; } .skip-link:focus { top:0; }
-    header { position:sticky; top:0; z-index:100; background:color-mix(in srgb,var(--cream) 88%,transparent); backdrop-filter:blur(12px); border-bottom:1px solid color-mix(in srgb,var(--pickle-light) 25%,transparent); } nav { display:flex; align-items:center; justify-content:space-between; padding:14px 0; gap:16px; } .brand { display:inline-flex; align-items:center; gap:10px; color:var(--ink); font-weight:800; font-size:1.15rem; text-decoration:none; white-space:nowrap; } .brand img { width:36px; height:36px; border-radius:8px; } .nav-links { display:flex; align-items:center; gap:4px; margin:0; padding:0; list-style:none; overflow-x:auto; } .nav-links a,.nav-links .planned { display:block; padding:6px 10px; font-size:.8rem; font-weight:650; white-space:nowrap; } .nav-links a { border-radius:999px; text-decoration:none; } .nav-links a:hover,.nav-links a[aria-current] { background:var(--pickle-light); color:var(--teal-deep); } .nav-links .planned { color:var(--ink-muted); }
-    .hero { padding:58px 0 28px; } .eyebrow { color:var(--pickle-dark); font-size:.8rem; font-weight:800; letter-spacing:.08em; text-transform:uppercase; } h1 { max-width:900px; margin:10px 0 16px; font-size:clamp(2.2rem,5vw,3.6rem); line-height:1.07; letter-spacing:-.04em; } .lead { max-width:860px; margin:0; color:var(--ink-muted); font-size:1.08rem; } .benchmark-context { max-width:860px; margin:14px 0 0; color:var(--ink-mid); font-size:.94rem; } .benchmark-context a { font-weight:750; } .provisional { display:inline-flex; align-items:center; gap:8px; margin-top:22px; padding:8px 14px; border:1px solid color-mix(in srgb,#c77d00 45%,transparent); border-radius:999px; background:color-mix(in srgb,#ffc107 13%,transparent); color:var(--ink-mid); font-weight:800; } .provisional::before { content:""; width:8px; height:8px; border-radius:50%; background:#c77d00; }
-    .summary { display:grid; grid-template-columns:repeat(4,1fr); gap:12px; margin:26px auto; } .summary-card { padding:18px; border:1px solid color-mix(in srgb,var(--pickle-light) 35%,transparent); border-radius:var(--radius); background:var(--white); box-shadow:var(--shadow); } .summary-card strong { display:block; font-size:1.45rem; line-height:1.1; } .summary-card span { color:var(--ink-muted); font-size:.86rem; } .notice { margin:0 0 22px; padding:16px 18px; border-left:4px solid #c77d00; border-radius:var(--radius-sm); background:var(--cream-dark); color:var(--ink-mid); } .notice p { margin:8px 0 0; }
-    .task-nav { display:flex; flex-wrap:wrap; gap:8px; margin:0 0 26px; } .task-nav a { padding:6px 11px; border:1px solid color-mix(in srgb,var(--pickle) 40%,transparent); border-radius:999px; font-size:.86rem; font-weight:700; text-decoration:none; } .task-nav a[aria-current="page"],.task-nav a:hover { background:var(--pickle-light); color:var(--teal-deep); }
-    .table-tools { display:flex; align-items:end; justify-content:space-between; gap:20px; margin-bottom:12px; } .table-tools h2 { margin:0; font-size:1.35rem; } .table-tools p { margin:3px 0 0; color:var(--ink-muted); font-size:.88rem; } .table-scroll { overflow:auto; border:1px solid color-mix(in srgb,var(--pickle-light) 35%,transparent); border-radius:var(--radius); background:var(--white); box-shadow:var(--shadow); scrollbar-gutter:stable; } table { width:100%; min-width:1420px; border-collapse:separate; border-spacing:0; font-size:.88rem; } caption { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); } th { position:sticky; top:0; z-index:2; padding:0; background:var(--cream-dark); border-bottom:2px solid color-mix(in srgb,var(--pickle) 40%,transparent); text-align:left; } th button { width:100%; min-height:52px; padding:10px 9px; border:0; background:transparent; color:var(--ink); font:750 .76rem/1.25 system-ui,sans-serif; text-align:left; cursor:pointer; } th button:hover { background:color-mix(in srgb,var(--pickle) 10%,transparent); } .sort-indicator { display:inline-block; min-width:1em; color:var(--pickle-dark); } td { padding:12px 9px; border-bottom:1px solid color-mix(in srgb,var(--ink-muted) 12%,transparent); vertical-align:top; } tbody tr:last-child td { border-bottom:0; } tbody tr:hover td { background:color-mix(in srgb,var(--pickle) 5%,var(--white)); } .model { font-weight:750; color:var(--ink); white-space:nowrap; } .candidate-id { display:block; color:var(--ink-muted); font-size:.72rem; font-weight:500; white-space:normal; } .score,.number { font-variant-numeric:tabular-nums; white-space:nowrap; } .score { text-align:center; } .overall { color:var(--teal); font-weight:850; } .na { color:var(--ink-muted); } .badge { display:inline-block; padding:3px 7px; border-radius:999px; font-size:.68rem; font-weight:750; line-height:1.2; text-transform:capitalize; } .badge.pass,.badge.completed { background:color-mix(in srgb,var(--pickle) 15%,transparent); color:var(--pickle-dark); } .badge.fail { background:color-mix(in srgb,#d32f2f 12%,transparent); color:#b71c1c; } .evidence { font-weight:700; white-space:nowrap; } .sources { margin:34px 0 0; padding:24px; border-radius:var(--radius); background:var(--cream-dark); } .sources h2 { margin:0 0 8px; font-size:1.2rem; } .sources p { margin:8px 0; color:var(--ink-muted); } .source-links { display:flex; flex-wrap:wrap; gap:8px 14px; margin:12px 0 0; padding:0; list-style:none; } .source-links a { font-weight:700; } footer { margin-top:56px; padding:30px 0 44px; border-top:1px solid color-mix(in srgb,var(--pickle-light) 20%,transparent); color:var(--ink-muted); text-align:center; font-size:.86rem; }
-    @media (max-width:760px) { .hero { padding-top:42px; } .summary { grid-template-columns:repeat(2,1fr); } .table-tools { align-items:start; flex-direction:column; gap:8px; } .table-scroll { border-radius:var(--radius-sm); } table { min-width:1360px; } th button { min-height:48px; } .brand span { display:none; } .nav-links { max-width:calc(100% - 44px); } .nav-links a,.nav-links .planned { padding:6px 8px; font-size:.76rem; } } @media (max-width:480px) { .wrap { width:min(100% - 20px,var(--max)); } .summary { gap:8px; } .summary-card { padding:14px; } .summary-card strong { font-size:1.3rem; } } @media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
-</style></head>
-<body><a class="skip-link" href="#comparison">Skip to comparison</a><header><div class="wrap"><nav aria-label="Benchmark navigation"><a class="brand" href="index.html"><img src="pickleshell-logo.png" alt="" width="36" height="36"><span>PickleShell</span></a><ul class="nav-links"><li><a href="model-benchmarks.html">LLM tests</a></li></ul></nav></div></header>
-<main><section class="hero"><div class="wrap"><div class="eyebrow">Historical multi-task benchmark · Provisional</div><h1>Historical five-task benchmark: aggregate results</h1><p class="lead">An aggregate of five different coding tasks: repairing ledger logic, implementing feature flags, refactoring event processing, navigating a repository to fix status labels, and strengthening range parsing and edge-case tests. Each model has one record per task; the aggregate combines objective results and four-dimensional expert reviews across all five.</p><p class="benchmark-context">This is provisional historical evidence, not part of the current isolated ranking. See the <a href="model-comparison-phase2-patch-current.html">retry-policy patch results</a> or the <a href="model-benchmarks.html">benchmark index</a>.</p><div class="provisional">Historical / Provisional — not a blind benchmark</div></div></section><div class="wrap"><section class="summary" aria-label="Benchmark summary"><div class="summary-card"><strong>31</strong><span>candidates</span></div><div class="summary-card"><strong>155</strong><span>task records</span></div><div class="summary-card"><strong>146 / 134</strong><span>public / hidden passes</span></div><div class="summary-card"><strong>0</strong><span>forbidden changes</span></div></section><aside class="notice"><strong>What this historical test asked models to do.</strong><p>Each model received five separate, small JavaScript repository tasks: repair ledger accounting, implement feature-flag targeting, simplify event processing without changing behavior, navigate an unfamiliar repository to add an account-summary change, and strengthen a numeric-range helper against boundary cases. Each task allowed changes only in its designated source file and was checked by public and hidden evaluators.</p></aside><aside class="notice"><strong>Important audit limitation.</strong><p>Audit found reference path matches in 55/155 traces and hidden path matches in 25/155. Hidden/reference artifacts were available in shared Git history, so this was not a blind benchmark. Results are published as historical/provisional evidence, not a claim of blind evaluation.</p></aside><aside class="notice"><strong>Expert-review policy.</strong><p>GPT-5.6 Sol is the single canonical expert reviewer to keep review costs controlled. Independent Gemini cross-checks broadly agreed with its scoring. Claude Opus 4.8 was removed from future judging after repeatedly missing seeded hidden defects while evaluating candidate patches. The complete review data, submitted patches, test results, and pipeline are public for independent verification.</p></aside><aside class="notice"><strong>New clean-room nominations are published separately.</strong><p><a href="llm-test-bug-fixing.html">Bug fixing</a> · <a href="llm-test-feature-implementation.html">Feature implementation</a> · <a href="llm-test-refactoring.html">Refactoring</a> · <a href="llm-test-repository-navigation.html">Repository navigation</a> · <a href="llm-test-tests-edge-cases.html">Tests / edge cases</a></p></aside><nav class="task-nav" aria-label="Archived historical task pages"><a href="model-comparison-phase2.html" aria-current="page">Five-task aggregate</a><a href="model-comparison-phase2-bug-fixing.html">Bug Fixing</a><a href="model-comparison-phase2-feature-implementation.html">Feature Implementation</a><a href="model-comparison-phase2-refactoring.html">Refactoring</a><a href="model-comparison-phase2-repository-navigation.html">Repository Navigation</a><a href="model-comparison-phase2-tests-edge-cases.html">Tests / Edge Cases</a></nav><section id="comparison" aria-labelledby="comparison-title"><div class="table-tools"><div><h2 id="comparison-title">Complete candidate results</h2><p>Activate any column heading to sort. Activate it again to reverse direction.</p></div><p><span id="row-count">31</span> rows</p></div><div class="table-scroll" role="region" aria-label="Sortable benchmark comparison table" tabindex="0"><table><caption>All 31 Phase 2 candidates, with aggregate arithmetic means and status summaries across five records.</caption><thead><tr><th scope="col" aria-sort="ascending"><button type="button" data-key="rank" data-type="number">Rank <span class="sort-indicator" aria-hidden="true">▲</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="model" data-type="text">Model / candidate <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="reviewed" data-type="number">Reviewed <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="harnesses" data-type="number">Harnesses passed <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="public" data-type="number">Public <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="hidden" data-type="number">Hidden <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="functional" data-type="number">Functional <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="reliability" data-type="number">Reliability <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="maintainability" data-type="number">Maintainability <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="scope" data-type="number">Scope <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="overall" data-type="number">Review overall <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="time" data-type="number">Avg solution time (s) <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="status" data-type="number">Record status <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="agent" data-type="number">Agent status <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="evaluator" data-type="number">Evaluator status <span class="sort-indicator" aria-hidden="true">↕</span></button></th><th scope="col" aria-sort="none"><button type="button" data-key="model" data-type="text">Evidence <span class="sort-indicator" aria-hidden="true">↕</span></button></th></tr></thead><tbody><tr data-original="0" data-rank="1" data-model="opencode-go/deepseek-v4-pro" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="9.0" data-scope="10.0" data-overall="9.75" data-time="65.574" data-status="5" data-agent="5" data-evaluator="5"><td class="number">1</td><td><span class="model">opencode-go/deepseek-v4-pro</span><span class="candidate-id">04-deepseek-v4-pro</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">9.0</td><td class="score">10.0</td><td class="score overall">9.75</td><td class="number">65.574</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/04-deepseek-v4-pro">records ↗</a></td></tr><tr data-original="1" data-rank="2" data-model="opencode-go/glm-5.2" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="9.0" data-scope="10.0" data-overall="9.75" data-time="119.742" data-status="5" data-agent="5" data-evaluator="5"><td class="number">2</td><td><span class="model">opencode-go/glm-5.2</span><span class="candidate-id">05-glm-5-2</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">9.0</td><td class="score">10.0</td><td class="score overall">9.75</td><td class="number">119.742</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/05-glm-5-2">records ↗</a></td></tr><tr data-original="2" data-rank="3" data-model="opencode-go/gpt-5.6-luna" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.8" data-scope="10.0" data-overall="9.70" data-time="38.673" data-status="5" data-agent="5" data-evaluator="5"><td class="number">3</td><td><span class="model">opencode-go/gpt-5.6-luna</span><span class="candidate-id">01-gpt-5-6-luna</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.70</td><td class="number">38.673</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/01-gpt-5-6-luna">records ↗</a></td></tr><tr data-original="3" data-rank="4" data-model="opencode/deepseek-v4-flash-free" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.8" data-scope="10.0" data-overall="9.70" data-time="51.981" data-status="5" data-agent="5" data-evaluator="5"><td class="number">4</td><td><span class="model">opencode/deepseek-v4-flash-free</span><span class="candidate-id">22-deepseek-v4-flash-free</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.70</td><td class="number">51.981</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/22-deepseek-v4-flash-free">records ↗</a></td></tr><tr data-original="4" data-rank="5" data-model="opencode/claude-sonnet-5" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.8" data-scope="10.0" data-overall="9.70" data-time="68.213" data-status="5" data-agent="5" data-evaluator="5"><td class="number">5</td><td><span class="model">opencode/claude-sonnet-5</span><span class="candidate-id">52-claude-sonnet-5</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.70</td><td class="number">68.213</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/52-claude-sonnet-5">records ↗</a></td></tr><tr data-original="5" data-rank="6" data-model="opencode-go/deepseek-v4-flash" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.8" data-scope="10.0" data-overall="9.70" data-time="74.143" data-status="5" data-agent="5" data-evaluator="5"><td class="number">6</td><td><span class="model">opencode-go/deepseek-v4-flash</span><span class="candidate-id">11-deepseek-v4-flash</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.70</td><td class="number">74.143</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/11-deepseek-v4-flash">records ↗</a></td></tr><tr data-original="6" data-rank="7" data-model="gpt-5.6-terra" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.8" data-scope="10.0" data-overall="9.70" data-time="87.055" data-status="5" data-agent="5" data-evaluator="5"><td class="number">7</td><td><span class="model">gpt-5.6-terra</span><span class="candidate-id">48-gpt-5-6-terra</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.70</td><td class="number">87.055</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/48-gpt-5-6-terra">records ↗</a></td></tr><tr data-original="7" data-rank="8" data-model="opencode-go/kimi-k2.6" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.8" data-scope="10.0" data-overall="9.70" data-time="91.592" data-status="5" data-agent="5" data-evaluator="5"><td class="number">8</td><td><span class="model">opencode-go/kimi-k2.6</span><span class="candidate-id">16-kimi-k2-6</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.70</td><td class="number">91.592</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/16-kimi-k2-6">records ↗</a></td></tr><tr data-original="8" data-rank="9" data-model="opencode-go/kimi-k2.7-code" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.8" data-scope="10.0" data-overall="9.70" data-time="99.379" data-status="5" data-agent="5" data-evaluator="5"><td class="number">9</td><td><span class="model">opencode-go/kimi-k2.7-code</span><span class="candidate-id">03-kimi-k2-7-code</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.70</td><td class="number">99.379</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/03-kimi-k2-7-code">records ↗</a></td></tr><tr data-original="9" data-rank="10" data-model="opencode-go/minimax-m3" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.8" data-scope="10.0" data-overall="9.70" data-time="101.459" data-status="5" data-agent="5" data-evaluator="5"><td class="number">10</td><td><span class="model">opencode-go/minimax-m3</span><span class="candidate-id">06-minimax-m3</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.70</td><td class="number">101.459</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/06-minimax-m3">records ↗</a></td></tr><tr data-original="10" data-rank="11" data-model="gpt-5.4" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.8" data-scope="10.0" data-overall="9.70" data-time="119.703" data-status="5" data-agent="5" data-evaluator="5"><td class="number">11</td><td><span class="model">gpt-5.4</span><span class="candidate-id">49-gpt-5-4</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.70</td><td class="number">119.703</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/49-gpt-5-4">records ↗</a></td></tr><tr data-original="11" data-rank="12" data-model="opencode-go/glm-5.1" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.8" data-scope="10.0" data-overall="9.70" data-time="135.099" data-status="5" data-agent="5" data-evaluator="5"><td class="number">12</td><td><span class="model">opencode-go/glm-5.1</span><span class="candidate-id">15-glm-5-1</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.70</td><td class="number">135.099</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/15-glm-5-1">records ↗</a></td></tr><tr data-original="12" data-rank="13" data-model="opencode-go/grok-4.5" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.6" data-scope="10.0" data-overall="9.65" data-time="29.899" data-status="5" data-agent="5" data-evaluator="5"><td class="number">13</td><td><span class="model">opencode-go/grok-4.5</span><span class="candidate-id">09-grok-4-5</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.6</td><td class="score">10.0</td><td class="score overall">9.65</td><td class="number">29.899</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/09-grok-4-5">records ↗</a></td></tr><tr data-original="13" data-rank="14" data-model="opencode-go/mimo-v2.5-pro" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.6" data-scope="10.0" data-overall="9.65" data-time="105.134" data-status="5" data-agent="5" data-evaluator="5"><td class="number">14</td><td><span class="model">opencode-go/mimo-v2.5-pro</span><span class="candidate-id">07-mimo-v2-5-pro</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.6</td><td class="score">10.0</td><td class="score overall">9.65</td><td class="number">105.134</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/07-mimo-v2-5-pro">records ↗</a></td></tr><tr data-original="14" data-rank="15" data-model="gpt-5.6-sol" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.6" data-scope="10.0" data-overall="9.65" data-time="121.107" data-status="5" data-agent="5" data-evaluator="5"><td class="number">15</td><td><span class="model">gpt-5.6-sol</span><span class="candidate-id">47-gpt-5-6-sol</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.6</td><td class="score">10.0</td><td class="score overall">9.65</td><td class="number">121.107</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/47-gpt-5-6-sol">records ↗</a></td></tr><tr data-original="15" data-rank="16" data-model="gpt-5.4-mini" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.6" data-scope="10.0" data-overall="9.65" data-time="124.081" data-status="5" data-agent="5" data-evaluator="5"><td class="number">16</td><td><span class="model">gpt-5.4-mini</span><span class="candidate-id">50-gpt-5-4-mini</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.6</td><td class="score">10.0</td><td class="score overall">9.65</td><td class="number">124.081</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/50-gpt-5-4-mini">records ↗</a></td></tr><tr data-original="16" data-rank="17" data-model="gpt-5.6-luna" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.6" data-scope="10.0" data-overall="9.65" data-time="195.330" data-status="5" data-agent="5" data-evaluator="5"><td class="number">17</td><td><span class="model">gpt-5.6-luna</span><span class="candidate-id">46-gpt-5-6-luna</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.6</td><td class="score">10.0</td><td class="score overall">9.65</td><td class="number">195.330</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/46-gpt-5-6-luna">records ↗</a></td></tr><tr data-original="17" data-rank="18" data-model="opencode-go/kimi-k3" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.4" data-scope="10.0" data-overall="9.60" data-time="189.396" data-status="5" data-agent="5" data-evaluator="5"><td class="number">18</td><td><span class="model">opencode-go/kimi-k3</span><span class="candidate-id">10-kimi-k3</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.4</td><td class="score">10.0</td><td class="score overall">9.60</td><td class="number">189.396</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/10-kimi-k3">records ↗</a></td></tr><tr data-original="18" data-rank="19" data-model="gpt-5.3-codex-spark" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.2" data-scope="10.0" data-overall="9.55" data-time="60.725" data-status="5" data-agent="5" data-evaluator="5"><td class="number">19</td><td><span class="model">gpt-5.3-codex-spark</span><span class="candidate-id">18-gpt-5-3-codex-spark</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.2</td><td class="score">10.0</td><td class="score overall">9.55</td><td class="number">60.725</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/18-gpt-5-3-codex-spark">records ↗</a></td></tr><tr data-original="19" data-rank="20" data-model="opencode/claude-opus-5" data-reviewed="5" data-harnesses="5" data-public="5" data-hidden="5" data-functional="10.0" data-reliability="10.0" data-maintainability="8.2" data-scope="10.0" data-overall="9.55" data-time="143.420" data-status="5" data-agent="5" data-evaluator="5"><td class="number">20</td><td><span class="model">opencode/claude-opus-5</span><span class="candidate-id">53-claude-opus-5</span></td><td class="score">5/5</td><td class="score">5/5</td><td class="score">5</td><td class="score">5</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.2</td><td class="score">10.0</td><td class="score overall">9.55</td><td class="number">143.420</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">5/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/53-claude-opus-5">records ↗</a></td></tr><tr data-original="20" data-rank="21" data-model="opencode-go/mimo-v2.5" data-reviewed="5" data-harnesses="4" data-public="5" data-hidden="4" data-functional="9.4" data-reliability="9.0" data-maintainability="8.8" data-scope="10.0" data-overall="9.30" data-time="72.584" data-status="5" data-agent="5" data-evaluator="4"><td class="number">21</td><td><span class="model">opencode-go/mimo-v2.5</span><span class="candidate-id">13-mimo-v2-5</span></td><td class="score">5/5</td><td class="score">4/5</td><td class="score">5</td><td class="score">4</td><td class="score">9.4</td><td class="score">9.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.30</td><td class="number">72.584</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">4/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/13-mimo-v2-5">records ↗</a></td></tr><tr data-original="21" data-rank="22" data-model="opencode/hy3-free" data-reviewed="5" data-harnesses="4" data-public="5" data-hidden="4" data-functional="9.4" data-reliability="9.0" data-maintainability="8.6" data-scope="10.0" data-overall="9.25" data-time="59.818" data-status="5" data-agent="5" data-evaluator="4"><td class="number">22</td><td><span class="model">opencode/hy3-free</span><span class="candidate-id">27-hy3-free</span></td><td class="score">5/5</td><td class="score">4/5</td><td class="score">5</td><td class="score">4</td><td class="score">9.4</td><td class="score">9.0</td><td class="score">8.6</td><td class="score">10.0</td><td class="score overall">9.25</td><td class="number">59.818</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">4/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/27-hy3-free">records ↗</a></td></tr><tr data-original="22" data-rank="23" data-model="opencode/big-pickle" data-reviewed="5" data-harnesses="4" data-public="5" data-hidden="4" data-functional="9.0" data-reliability="8.6" data-maintainability="9.0" data-scope="10.0" data-overall="9.15" data-time="68.279" data-status="5" data-agent="5" data-evaluator="4"><td class="number">23</td><td><span class="model">opencode/big-pickle</span><span class="candidate-id">19-big-pickle</span></td><td class="score">5/5</td><td class="score">4/5</td><td class="score">5</td><td class="score">4</td><td class="score">9.0</td><td class="score">8.6</td><td class="score">9.0</td><td class="score">10.0</td><td class="score overall">9.15</td><td class="number">68.279</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">4/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/19-big-pickle">records ↗</a></td></tr><tr data-original="23" data-rank="24" data-model="opencode-go/hy3" data-reviewed="5" data-harnesses="4" data-public="5" data-hidden="4" data-functional="9.0" data-reliability="8.6" data-maintainability="8.8" data-scope="10.0" data-overall="9.10" data-time="42.575" data-status="5" data-agent="5" data-evaluator="4"><td class="number">24</td><td><span class="model">opencode-go/hy3</span><span class="candidate-id">14-hy3</span></td><td class="score">5/5</td><td class="score">4/5</td><td class="score">5</td><td class="score">4</td><td class="score">9.0</td><td class="score">8.6</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">9.10</td><td class="number">42.575</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">4/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/14-hy3">records ↗</a></td></tr><tr data-original="24" data-rank="25" data-model="opencode/claude-haiku-4-5" data-reviewed="5" data-harnesses="4" data-public="5" data-hidden="4" data-functional="9.0" data-reliability="8.6" data-maintainability="8.2" data-scope="10.0" data-overall="8.95" data-time="55.642" data-status="5" data-agent="5" data-evaluator="4"><td class="number">25</td><td><span class="model">opencode/claude-haiku-4-5</span><span class="candidate-id">51-claude-haiku-4-5</span></td><td class="score">5/5</td><td class="score">4/5</td><td class="score">5</td><td class="score">4</td><td class="score">9.0</td><td class="score">8.6</td><td class="score">8.2</td><td class="score">10.0</td><td class="score overall">8.95</td><td class="number">55.642</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">4/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/51-claude-haiku-4-5">records ↗</a></td></tr><tr data-original="25" data-rank="26" data-model="opencode-go/minimax-m2.7" data-reviewed="5" data-harnesses="3" data-public="5" data-hidden="3" data-functional="8.6" data-reliability="7.8" data-maintainability="8.8" data-scope="10.0" data-overall="8.80" data-time="88.774" data-status="5" data-agent="5" data-evaluator="3"><td class="number">26</td><td><span class="model">opencode-go/minimax-m2.7</span><span class="candidate-id">17-minimax-m2-7</span></td><td class="score">5/5</td><td class="score">3/5</td><td class="score">5</td><td class="score">3</td><td class="score">8.6</td><td class="score">7.8</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">8.80</td><td class="number">88.774</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">3/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/17-minimax-m2-7">records ↗</a></td></tr><tr data-original="26" data-rank="27" data-model="opencode/nemotron-3.5-lightning-free" data-reviewed="5" data-harnesses="3" data-public="5" data-hidden="3" data-functional="8.4" data-reliability="7.6" data-maintainability="9.0" data-scope="10.0" data-overall="8.75" data-time="55.641" data-status="5" data-agent="5" data-evaluator="3"><td class="number">27</td><td><span class="model">opencode/nemotron-3.5-lightning-free</span><span class="candidate-id">33-nemotron-3-5-lightning-free</span></td><td class="score">5/5</td><td class="score">3/5</td><td class="score">5</td><td class="score">3</td><td class="score">8.4</td><td class="score">7.6</td><td class="score">9.0</td><td class="score">10.0</td><td class="score overall">8.75</td><td class="number">55.641</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">3/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/33-nemotron-3-5-lightning-free">records ↗</a></td></tr><tr data-original="27" data-rank="999" data-model="opencode/nemotron-3-ultra-free" data-reviewed="4" data-harnesses="3" data-public="4" data-hidden="3" data-functional="8.8" data-reliability="8.3" data-maintainability="9.0" data-scope="10.0" data-overall="9.00" data-time="81.606" data-status="5" data-agent="4" data-evaluator="3"><td class="number"><span class="na">N/A</span></td><td><span class="model">opencode/nemotron-3-ultra-free</span><span class="candidate-id">35-nemotron-3-ultra-free</span></td><td class="score">4/5</td><td class="score">3/5</td><td class="score">4</td><td class="score">3</td><td class="score">8.8</td><td class="score">8.3</td><td class="score">9.0</td><td class="score">10.0</td><td class="score overall">9.00</td><td class="number">81.606</td><td><span class="badge completed">5/5 completed</span></td><td class="number">4/5</td><td class="number">3/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/35-nemotron-3-ultra-free">records ↗</a></td></tr><tr data-original="28" data-rank="999" data-model="opencode/mimo-v2.5-free" data-reviewed="4" data-harnesses="2" data-public="4" data-hidden="2" data-functional="8.0" data-reliability="7.0" data-maintainability="8.8" data-scope="10.0" data-overall="8.44" data-time="168.850" data-status="5" data-agent="5" data-evaluator="2"><td class="number"><span class="na">N/A</span></td><td><span class="model">opencode/mimo-v2.5-free</span><span class="candidate-id">28-mimo-v2-5-free</span></td><td class="score">4/5</td><td class="score">2/5</td><td class="score">4</td><td class="score">2</td><td class="score">8.0</td><td class="score">7.0</td><td class="score">8.8</td><td class="score">10.0</td><td class="score overall">8.44</td><td class="number">168.850</td><td><span class="badge completed">5/5 completed</span></td><td class="number">5/5</td><td class="number">2/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/28-mimo-v2-5-free">records ↗</a></td></tr><tr data-original="29" data-rank="999" data-model="opencode/laguna-s-2.1-free" data-reviewed="3" data-harnesses="3" data-public="3" data-hidden="3" data-functional="10.0" data-reliability="10.0" data-maintainability="8.7" data-scope="10.0" data-overall="9.67" data-time="499.955" data-status="5" data-agent="3" data-evaluator="3"><td class="number"><span class="na">N/A</span></td><td><span class="model">opencode/laguna-s-2.1-free</span><span class="candidate-id">20-laguna-s-2-1-free</span></td><td class="score">3/5</td><td class="score">3/5</td><td class="score">3</td><td class="score">3</td><td class="score">10.0</td><td class="score">10.0</td><td class="score">8.7</td><td class="score">10.0</td><td class="score overall">9.67</td><td class="number">499.955</td><td><span class="badge completed">5/5 completed</span></td><td class="number">3/5</td><td class="number">3/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/20-laguna-s-2-1-free">records ↗</a></td></tr><tr data-original="30" data-rank="999" data-model="opencode-go/qwen3.7-plus" data-reviewed="0" data-harnesses="0" data-public="0" data-hidden="0" data-functional="-1" data-reliability="-1" data-maintainability="-1" data-scope="-1" data-overall="-1" data-time="900.024" data-status="5" data-agent="0" data-evaluator="0"><td class="number"><span class="na">N/A</span></td><td><span class="model">opencode-go/qwen3.7-plus</span><span class="candidate-id">02-qwen3-7-plus</span></td><td class="score">0/5</td><td class="score">0/5</td><td class="score">0</td><td class="score">0</td><td class="score"><span class="na">N/A</span></td><td class="score"><span class="na">N/A</span></td><td class="score"><span class="na">N/A</span></td><td class="score"><span class="na">N/A</span></td><td class="score"><span class="na">N/A</span></td><td class="number">900.024</td><td><span class="badge completed">5/5 completed</span></td><td class="number">0/5</td><td class="number">0/5</td><td class="evidence"><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/02-qwen3-7-plus">records ↗</a></td></tr></tbody></table></div></section><section class="sources" id="sources"><h2>Source data and evidence</h2><p>Generated from the Phase 2 records and expert reviews at commit <code>f6e0d4ed4df2690f66b66d656012238d9cfe5add</code>. Times are agent wall-clock solution durations. Public and hidden results remain separate objective evidence; expert scores use four 0–10 criteria and Overall is their arithmetic mean. No-patch outcomes remain N/A and do not count as code-quality failures.</p><ul class="source-links"><li><a href="https://github.com/pickleshell/models-test/blob/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/expert-review-methodology.md">review methodology <span aria-hidden="true">↗</span></a></li><li><a href="https://github.com/pickleshell/models-test/blob/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/expert-reviews.json">expert-review data <span aria-hidden="true">↗</span></a></li><li><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add">models-test repository <span aria-hidden="true">↗</span></a></li><li><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/aggregate-ranking.md">generated ranking <span aria-hidden="true">↗</span></a></li><li><a href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2">all Phase 2 task records and evidence <span aria-hidden="true">↗</span></a></li></ul></section></div></main><footer><div class="wrap">PickleShell model benchmark · Phase 2 historical/provisional results.</div></footer>
-<script>
-(() => {
-  const table = document.querySelector('table'); const body = table.tBodies[0]; const buttons = table.querySelectorAll('th button');
-  let key = 'rank', dir = 1;
-  const compare = (a,b,type) => { const av=a.dataset[key] ?? '', bv=b.dataset[key] ?? ''; if(type === 'number') return Number(av)-Number(bv); return av.localeCompare(bv, undefined, {numeric:true,sensitivity:'base'}); };
-  buttons.forEach(button => button.addEventListener('click', () => { const type=button.dataset.type; key === button.dataset.key ? dir *= -1 : (key=button.dataset.key,dir=1); const rows=[...body.rows]; rows.sort((a,b) => (compare(a,b,type)*dir) || (Number(a.dataset.original)-Number(b.dataset.original))); rows.forEach(row=>body.appendChild(row)); buttons.forEach(other => { const active=other===button; other.closest('th').setAttribute('aria-sort',active?(dir===1?'ascending':'descending'):'none'); other.querySelector('.sort-indicator').textContent=active?(dir===1?'▲':'▼'):'↕'; }); });
-})();
-</script>
-</body></html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="description"
+      content="PickleShell Phase 2 Historical / Provisional coding-agent benchmark results."
+    />
+    <title>
+      Historical Five-task Benchmark: Aggregate Results — PickleShell
+    </title>
+    <link rel="icon" href="favicon.ico" sizes="48x48" />
+    <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <style>
+      :root {
+        --pickle: #7cb342;
+        --pickle-light: #aed581;
+        --pickle-dark: #558b2f;
+        --teal: #00796b;
+        --teal-deep: #004d40;
+        --cream: #fefcf3;
+        --cream-dark: #f5f0e0;
+        --ink: #1a1a2e;
+        --ink-mid: #3a3a52;
+        --ink-muted: #6b6b80;
+        --white: #fff;
+        --max: 1180px;
+        --radius: 16px;
+        --radius-sm: 10px;
+        --shadow: 0 2px 12px rgba(26, 26, 46, 0.07);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --cream: #111122;
+          --cream-dark: #1a1a30;
+          --ink: #e8e8f0;
+          --ink-mid: #b8b8cc;
+          --ink-muted: #9898ad;
+          --white: #1e1e34;
+          --shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+        }
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--cream);
+        font:
+          16px/1.55 system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+      }
+      a {
+        color: var(--teal);
+        text-decoration-skip-ink: auto;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 3px solid var(--pickle);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      .wrap {
+        width: min(var(--max), calc(100% - 32px));
+        margin: 0 auto;
+      }
+      .skip-link {
+        position: absolute;
+        top: -100%;
+        left: 16px;
+        background: var(--pickle-dark);
+        color: var(--white);
+        padding: 8px 16px;
+        border-radius: 0 0 8px 8px;
+        font-weight: 700;
+        z-index: 200;
+      }
+      .skip-link:focus {
+        top: 0;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: color-mix(in srgb, var(--cream) 88%, transparent);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid
+          color-mix(in srgb, var(--pickle-light) 25%, transparent);
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+        gap: 16px;
+      }
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--ink);
+        font-weight: 800;
+        font-size: 1.15rem;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .brand img {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+      }
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow-x: auto;
+      }
+      .nav-links a,
+      .nav-links .planned {
+        display: block;
+        padding: 6px 10px;
+        font-size: 0.8rem;
+        font-weight: 650;
+        white-space: nowrap;
+      }
+      .nav-links a {
+        border-radius: 999px;
+        text-decoration: none;
+      }
+      .nav-links a:hover,
+      .nav-links a[aria-current] {
+        background: var(--pickle-light);
+        color: var(--teal-deep);
+      }
+      .nav-links .planned {
+        color: var(--ink-muted);
+      }
+      .hero {
+        padding: 58px 0 28px;
+      }
+      .eyebrow {
+        color: var(--pickle-dark);
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      h1 {
+        max-width: 900px;
+        margin: 10px 0 16px;
+        font-size: clamp(2.2rem, 5vw, 3.6rem);
+        line-height: 1.07;
+        letter-spacing: -0.04em;
+      }
+      .lead {
+        max-width: 860px;
+        margin: 0;
+        color: var(--ink-muted);
+        font-size: 1.08rem;
+      }
+      .benchmark-context {
+        max-width: 860px;
+        margin: 14px 0 0;
+        color: var(--ink-mid);
+        font-size: 0.94rem;
+      }
+      .benchmark-context a {
+        font-weight: 750;
+      }
+      .provisional {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        margin-top: 22px;
+        padding: 8px 14px;
+        border: 1px solid color-mix(in srgb, #c77d00 45%, transparent);
+        border-radius: 999px;
+        background: color-mix(in srgb, #ffc107 13%, transparent);
+        color: var(--ink-mid);
+        font-weight: 800;
+      }
+      .provisional::before {
+        content: "";
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: #c77d00;
+      }
+      .summary {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin: 26px auto;
+      }
+      .summary-card {
+        padding: 18px;
+        border: 1px solid
+          color-mix(in srgb, var(--pickle-light) 35%, transparent);
+        border-radius: var(--radius);
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+      .summary-card strong {
+        display: block;
+        font-size: 1.45rem;
+        line-height: 1.1;
+      }
+      .summary-card span {
+        color: var(--ink-muted);
+        font-size: 0.86rem;
+      }
+      .notice {
+        margin: 0 0 22px;
+        padding: 16px 18px;
+        border-left: 4px solid #c77d00;
+        border-radius: var(--radius-sm);
+        background: var(--cream-dark);
+        color: var(--ink-mid);
+      }
+      .notice p {
+        margin: 8px 0 0;
+      }
+      .task-nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: 0 0 26px;
+      }
+      .task-nav a {
+        padding: 6px 11px;
+        border: 1px solid color-mix(in srgb, var(--pickle) 40%, transparent);
+        border-radius: 999px;
+        font-size: 0.86rem;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      .task-nav a[aria-current="page"],
+      .task-nav a:hover {
+        background: var(--pickle-light);
+        color: var(--teal-deep);
+      }
+      .table-tools {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 20px;
+        margin-bottom: 12px;
+      }
+      .table-tools h2 {
+        margin: 0;
+        font-size: 1.35rem;
+      }
+      .table-tools p {
+        margin: 3px 0 0;
+        color: var(--ink-muted);
+        font-size: 0.88rem;
+      }
+      .table-scroll {
+        overflow: auto;
+        border: 1px solid
+          color-mix(in srgb, var(--pickle-light) 35%, transparent);
+        border-radius: var(--radius);
+        background: var(--white);
+        box-shadow: var(--shadow);
+        scrollbar-gutter: stable;
+      }
+      table {
+        width: 100%;
+        min-width: 1420px;
+        border-collapse: separate;
+        border-spacing: 0;
+        font-size: 0.88rem;
+      }
+      caption {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+      }
+      th {
+        position: sticky;
+        top: 0;
+        z-index: 2;
+        padding: 0;
+        background: var(--cream-dark);
+        border-bottom: 2px solid
+          color-mix(in srgb, var(--pickle) 40%, transparent);
+        text-align: left;
+      }
+      th button {
+        width: 100%;
+        min-height: 52px;
+        padding: 10px 9px;
+        border: 0;
+        background: transparent;
+        color: var(--ink);
+        font:
+          750 0.76rem/1.25 system-ui,
+          sans-serif;
+        text-align: left;
+        cursor: pointer;
+      }
+      th button:hover {
+        background: color-mix(in srgb, var(--pickle) 10%, transparent);
+      }
+      .sort-indicator {
+        display: inline-block;
+        min-width: 1em;
+        color: var(--pickle-dark);
+      }
+      td {
+        padding: 12px 9px;
+        border-bottom: 1px solid
+          color-mix(in srgb, var(--ink-muted) 12%, transparent);
+        vertical-align: top;
+      }
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+      tbody tr:hover td {
+        background: color-mix(in srgb, var(--pickle) 5%, var(--white));
+      }
+      .model {
+        font-weight: 750;
+        color: var(--ink);
+        white-space: nowrap;
+      }
+      .candidate-id {
+        display: block;
+        color: var(--ink-muted);
+        font-size: 0.72rem;
+        font-weight: 500;
+        white-space: normal;
+      }
+      .score,
+      .number {
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+      .score {
+        text-align: center;
+      }
+      .overall {
+        color: var(--teal);
+        font-weight: 850;
+      }
+      .na {
+        color: var(--ink-muted);
+      }
+      .badge {
+        display: inline-block;
+        padding: 3px 7px;
+        border-radius: 999px;
+        font-size: 0.68rem;
+        font-weight: 750;
+        line-height: 1.2;
+        text-transform: capitalize;
+      }
+      .badge.pass,
+      .badge.completed {
+        background: color-mix(in srgb, var(--pickle) 15%, transparent);
+        color: var(--pickle-dark);
+      }
+      .badge.fail {
+        background: color-mix(in srgb, #d32f2f 12%, transparent);
+        color: #b71c1c;
+      }
+      .evidence {
+        font-weight: 700;
+        white-space: nowrap;
+      }
+      .sources {
+        margin: 34px 0 0;
+        padding: 24px;
+        border-radius: var(--radius);
+        background: var(--cream-dark);
+      }
+      .sources h2 {
+        margin: 0 0 8px;
+        font-size: 1.2rem;
+      }
+      .sources p {
+        margin: 8px 0;
+        color: var(--ink-muted);
+      }
+      .source-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 14px;
+        margin: 12px 0 0;
+        padding: 0;
+        list-style: none;
+      }
+      .source-links a {
+        font-weight: 700;
+      }
+      footer {
+        margin-top: 56px;
+        padding: 30px 0 44px;
+        border-top: 1px solid
+          color-mix(in srgb, var(--pickle-light) 20%, transparent);
+        color: var(--ink-muted);
+        text-align: center;
+        font-size: 0.86rem;
+      }
+      @media (max-width: 760px) {
+        .hero {
+          padding-top: 42px;
+        }
+        .summary {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .table-tools {
+          align-items: start;
+          flex-direction: column;
+          gap: 8px;
+        }
+        .table-scroll {
+          border-radius: var(--radius-sm);
+        }
+        table {
+          min-width: 1360px;
+        }
+        th button {
+          min-height: 48px;
+        }
+        .brand span {
+          display: none;
+        }
+        .nav-links {
+          max-width: calc(100% - 44px);
+        }
+        .nav-links a,
+        .nav-links .planned {
+          padding: 6px 8px;
+          font-size: 0.76rem;
+        }
+      }
+      @media (max-width: 480px) {
+        .wrap {
+          width: min(100% - 20px, var(--max));
+        }
+        .summary {
+          gap: 8px;
+        }
+        .summary-card {
+          padding: 14px;
+        }
+        .summary-card strong {
+          font-size: 1.3rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <a class="skip-link" href="#comparison">Skip to comparison</a>
+    <header>
+      <div class="wrap">
+        <nav aria-label="Benchmark navigation">
+          <a class="brand" href="index.html"
+            ><img
+              src="pickleshell-logo.png"
+              alt=""
+              width="36"
+              height="36"
+            /><span>PickleShell</span></a
+          >
+          <ul class="nav-links">
+            <li><a href="model-benchmarks.html">LLM tests</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <div class="eyebrow">
+            Historical multi-task benchmark · Provisional
+          </div>
+          <h1>Historical five-task benchmark: aggregate results</h1>
+          <p class="lead">
+            An aggregate of five different coding tasks: repairing ledger logic,
+            implementing feature flags, refactoring event processing, navigating
+            a repository to fix status labels, and strengthening range parsing
+            and edge-case tests. Each model has one record per task; the
+            aggregate combines objective results and four-dimensional expert
+            reviews across all five.
+          </p>
+          <p class="benchmark-context">
+            This is provisional historical evidence, not part of the current
+            isolated ranking. See the
+            <a href="model-comparison-phase2-patch-current.html"
+              >retry-policy patch results</a
+            >
+            or the <a href="model-benchmarks.html">benchmark index</a>.
+          </p>
+          <div class="provisional">
+            Historical / Provisional — not a blind benchmark
+          </div>
+        </div>
+      </section>
+      <div class="wrap">
+        <section class="summary" aria-label="Benchmark summary">
+          <div class="summary-card">
+            <strong>31</strong><span>candidates</span>
+          </div>
+          <div class="summary-card">
+            <strong>155</strong><span>task records</span>
+          </div>
+          <div class="summary-card">
+            <strong>146 / 134</strong><span>public / hidden passes</span>
+          </div>
+          <div class="summary-card">
+            <strong>0</strong><span>forbidden changes</span>
+          </div>
+        </section>
+      <aside class="notice">\n        <strong>One attempt. No second chance.</strong> LLMs operate as part of\n        real development pipelines, and every retry costs time and money. The\n        quality of the first delivered result matters—that is why we preserve\n        and score the first-run outcome.\n      </aside>\n      <aside class="notice">
+          <strong>What this historical test asked models to do.</strong>
+          <p>
+            Each model received five separate, small JavaScript repository
+            tasks: repair ledger accounting, implement feature-flag targeting,
+            simplify event processing without changing behavior, navigate an
+            unfamiliar repository to add an account-summary change, and
+            strengthen a numeric-range helper against boundary cases. Each task
+            allowed changes only in its designated source file and was checked
+            by public and hidden evaluators.
+          </p>
+        </aside>
+        <aside class="notice">
+          <strong>Important audit limitation.</strong>
+          <p>
+            Audit found reference path matches in 55/155 traces and hidden path
+            matches in 25/155. Hidden/reference artifacts were available in
+            shared Git history, so this was not a blind benchmark. Results are
+            published as historical/provisional evidence, not a claim of blind
+            evaluation.
+          </p>
+        </aside>
+        <aside class="notice">
+          <strong>Expert-review policy.</strong>
+          <p>
+            GPT-5.6 Sol is the single canonical expert reviewer to keep review
+            costs controlled. Independent Gemini cross-checks broadly agreed
+            with its scoring. Claude Opus 4.8 was removed from future judging
+            after repeatedly missing seeded hidden defects while evaluating
+            candidate patches. The complete review data, submitted patches, test
+            results, and pipeline are public for independent verification.
+          </p>
+        </aside>
+        <aside class="notice">
+          <strong>New clean-room nominations are published separately.</strong>
+          <p>
+            <a href="llm-test-bug-fixing.html">Bug fixing</a> ·
+            <a href="llm-test-feature-implementation.html"
+              >Feature implementation</a
+            >
+            · <a href="llm-test-refactoring.html">Refactoring</a> ·
+            <a href="llm-test-repository-navigation.html"
+              >Repository navigation</a
+            >
+            · <a href="llm-test-tests-edge-cases.html">Tests / edge cases</a>
+          </p>
+        </aside>
+        <nav class="task-nav" aria-label="Archived historical task pages">
+          <a href="model-comparison-phase2.html" aria-current="page"
+            >Five-task aggregate</a
+          ><a href="model-comparison-phase2-bug-fixing.html">Bug Fixing</a
+          ><a href="model-comparison-phase2-feature-implementation.html"
+            >Feature Implementation</a
+          ><a href="model-comparison-phase2-refactoring.html">Refactoring</a
+          ><a href="model-comparison-phase2-repository-navigation.html"
+            >Repository Navigation</a
+          ><a href="model-comparison-phase2-tests-edge-cases.html"
+            >Tests / Edge Cases</a
+          >
+        </nav>
+        <section id="comparison" aria-labelledby="comparison-title">
+          <div class="table-tools">
+            <div>
+              <h2 id="comparison-title">Complete candidate results</h2>
+              <p>
+                Activate any column heading to sort. Activate it again to
+                reverse direction.
+              </p>
+            </div>
+            <p><span id="row-count">31</span> rows</p>
+          </div>
+          <div
+            class="table-scroll"
+            role="region"
+            aria-label="Sortable benchmark comparison table"
+            tabindex="0"
+          >
+            <table>
+              <caption>
+                All 31 Phase 2 candidates, with aggregate arithmetic means and
+                status summaries across five records.
+              </caption>
+              <thead>
+                <tr>
+                  <th scope="col" aria-sort="ascending">
+                    <button type="button" data-key="rank" data-type="number">
+                      Rank
+                      <span class="sort-indicator" aria-hidden="true">▲</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button type="button" data-key="model" data-type="text">
+                      Model / candidate
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button
+                      type="button"
+                      data-key="reviewed"
+                      data-type="number"
+                    >
+                      Reviewed
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button
+                      type="button"
+                      data-key="harnesses"
+                      data-type="number"
+                    >
+                      Harnesses passed
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button type="button" data-key="public" data-type="number">
+                      Public
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button type="button" data-key="hidden" data-type="number">
+                      Hidden
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button
+                      type="button"
+                      data-key="functional"
+                      data-type="number"
+                    >
+                      Functional
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button
+                      type="button"
+                      data-key="reliability"
+                      data-type="number"
+                    >
+                      Reliability
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button
+                      type="button"
+                      data-key="maintainability"
+                      data-type="number"
+                    >
+                      Maintainability
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button type="button" data-key="scope" data-type="number">
+                      Scope
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button type="button" data-key="overall" data-type="number">
+                      Review overall
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button type="button" data-key="time" data-type="number">
+                      Avg solution time (s)
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button type="button" data-key="status" data-type="number">
+                      Record status
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button type="button" data-key="agent" data-type="number">
+                      Agent status
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button
+                      type="button"
+                      data-key="evaluator"
+                      data-type="number"
+                    >
+                      Evaluator status
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                  <th scope="col" aria-sort="none">
+                    <button type="button" data-key="model" data-type="text">
+                      Evidence
+                      <span class="sort-indicator" aria-hidden="true">↕</span>
+                    </button>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr
+                  data-original="0"
+                  data-rank="1"
+                  data-model="opencode-go/deepseek-v4-pro"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="9.0"
+                  data-scope="10.0"
+                  data-overall="9.75"
+                  data-time="65.574"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">1</td>
+                  <td>
+                    <span class="model">opencode-go/deepseek-v4-pro</span
+                    ><span class="candidate-id">04-deepseek-v4-pro</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">9.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.75</td>
+                  <td class="number">65.574</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/04-deepseek-v4-pro"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="1"
+                  data-rank="2"
+                  data-model="opencode-go/glm-5.2"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="9.0"
+                  data-scope="10.0"
+                  data-overall="9.75"
+                  data-time="119.742"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">2</td>
+                  <td>
+                    <span class="model">opencode-go/glm-5.2</span
+                    ><span class="candidate-id">05-glm-5-2</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">9.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.75</td>
+                  <td class="number">119.742</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/05-glm-5-2"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="2"
+                  data-rank="3"
+                  data-model="opencode-go/gpt-5.6-luna"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.70"
+                  data-time="38.673"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">3</td>
+                  <td>
+                    <span class="model">opencode-go/gpt-5.6-luna</span
+                    ><span class="candidate-id">01-gpt-5-6-luna</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.70</td>
+                  <td class="number">38.673</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/01-gpt-5-6-luna"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="3"
+                  data-rank="4"
+                  data-model="opencode/deepseek-v4-flash-free"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.70"
+                  data-time="51.981"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">4</td>
+                  <td>
+                    <span class="model">opencode/deepseek-v4-flash-free</span
+                    ><span class="candidate-id">22-deepseek-v4-flash-free</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.70</td>
+                  <td class="number">51.981</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/22-deepseek-v4-flash-free"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="4"
+                  data-rank="5"
+                  data-model="opencode/claude-sonnet-5"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.70"
+                  data-time="68.213"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">5</td>
+                  <td>
+                    <span class="model">opencode/claude-sonnet-5</span
+                    ><span class="candidate-id">52-claude-sonnet-5</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.70</td>
+                  <td class="number">68.213</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/52-claude-sonnet-5"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="5"
+                  data-rank="6"
+                  data-model="opencode-go/deepseek-v4-flash"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.70"
+                  data-time="74.143"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">6</td>
+                  <td>
+                    <span class="model">opencode-go/deepseek-v4-flash</span
+                    ><span class="candidate-id">11-deepseek-v4-flash</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.70</td>
+                  <td class="number">74.143</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/11-deepseek-v4-flash"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="6"
+                  data-rank="7"
+                  data-model="gpt-5.6-terra"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.70"
+                  data-time="87.055"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">7</td>
+                  <td>
+                    <span class="model">gpt-5.6-terra</span
+                    ><span class="candidate-id">48-gpt-5-6-terra</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.70</td>
+                  <td class="number">87.055</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/48-gpt-5-6-terra"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="7"
+                  data-rank="8"
+                  data-model="opencode-go/kimi-k2.6"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.70"
+                  data-time="91.592"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">8</td>
+                  <td>
+                    <span class="model">opencode-go/kimi-k2.6</span
+                    ><span class="candidate-id">16-kimi-k2-6</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.70</td>
+                  <td class="number">91.592</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/16-kimi-k2-6"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="8"
+                  data-rank="9"
+                  data-model="opencode-go/kimi-k2.7-code"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.70"
+                  data-time="99.379"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">9</td>
+                  <td>
+                    <span class="model">opencode-go/kimi-k2.7-code</span
+                    ><span class="candidate-id">03-kimi-k2-7-code</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.70</td>
+                  <td class="number">99.379</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/03-kimi-k2-7-code"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="9"
+                  data-rank="10"
+                  data-model="opencode-go/minimax-m3"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.70"
+                  data-time="101.459"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">10</td>
+                  <td>
+                    <span class="model">opencode-go/minimax-m3</span
+                    ><span class="candidate-id">06-minimax-m3</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.70</td>
+                  <td class="number">101.459</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/06-minimax-m3"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="10"
+                  data-rank="11"
+                  data-model="gpt-5.4"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.70"
+                  data-time="119.703"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">11</td>
+                  <td>
+                    <span class="model">gpt-5.4</span
+                    ><span class="candidate-id">49-gpt-5-4</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.70</td>
+                  <td class="number">119.703</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/49-gpt-5-4"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="11"
+                  data-rank="12"
+                  data-model="opencode-go/glm-5.1"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.70"
+                  data-time="135.099"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">12</td>
+                  <td>
+                    <span class="model">opencode-go/glm-5.1</span
+                    ><span class="candidate-id">15-glm-5-1</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.70</td>
+                  <td class="number">135.099</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/15-glm-5-1"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="12"
+                  data-rank="13"
+                  data-model="opencode-go/grok-4.5"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.6"
+                  data-scope="10.0"
+                  data-overall="9.65"
+                  data-time="29.899"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">13</td>
+                  <td>
+                    <span class="model">opencode-go/grok-4.5</span
+                    ><span class="candidate-id">09-grok-4-5</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.6</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.65</td>
+                  <td class="number">29.899</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/09-grok-4-5"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="13"
+                  data-rank="14"
+                  data-model="opencode-go/mimo-v2.5-pro"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.6"
+                  data-scope="10.0"
+                  data-overall="9.65"
+                  data-time="105.134"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">14</td>
+                  <td>
+                    <span class="model">opencode-go/mimo-v2.5-pro</span
+                    ><span class="candidate-id">07-mimo-v2-5-pro</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.6</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.65</td>
+                  <td class="number">105.134</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/07-mimo-v2-5-pro"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="14"
+                  data-rank="15"
+                  data-model="gpt-5.6-sol"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.6"
+                  data-scope="10.0"
+                  data-overall="9.65"
+                  data-time="121.107"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">15</td>
+                  <td>
+                    <span class="model">gpt-5.6-sol</span
+                    ><span class="candidate-id">47-gpt-5-6-sol</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.6</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.65</td>
+                  <td class="number">121.107</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/47-gpt-5-6-sol"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="15"
+                  data-rank="16"
+                  data-model="gpt-5.4-mini"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.6"
+                  data-scope="10.0"
+                  data-overall="9.65"
+                  data-time="124.081"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">16</td>
+                  <td>
+                    <span class="model">gpt-5.4-mini</span
+                    ><span class="candidate-id">50-gpt-5-4-mini</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.6</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.65</td>
+                  <td class="number">124.081</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/50-gpt-5-4-mini"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="16"
+                  data-rank="17"
+                  data-model="gpt-5.6-luna"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.6"
+                  data-scope="10.0"
+                  data-overall="9.65"
+                  data-time="195.330"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">17</td>
+                  <td>
+                    <span class="model">gpt-5.6-luna</span
+                    ><span class="candidate-id">46-gpt-5-6-luna</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.6</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.65</td>
+                  <td class="number">195.330</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/46-gpt-5-6-luna"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="17"
+                  data-rank="18"
+                  data-model="opencode-go/kimi-k3"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.4"
+                  data-scope="10.0"
+                  data-overall="9.60"
+                  data-time="189.396"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">18</td>
+                  <td>
+                    <span class="model">opencode-go/kimi-k3</span
+                    ><span class="candidate-id">10-kimi-k3</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.4</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.60</td>
+                  <td class="number">189.396</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/10-kimi-k3"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="18"
+                  data-rank="19"
+                  data-model="gpt-5.3-codex-spark"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.2"
+                  data-scope="10.0"
+                  data-overall="9.55"
+                  data-time="60.725"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">19</td>
+                  <td>
+                    <span class="model">gpt-5.3-codex-spark</span
+                    ><span class="candidate-id">18-gpt-5-3-codex-spark</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.2</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.55</td>
+                  <td class="number">60.725</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/18-gpt-5-3-codex-spark"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="19"
+                  data-rank="20"
+                  data-model="opencode/claude-opus-5"
+                  data-reviewed="5"
+                  data-harnesses="5"
+                  data-public="5"
+                  data-hidden="5"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.2"
+                  data-scope="10.0"
+                  data-overall="9.55"
+                  data-time="143.420"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="5"
+                >
+                  <td class="number">20</td>
+                  <td>
+                    <span class="model">opencode/claude-opus-5</span
+                    ><span class="candidate-id">53-claude-opus-5</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">5/5</td>
+                  <td class="score">5</td>
+                  <td class="score">5</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.2</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.55</td>
+                  <td class="number">143.420</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">5/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/53-claude-opus-5"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="20"
+                  data-rank="21"
+                  data-model="opencode-go/mimo-v2.5"
+                  data-reviewed="5"
+                  data-harnesses="4"
+                  data-public="5"
+                  data-hidden="4"
+                  data-functional="9.4"
+                  data-reliability="9.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.30"
+                  data-time="72.584"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="4"
+                >
+                  <td class="number">21</td>
+                  <td>
+                    <span class="model">opencode-go/mimo-v2.5</span
+                    ><span class="candidate-id">13-mimo-v2-5</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">4/5</td>
+                  <td class="score">5</td>
+                  <td class="score">4</td>
+                  <td class="score">9.4</td>
+                  <td class="score">9.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.30</td>
+                  <td class="number">72.584</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">4/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/13-mimo-v2-5"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="21"
+                  data-rank="22"
+                  data-model="opencode/hy3-free"
+                  data-reviewed="5"
+                  data-harnesses="4"
+                  data-public="5"
+                  data-hidden="4"
+                  data-functional="9.4"
+                  data-reliability="9.0"
+                  data-maintainability="8.6"
+                  data-scope="10.0"
+                  data-overall="9.25"
+                  data-time="59.818"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="4"
+                >
+                  <td class="number">22</td>
+                  <td>
+                    <span class="model">opencode/hy3-free</span
+                    ><span class="candidate-id">27-hy3-free</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">4/5</td>
+                  <td class="score">5</td>
+                  <td class="score">4</td>
+                  <td class="score">9.4</td>
+                  <td class="score">9.0</td>
+                  <td class="score">8.6</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.25</td>
+                  <td class="number">59.818</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">4/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/27-hy3-free"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="22"
+                  data-rank="23"
+                  data-model="opencode/big-pickle"
+                  data-reviewed="5"
+                  data-harnesses="4"
+                  data-public="5"
+                  data-hidden="4"
+                  data-functional="9.0"
+                  data-reliability="8.6"
+                  data-maintainability="9.0"
+                  data-scope="10.0"
+                  data-overall="9.15"
+                  data-time="68.279"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="4"
+                >
+                  <td class="number">23</td>
+                  <td>
+                    <span class="model">opencode/big-pickle</span
+                    ><span class="candidate-id">19-big-pickle</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">4/5</td>
+                  <td class="score">5</td>
+                  <td class="score">4</td>
+                  <td class="score">9.0</td>
+                  <td class="score">8.6</td>
+                  <td class="score">9.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.15</td>
+                  <td class="number">68.279</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">4/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/19-big-pickle"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="23"
+                  data-rank="24"
+                  data-model="opencode-go/hy3"
+                  data-reviewed="5"
+                  data-harnesses="4"
+                  data-public="5"
+                  data-hidden="4"
+                  data-functional="9.0"
+                  data-reliability="8.6"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="9.10"
+                  data-time="42.575"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="4"
+                >
+                  <td class="number">24</td>
+                  <td>
+                    <span class="model">opencode-go/hy3</span
+                    ><span class="candidate-id">14-hy3</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">4/5</td>
+                  <td class="score">5</td>
+                  <td class="score">4</td>
+                  <td class="score">9.0</td>
+                  <td class="score">8.6</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.10</td>
+                  <td class="number">42.575</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">4/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/14-hy3"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="24"
+                  data-rank="25"
+                  data-model="opencode/claude-haiku-4-5"
+                  data-reviewed="5"
+                  data-harnesses="4"
+                  data-public="5"
+                  data-hidden="4"
+                  data-functional="9.0"
+                  data-reliability="8.6"
+                  data-maintainability="8.2"
+                  data-scope="10.0"
+                  data-overall="8.95"
+                  data-time="55.642"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="4"
+                >
+                  <td class="number">25</td>
+                  <td>
+                    <span class="model">opencode/claude-haiku-4-5</span
+                    ><span class="candidate-id">51-claude-haiku-4-5</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">4/5</td>
+                  <td class="score">5</td>
+                  <td class="score">4</td>
+                  <td class="score">9.0</td>
+                  <td class="score">8.6</td>
+                  <td class="score">8.2</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">8.95</td>
+                  <td class="number">55.642</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">4/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/51-claude-haiku-4-5"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="25"
+                  data-rank="26"
+                  data-model="opencode-go/minimax-m2.7"
+                  data-reviewed="5"
+                  data-harnesses="3"
+                  data-public="5"
+                  data-hidden="3"
+                  data-functional="8.6"
+                  data-reliability="7.8"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="8.80"
+                  data-time="88.774"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="3"
+                >
+                  <td class="number">26</td>
+                  <td>
+                    <span class="model">opencode-go/minimax-m2.7</span
+                    ><span class="candidate-id">17-minimax-m2-7</span>
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">3/5</td>
+                  <td class="score">5</td>
+                  <td class="score">3</td>
+                  <td class="score">8.6</td>
+                  <td class="score">7.8</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">8.80</td>
+                  <td class="number">88.774</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">3/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/17-minimax-m2-7"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="26"
+                  data-rank="27"
+                  data-model="opencode/nemotron-3.5-lightning-free"
+                  data-reviewed="5"
+                  data-harnesses="3"
+                  data-public="5"
+                  data-hidden="3"
+                  data-functional="8.4"
+                  data-reliability="7.6"
+                  data-maintainability="9.0"
+                  data-scope="10.0"
+                  data-overall="8.75"
+                  data-time="55.641"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="3"
+                >
+                  <td class="number">27</td>
+                  <td>
+                    <span class="model"
+                      >opencode/nemotron-3.5-lightning-free</span
+                    ><span class="candidate-id"
+                      >33-nemotron-3-5-lightning-free</span
+                    >
+                  </td>
+                  <td class="score">5/5</td>
+                  <td class="score">3/5</td>
+                  <td class="score">5</td>
+                  <td class="score">3</td>
+                  <td class="score">8.4</td>
+                  <td class="score">7.6</td>
+                  <td class="score">9.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">8.75</td>
+                  <td class="number">55.641</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">3/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/33-nemotron-3-5-lightning-free"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="27"
+                  data-rank="999"
+                  data-model="opencode/nemotron-3-ultra-free"
+                  data-reviewed="4"
+                  data-harnesses="3"
+                  data-public="4"
+                  data-hidden="3"
+                  data-functional="8.8"
+                  data-reliability="8.3"
+                  data-maintainability="9.0"
+                  data-scope="10.0"
+                  data-overall="9.00"
+                  data-time="81.606"
+                  data-status="5"
+                  data-agent="4"
+                  data-evaluator="3"
+                >
+                  <td class="number"><span class="na">N/A</span></td>
+                  <td>
+                    <span class="model">opencode/nemotron-3-ultra-free</span
+                    ><span class="candidate-id">35-nemotron-3-ultra-free</span>
+                  </td>
+                  <td class="score">4/5</td>
+                  <td class="score">3/5</td>
+                  <td class="score">4</td>
+                  <td class="score">3</td>
+                  <td class="score">8.8</td>
+                  <td class="score">8.3</td>
+                  <td class="score">9.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.00</td>
+                  <td class="number">81.606</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">4/5</td>
+                  <td class="number">3/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/35-nemotron-3-ultra-free"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="28"
+                  data-rank="999"
+                  data-model="opencode/mimo-v2.5-free"
+                  data-reviewed="4"
+                  data-harnesses="2"
+                  data-public="4"
+                  data-hidden="2"
+                  data-functional="8.0"
+                  data-reliability="7.0"
+                  data-maintainability="8.8"
+                  data-scope="10.0"
+                  data-overall="8.44"
+                  data-time="168.850"
+                  data-status="5"
+                  data-agent="5"
+                  data-evaluator="2"
+                >
+                  <td class="number"><span class="na">N/A</span></td>
+                  <td>
+                    <span class="model">opencode/mimo-v2.5-free</span
+                    ><span class="candidate-id">28-mimo-v2-5-free</span>
+                  </td>
+                  <td class="score">4/5</td>
+                  <td class="score">2/5</td>
+                  <td class="score">4</td>
+                  <td class="score">2</td>
+                  <td class="score">8.0</td>
+                  <td class="score">7.0</td>
+                  <td class="score">8.8</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">8.44</td>
+                  <td class="number">168.850</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">5/5</td>
+                  <td class="number">2/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/28-mimo-v2-5-free"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="29"
+                  data-rank="999"
+                  data-model="opencode/laguna-s-2.1-free"
+                  data-reviewed="3"
+                  data-harnesses="3"
+                  data-public="3"
+                  data-hidden="3"
+                  data-functional="10.0"
+                  data-reliability="10.0"
+                  data-maintainability="8.7"
+                  data-scope="10.0"
+                  data-overall="9.67"
+                  data-time="499.955"
+                  data-status="5"
+                  data-agent="3"
+                  data-evaluator="3"
+                >
+                  <td class="number"><span class="na">N/A</span></td>
+                  <td>
+                    <span class="model">opencode/laguna-s-2.1-free</span
+                    ><span class="candidate-id">20-laguna-s-2-1-free</span>
+                  </td>
+                  <td class="score">3/5</td>
+                  <td class="score">3/5</td>
+                  <td class="score">3</td>
+                  <td class="score">3</td>
+                  <td class="score">10.0</td>
+                  <td class="score">10.0</td>
+                  <td class="score">8.7</td>
+                  <td class="score">10.0</td>
+                  <td class="score overall">9.67</td>
+                  <td class="number">499.955</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">3/5</td>
+                  <td class="number">3/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/20-laguna-s-2-1-free"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+                <tr
+                  data-original="30"
+                  data-rank="999"
+                  data-model="opencode-go/qwen3.7-plus"
+                  data-reviewed="0"
+                  data-harnesses="0"
+                  data-public="0"
+                  data-hidden="0"
+                  data-functional="-1"
+                  data-reliability="-1"
+                  data-maintainability="-1"
+                  data-scope="-1"
+                  data-overall="-1"
+                  data-time="900.024"
+                  data-status="5"
+                  data-agent="0"
+                  data-evaluator="0"
+                >
+                  <td class="number"><span class="na">N/A</span></td>
+                  <td>
+                    <span class="model">opencode-go/qwen3.7-plus</span
+                    ><span class="candidate-id">02-qwen3-7-plus</span>
+                  </td>
+                  <td class="score">0/5</td>
+                  <td class="score">0/5</td>
+                  <td class="score">0</td>
+                  <td class="score">0</td>
+                  <td class="score"><span class="na">N/A</span></td>
+                  <td class="score"><span class="na">N/A</span></td>
+                  <td class="score"><span class="na">N/A</span></td>
+                  <td class="score"><span class="na">N/A</span></td>
+                  <td class="score"><span class="na">N/A</span></td>
+                  <td class="number">900.024</td>
+                  <td><span class="badge completed">5/5 completed</span></td>
+                  <td class="number">0/5</td>
+                  <td class="number">0/5</td>
+                  <td class="evidence">
+                    <a
+                      href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/02-qwen3-7-plus"
+                      >records ↗</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+        <section class="sources" id="sources">
+          <h2>Source data and evidence</h2>
+          <p>
+            Generated from the Phase 2 records and expert reviews at commit
+            <code>f6e0d4ed4df2690f66b66d656012238d9cfe5add</code>. Times are
+            agent wall-clock solution durations. Public and hidden results
+            remain separate objective evidence; expert scores use four 0–10
+            criteria and Overall is their arithmetic mean. No-patch outcomes
+            remain N/A and do not count as code-quality failures.
+          </p>
+          <ul class="source-links">
+            <li>
+              <a
+                href="https://github.com/pickleshell/models-test/blob/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/expert-review-methodology.md"
+                >review methodology <span aria-hidden="true">↗</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/pickleshell/models-test/blob/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/expert-reviews.json"
+                >expert-review data <span aria-hidden="true">↗</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add"
+                >models-test repository <span aria-hidden="true">↗</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2/aggregate-ranking.md"
+                >generated ranking <span aria-hidden="true">↗</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/pickleshell/models-test/tree/f6e0d4ed4df2690f66b66d656012238d9cfe5add/results/phase2"
+                >all Phase 2 task records and evidence
+                <span aria-hidden="true">↗</span></a
+              >
+            </li>
+          </ul>
+        </section>
+      </div>
+    </main>
+    <footer>
+      <div class="wrap">
+        PickleShell model benchmark · Phase 2 historical/provisional results.
+      </div>
+    </footer>
+    <script>
+      (() => {
+        const table = document.querySelector('table'); const body = table.tBodies[0]; const buttons = table.querySelectorAll('th button');
+        let key = 'rank', dir = 1;
+        const compare = (a,b,type) => { const av=a.dataset[key] ?? '', bv=b.dataset[key] ?? ''; if(type === 'number') return Number(av)-Number(bv); return av.localeCompare(bv, undefined, {numeric:true,sensitivity:'base'}); };
+        buttons.forEach(button => button.addEventListener('click', () => { const type=button.dataset.type; key === button.dataset.key ? dir *= -1 : (key=button.dataset.key,dir=1); const rows=[...body.rows]; rows.sort((a,b) => (compare(a,b,type)*dir) || (Number(a.dataset.original)-Number(b.dataset.original))); rows.forEach(row=>body.appendChild(row)); buttons.forEach(other => { const active=other===button; other.closest('th').setAttribute('aria-sort',active?(dir===1?'ascending':'descending'):'none'); other.querySelector('.sort-indicator').textContent=active?(dir===1?'▲':'▼'):'↕'; }); });
+      })();
+    </script>
+  </body>
+</html>

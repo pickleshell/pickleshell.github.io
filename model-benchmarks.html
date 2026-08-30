@@ -1,38 +1,467 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="robots" content="index, follow">
-  <meta name="description" content="PickleShell coding-agent benchmark index: current isolated patch tests and historical evidence.">
-  <title>Model Benchmarks — PickleShell</title>
-  <link rel="icon" href="favicon.ico" sizes="48x48">
-  <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32">
-  <link rel="apple-touch-icon" href="apple-touch-icon.png">
-  <style>
-    :root{--pickle:#7cb342;--pickle-light:#aed581;--pickle-dark:#558b2f;--teal:#00796b;--teal-deep:#004d40;--cream:#fefcf3;--cream-dark:#f5f0e0;--ink:#1a1a2e;--ink-mid:#3a3a52;--ink-muted:#6b6b80;--white:#fff;--max:1120px;--radius:18px;--shadow:0 2px 14px rgba(26,26,46,.08)}
-    @media(prefers-color-scheme:dark){:root{--cream:#111122;--cream-dark:#1a1a30;--ink:#e8e8f0;--ink-mid:#b8b8cc;--ink-muted:#9898ad;--white:#1e1e34;--shadow:0 2px 14px rgba(0,0,0,.26)}}
-    *,*::before,*::after{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--cream);font:16px/1.55 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}.wrap{width:min(var(--max),calc(100% - 32px));margin:auto}a{color:var(--teal)}a:focus-visible{outline:3px solid var(--pickle);outline-offset:3px;border-radius:4px}header{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--cream) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid color-mix(in srgb,var(--pickle-light) 25%,transparent)}nav{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}.brand{display:flex;align-items:center;gap:10px;color:var(--ink);font-weight:800;text-decoration:none}.brand img{border-radius:8px}.nav-links{display:flex;gap:6px;margin:0;padding:0;list-style:none;overflow:auto}.nav-links a{display:block;padding:6px 12px;border-radius:999px;font-size:.88rem;font-weight:700;text-decoration:none;white-space:nowrap}.nav-links a:hover,.nav-links a[aria-current="page"]{background:var(--pickle-light);color:var(--teal-deep)}.hero{padding:70px 0 34px}.eyebrow{color:var(--pickle-dark);font-size:.8rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase}h1{max-width:820px;margin:10px 0 16px;font-size:clamp(2.4rem,6vw,4.2rem);line-height:1.03;letter-spacing:-.045em}.lead{max-width:820px;margin:0;color:var(--ink-muted);font-size:1.1rem}.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin:28px 0 42px}.card{display:flex;flex-direction:column;padding:24px;border:1px solid color-mix(in srgb,var(--pickle-light) 38%,transparent);border-radius:var(--radius);background:var(--white);box-shadow:var(--shadow)}.card.current{border-color:color-mix(in srgb,var(--pickle) 70%,transparent)}.card.in-progress{border-color:color-mix(in srgb,var(--ink-muted) 22%,transparent);background:color-mix(in srgb,var(--white) 82%,var(--cream-dark));box-shadow:none}.tag{width:max-content;padding:4px 9px;border-radius:999px;background:var(--cream-dark);color:var(--ink-muted);font-size:.72rem;font-weight:800;text-transform:uppercase}.current .tag{background:color-mix(in srgb,var(--pickle) 16%,transparent);color:var(--pickle-dark)}.in-progress .tag{background:color-mix(in srgb,var(--ink-muted) 12%,transparent);color:var(--ink-muted)}.card h2{margin:14px 0 6px;font-size:1.35rem}.card p{margin:0 0 18px;color:var(--ink-muted)}.in-progress h2,.in-progress p{color:var(--ink-muted)}.facts{display:flex;flex-wrap:wrap;gap:8px;margin:auto 0 18px;padding:0;list-style:none}.facts li{padding:5px 9px;border-radius:8px;background:var(--cream-dark);color:var(--ink-mid);font-size:.78rem;font-weight:700}.in-progress .facts li{color:var(--ink-muted)}.button{width:max-content;padding:9px 14px;border-radius:10px;background:var(--teal);color:#fff;font-weight:800;text-decoration:none}.in-progress .button{background:color-mix(in srgb,var(--ink-muted) 72%,var(--white));color:var(--white)}.notice{margin:0 0 48px;padding:18px 20px;border-left:4px solid var(--pickle);border-radius:12px;background:var(--cream-dark);color:var(--ink-mid)}footer{padding:30px 0 44px;border-top:1px solid color-mix(in srgb,var(--pickle-light) 20%,transparent);color:var(--ink-muted);text-align:center;font-size:.86rem}@media(max-width:760px){.brand span{display:none}.nav-links a{padding:6px 8px;font-size:.78rem}.cards{grid-template-columns:1fr}.hero{padding-top:48px}}@media(max-width:480px){.wrap{width:min(100% - 20px,var(--max))}}
-  </style>
-</head>
-<body>
-  <header><div class="wrap"><nav aria-label="Benchmark navigation"><a class="brand" href="index.html"><img src="pickleshell-logo.png" alt="" width="36" height="36"><span>PickleShell</span></a><ul class="nav-links"><li><a href="model-benchmarks.html" aria-current="page">LLM tests</a></li></ul></nav></div></header>
-  <main><section class="hero"><div class="wrap"><div class="eyebrow">Coding-agent evidence</div><h1>Model benchmarks, separated by task and methodology.</h1><p class="lead">Compare patches, objective correctness, manual review, solution time, and known provider cost without treating availability or infrastructure failures as code quality.</p></div></section>
-    <div class="wrap">
-      <section class="cards" aria-label="Available benchmark result sets">
-        <article class="card current"><span class="tag">Current · isolated</span><h2>Retry-policy patch</h2><p>A focused JavaScript maintenance task executed through the clean-room OpenCode and Codex pipeline, with public tests, a private objective evaluator, immutable patches, time, and provider-reported cost.</p><ul class="facts"><li>42 runtime routes</li><li>4 review criteria</li><li>public + objective checks</li></ul><a class="button" href="model-comparison-phase2-patch-current.html">View current results</a></article>
-        <article class="card"><span class="tag">Patch benchmark</span><h2>Ledger reconciliation</h2><p>The first broad patch comparison: 53 coding-agent candidates solving the same ledger task, with availability kept separate from quality scoring.</p><ul class="facts"><li>53 candidates</li><li>31 scored patches</li><li>5 quality dimensions</li></ul><a class="button" href="model-comparison.html">View ledger results</a></article>
-        <article class="card current"><span class="tag">Current · results published</span><h2>Bug fixing</h2><p>Diagnose and repair duplicate IDs, exact money parsing, sales, refunds, invalid rows, and daily ledger totals.</p><ul class="facts"><li>public + objective checks</li><li>4 review criteria</li><li>clean-room execution</li></ul><a class="button" href="llm-test-bug-fixing.html">View results</a></article>
-        <article class="card current"><span class="tag">Current · results published</span><h2>Feature implementation</h2><p>Implement feature overrides and deterministic percentage rollout from a detailed behavioral contract.</p><ul class="facts"><li>15 tested routes</li><li>4 review criteria</li><li>clean-room execution</li></ul><a class="button" href="llm-test-feature-implementation.html">View results</a></article>
-        <article class="card current"><span class="tag">Current · results published</span><h2>Refactoring</h2><p>Extract one shared event-filtering helper while preserving the public API and all existing behavior.</p><ul class="facts"><li>15 tested routes</li><li>4 review criteria</li><li>clean-room execution</li></ul><a class="button" href="llm-test-refactoring.html">View results</a></article>
-        <article class="card current"><span class="tag">Current · results published</span><h2>Repository navigation</h2><p>Explore an unfamiliar module layout, locate the correct formatter, and repair account status labels.</p><ul class="facts"><li>15 tested routes</li><li>4 review criteria</li><li>correct-layer change</li></ul><a class="button" href="llm-test-repository-navigation.html">View results</a></article>
-        <article class="card current"><span class="tag">Current · results published</span><h2>Tests / edge cases</h2><p>Repair strict integer-range parsing and author meaningful tests that survive mutation testing.</p><ul class="facts"><li>15 tested routes</li><li>4 review criteria</li><li>2 allowed files</li></ul><a class="button" href="llm-test-tests-edge-cases.html">View results</a></article>
-        <article class="card"><span class="tag">Archive · provisional</span><h2>Historical five-task results</h2><p>Archived results from the older combined run. Audit found shared-history contamination, so these records are retained as evidence but are not part of the new clean-room nomination pages.</p><ul class="facts"><li>31 candidates</li><li>5 old task records each</li><li>not a blind benchmark</li></ul><a class="button" href="model-comparison-phase2.html">View provisional archive</a></article>
-        <article class="card"><span class="tag">Methodology</span><h2>Runner and source evidence</h2><p>The public benchmark runner documents clean-room isolation, separate candidate testing and judging, objective evaluation, timing, cost policy, and immutable result artifacts.</p><ul class="facts"><li>OpenCode + Codex</li><li>MIT licensed</li><li>public artifacts</li></ul><a class="button" href="https://github.com/pickleshell/models-benchmark">Open benchmark repository ↗</a></article>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="description"
+      content="PickleShell coding-agent benchmark index: current isolated patch tests and historical evidence."
+    />
+    <title>Model Benchmarks — PickleShell</title>
+    <link rel="icon" href="favicon.ico" sizes="48x48" />
+    <link rel="icon" href="favicon-32x32.png" type="image/png" sizes="32x32" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+    <style>
+      :root {
+        --pickle: #7cb342;
+        --pickle-light: #aed581;
+        --pickle-dark: #558b2f;
+        --teal: #00796b;
+        --teal-deep: #004d40;
+        --cream: #fefcf3;
+        --cream-dark: #f5f0e0;
+        --ink: #1a1a2e;
+        --ink-mid: #3a3a52;
+        --ink-muted: #6b6b80;
+        --white: #fff;
+        --max: 1120px;
+        --radius: 18px;
+        --shadow: 0 2px 14px rgba(26, 26, 46, 0.08);
+      }
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --cream: #111122;
+          --cream-dark: #1a1a30;
+          --ink: #e8e8f0;
+          --ink-mid: #b8b8cc;
+          --ink-muted: #9898ad;
+          --white: #1e1e34;
+          --shadow: 0 2px 14px rgba(0, 0, 0, 0.26);
+        }
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--cream);
+        font:
+          16px/1.55 system-ui,
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          Roboto,
+          sans-serif;
+      }
+      .wrap {
+        width: min(var(--max), calc(100% - 32px));
+        margin: auto;
+      }
+      a {
+        color: var(--teal);
+      }
+      a:focus-visible {
+        outline: 3px solid var(--pickle);
+        outline-offset: 3px;
+        border-radius: 4px;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: color-mix(in srgb, var(--cream) 88%, transparent);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid
+          color-mix(in srgb, var(--pickle-light) 25%, transparent);
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 0;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: var(--ink);
+        font-weight: 800;
+        text-decoration: none;
+      }
+      .brand img {
+        border-radius: 8px;
+      }
+      .nav-links {
+        display: flex;
+        gap: 6px;
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        overflow: auto;
+      }
+      .nav-links a {
+        display: block;
+        padding: 6px 12px;
+        border-radius: 999px;
+        font-size: 0.88rem;
+        font-weight: 700;
+        text-decoration: none;
+        white-space: nowrap;
+      }
+      .nav-links a:hover,
+      .nav-links a[aria-current="page"] {
+        background: var(--pickle-light);
+        color: var(--teal-deep);
+      }
+      .hero {
+        padding: 70px 0 34px;
+      }
+      .eyebrow {
+        color: var(--pickle-dark);
+        font-size: 0.8rem;
+        font-weight: 850;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      h1 {
+        max-width: 820px;
+        margin: 10px 0 16px;
+        font-size: clamp(2.4rem, 6vw, 4.2rem);
+        line-height: 1.03;
+        letter-spacing: -0.045em;
+      }
+      .lead {
+        max-width: 820px;
+        margin: 0;
+        color: var(--ink-muted);
+        font-size: 1.1rem;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 16px;
+        margin: 28px 0 42px;
+      }
+      .card {
+        display: flex;
+        flex-direction: column;
+        padding: 24px;
+        border: 1px solid
+          color-mix(in srgb, var(--pickle-light) 38%, transparent);
+        border-radius: var(--radius);
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+      .card.current {
+        border-color: color-mix(in srgb, var(--pickle) 70%, transparent);
+      }
+      .card.in-progress {
+        border-color: color-mix(in srgb, var(--ink-muted) 22%, transparent);
+        background: color-mix(in srgb, var(--white) 82%, var(--cream-dark));
+        box-shadow: none;
+      }
+      .tag {
+        width: max-content;
+        padding: 4px 9px;
+        border-radius: 999px;
+        background: var(--cream-dark);
+        color: var(--ink-muted);
+        font-size: 0.72rem;
+        font-weight: 800;
+        text-transform: uppercase;
+      }
+      .current .tag {
+        background: color-mix(in srgb, var(--pickle) 16%, transparent);
+        color: var(--pickle-dark);
+      }
+      .in-progress .tag {
+        background: color-mix(in srgb, var(--ink-muted) 12%, transparent);
+        color: var(--ink-muted);
+      }
+      .card h2 {
+        margin: 14px 0 6px;
+        font-size: 1.35rem;
+      }
+      .card p {
+        margin: 0 0 18px;
+        color: var(--ink-muted);
+      }
+      .in-progress h2,
+      .in-progress p {
+        color: var(--ink-muted);
+      }
+      .facts {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin: auto 0 18px;
+        padding: 0;
+        list-style: none;
+      }
+      .facts li {
+        padding: 5px 9px;
+        border-radius: 8px;
+        background: var(--cream-dark);
+        color: var(--ink-mid);
+        font-size: 0.78rem;
+        font-weight: 700;
+      }
+      .in-progress .facts li {
+        color: var(--ink-muted);
+      }
+      .button {
+        width: max-content;
+        padding: 9px 14px;
+        border-radius: 10px;
+        background: var(--teal);
+        color: #fff;
+        font-weight: 800;
+        text-decoration: none;
+      }
+      .in-progress .button {
+        background: color-mix(in srgb, var(--ink-muted) 72%, var(--white));
+        color: var(--white);
+      }
+      .notice {
+        margin: 0 0 48px;
+        padding: 18px 20px;
+        border-left: 4px solid var(--pickle);
+        border-radius: 12px;
+        background: var(--cream-dark);
+        color: var(--ink-mid);
+      }
+      footer {
+        padding: 30px 0 44px;
+        border-top: 1px solid
+          color-mix(in srgb, var(--pickle-light) 20%, transparent);
+        color: var(--ink-muted);
+        text-align: center;
+        font-size: 0.86rem;
+      }
+      @media (max-width: 760px) {
+        .brand span {
+          display: none;
+        }
+        .nav-links a {
+          padding: 6px 8px;
+          font-size: 0.78rem;
+        }
+        .cards {
+          grid-template-columns: 1fr;
+        }
+        .hero {
+          padding-top: 48px;
+        }
+      }
+      @media (max-width: 480px) {
+        .wrap {
+          width: min(100% - 20px, var(--max));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <nav aria-label="Benchmark navigation">
+          <a class="brand" href="index.html"
+            ><img
+              src="pickleshell-logo.png"
+              alt=""
+              width="36"
+              height="36"
+            /><span>PickleShell</span></a
+          >
+          <ul class="nav-links">
+            <li>
+              <a href="model-benchmarks.html" aria-current="page">LLM tests</a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <div class="eyebrow">Coding-agent evidence</div>
+          <h1>Model benchmarks, separated by task and methodology.</h1>
+          <p class="lead">
+            Compare patches, objective correctness, manual review, solution
+            time, and known provider cost without treating availability or
+            infrastructure failures as code quality.
+          </p>
+        </div>
       </section>
-      <aside class="notice"><strong>Do not compare rows across tasks as if they were one leaderboard.</strong> A result is specific to its prompt, fixture, evaluator, runtime, provider route, and release. OpenCode and Codex routes remain separate even when their model names are similar.</aside>
-    </div>
-  </main>
-  <footer><div class="wrap">PickleShell model benchmarks · Evidence first, rankings second.</div></footer>
-</body>
+      <div class="wrap">
+        <section class="cards" aria-label="Available benchmark result sets">
+          <article class="card current">
+            <span class="tag">Current · isolated</span>
+            <h2>Retry-policy patch</h2>
+            <p>
+              A focused JavaScript maintenance task executed through the
+              clean-room OpenCode and Codex pipeline, with public tests, a
+              private objective evaluator, immutable patches, time, and
+              provider-reported cost.
+            </p>
+            <ul class="facts">
+              <li>42 runtime routes</li>
+              <li>4 review criteria</li>
+              <li>public + objective checks</li>
+            </ul>
+            <a class="button" href="model-comparison-phase2-patch-current.html"
+              >View current results</a
+            >
+          </article>
+          <article class="card">
+            <span class="tag">Patch benchmark</span>
+            <h2>Ledger reconciliation</h2>
+            <p>
+              The first broad patch comparison: 53 coding-agent candidates
+              solving the same ledger task, with availability kept separate from
+              quality scoring.
+            </p>
+            <ul class="facts">
+              <li>53 candidates</li>
+              <li>31 scored patches</li>
+              <li>5 quality dimensions</li>
+            </ul>
+            <a class="button" href="model-comparison.html"
+              >View ledger results</a
+            >
+          </article>
+          <article class="card current">
+            <span class="tag">Current · results published</span>
+            <h2>Bug fixing</h2>
+            <p>
+              Diagnose and repair duplicate IDs, exact money parsing, sales,
+              refunds, invalid rows, and daily ledger totals.
+            </p>
+            <ul class="facts">
+              <li>public + objective checks</li>
+              <li>4 review criteria</li>
+              <li>clean-room execution</li>
+            </ul>
+            <a class="button" href="llm-test-bug-fixing.html">View results</a>
+          </article>
+          <article class="card current">
+            <span class="tag">Current · results published</span>
+            <h2>Feature implementation</h2>
+            <p>
+              Implement feature overrides and deterministic percentage rollout
+              from a detailed behavioral contract.
+            </p>
+            <ul class="facts">
+              <li>15 tested routes</li>
+              <li>4 review criteria</li>
+              <li>clean-room execution</li>
+            </ul>
+            <a class="button" href="llm-test-feature-implementation.html"
+              >View results</a
+            >
+          </article>
+          <article class="card current">
+            <span class="tag">Current · results published</span>
+            <h2>Refactoring</h2>
+            <p>
+              Extract one shared event-filtering helper while preserving the
+              public API and all existing behavior.
+            </p>
+            <ul class="facts">
+              <li>15 tested routes</li>
+              <li>4 review criteria</li>
+              <li>clean-room execution</li>
+            </ul>
+            <a class="button" href="llm-test-refactoring.html">View results</a>
+          </article>
+          <article class="card current">
+            <span class="tag">Current · results published</span>
+            <h2>Repository navigation</h2>
+            <p>
+              Explore an unfamiliar module layout, locate the correct formatter,
+              and repair account status labels.
+            </p>
+            <ul class="facts">
+              <li>15 tested routes</li>
+              <li>4 review criteria</li>
+              <li>correct-layer change</li>
+            </ul>
+            <a class="button" href="llm-test-repository-navigation.html"
+              >View results</a
+            >
+          </article>
+          <article class="card current">
+            <span class="tag">Current · results published</span>
+            <h2>Tests / edge cases</h2>
+            <p>
+              Repair strict integer-range parsing and author meaningful tests
+              that survive mutation testing.
+            </p>
+            <ul class="facts">
+              <li>15 tested routes</li>
+              <li>4 review criteria</li>
+              <li>2 allowed files</li>
+            </ul>
+            <a class="button" href="llm-test-tests-edge-cases.html"
+              >View results</a
+            >
+          </article>
+          <article class="card">
+            <span class="tag">Archive · provisional</span>
+            <h2>Historical five-task results</h2>
+            <p>
+              Archived results from the older combined run. Audit found
+              shared-history contamination, so these records are retained as
+              evidence but are not part of the new clean-room nomination pages.
+            </p>
+            <ul class="facts">
+              <li>31 candidates</li>
+              <li>5 old task records each</li>
+              <li>not a blind benchmark</li>
+            </ul>
+            <a class="button" href="model-comparison-phase2.html"
+              >View provisional archive</a
+            >
+          </article>
+          <article class="card">
+            <span class="tag">Methodology</span>
+            <h2>Runner and source evidence</h2>
+            <p>
+              The public benchmark runner documents clean-room isolation,
+              separate candidate testing and judging, objective evaluation,
+              timing, cost policy, and immutable result artifacts.
+            </p>
+            <ul class="facts">
+              <li>OpenCode + Codex</li>
+              <li>MIT licensed</li>
+              <li>public artifacts</li>
+            </ul>
+            <a
+              class="button"
+              href="https://github.com/pickleshell/models-benchmark"
+              >Open benchmark repository ↗</a
+            >
+          </article>
+        </section>
+      <aside class="notice">\n        <strong>One attempt. No second chance.</strong> LLMs operate as part of\n        real development pipelines, and every retry costs time and money. The\n        quality of the first delivered result matters—that is why we preserve\n        and score the first-run outcome.\n      </aside>\n      <aside class="notice">
+          <strong
+            >Do not compare rows across tasks as if they were one
+            leaderboard.</strong
+          >
+          A result is specific to its prompt, fixture, evaluator, runtime,
+          provider route, and release. OpenCode and Codex routes remain separate
+          even when their model names are similar.
+        </aside>
+      </div>
+    </main>
+    <footer>
+      <div class="wrap">
+        PickleShell model benchmarks · Evidence first, rankings second.
+      </div>
+    </footer>
+  </body>
 </html>
