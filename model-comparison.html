@@ -2455,7 +2455,7 @@
         );
       }
       function score(value, overall = false) {
-        return value === null
+        return value === null || value === undefined
           ? '<span class="na">N/A</span>'
           : '<span class="' +
               (overall ? "overall" : "") +
@@ -2587,7 +2587,7 @@
               score(row.overall, true) +
               "</td>" +
               '<td class="number">' +
-              (row.seconds === null
+              (row.seconds === null || row.seconds === undefined
                 ? '<span class="na">N/A</span>'
                 : row.seconds.toFixed(3)) +
               "</td>" +
