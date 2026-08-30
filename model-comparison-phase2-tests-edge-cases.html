@@ -1972,7 +1972,7 @@
         const table = document.querySelector('table'); const body = table.tBodies[0]; const buttons = table.querySelectorAll('th button');
         let key = 'rank', dir = 1;
         const compare = (a,b,type) => { const av=a.dataset[key] ?? '', bv=b.dataset[key] ?? ''; if(type === 'number') return Number(av)-Number(bv); return av.localeCompare(bv, undefined, {numeric:true,sensitivity:'base'}); };
-        buttons.forEach(button => button.addEventListener('click', () => { const type=button.dataset.type; key === button.dataset.key ? dir *= -1 : (key=button.dataset.key,dir=1); const rows=[...body.rows]; rows.sort((a,b) => (compare(a,b,type)*dir) || (Number(a.dataset.original)-Number(b.dataset.original))); rows.forEach(row=>body.appendChild(row)); buttons.forEach(other => { const active=other===button; other.closest('th').setAttribute('aria-sort',active?(dir===1?'ascending':'descending'):'none'); other.querySelector('.sort-indicator').textContent=active?(dir===1?'▲':'▼'):'↕'; }); });
+        buttons.forEach(button => button.addEventListener('click', () => { const type=button.dataset.type; key === button.dataset.key ? dir *= -1 : (key=button.dataset.key,dir=1); const rows=[...body.rows]; rows.sort((a,b) => (compare(a,b,type)*dir) || (Number(a.dataset.original)-Number(b.dataset.original))); rows.forEach(row=>body.appendChild(row)); buttons.forEach(other => { const active=other===button; other.closest('th').setAttribute('aria-sort',active?(dir===1?'ascending':'descending'):'none'); other.querySelector('.sort-indicator').textContent=active?(dir===1?'▲':'▼'):'↕'; }); }));
       })();
     </script>
   </body>
