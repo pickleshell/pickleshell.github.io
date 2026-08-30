@@ -86,7 +86,11 @@
     const title = document.createElement("strong");
     title.textContent = item.label;
     const description = document.createElement("span");
-    description.textContent = item.description;
+    // A results table may add a model-specific explanation from its sanitized
+    // public artifact.  Keep the taxonomy text as a fallback, but never reduce
+    // a concrete failure to an opaque process-status code.
+    const detail = badge.dataset.failureDetail?.trim();
+    description.textContent = detail || item.description;
     popover.append(title, description);
     holder.append(button, popover);
     badge.after(holder);

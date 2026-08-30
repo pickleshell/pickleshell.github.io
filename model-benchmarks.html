@@ -147,6 +147,76 @@
         gap: 16px;
         margin: 28px 0 42px;
       }
+      .workflow {
+        margin: 0 0 48px;
+        padding: 26px;
+        border: 1px solid color-mix(in srgb, var(--pickle-light) 42%, transparent);
+        border-radius: var(--radius);
+        background: var(--white);
+        box-shadow: var(--shadow);
+      }
+      .workflow h2 {
+        margin: 6px 0 8px;
+        font-size: clamp(1.5rem, 3vw, 2rem);
+        letter-spacing: -0.025em;
+      }
+      .workflow > p {
+        max-width: 760px;
+        margin: 0;
+        color: var(--ink-muted);
+      }
+      .workflow-steps {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        gap: 10px;
+        margin: 22px 0 14px;
+        padding: 0;
+        list-style: none;
+      }
+      .workflow-steps li {
+        position: relative;
+        min-height: 116px;
+        padding: 13px;
+        border: 1px solid color-mix(in srgb, var(--pickle-light) 40%, transparent);
+        border-radius: 12px;
+        background: var(--cream);
+      }
+      .workflow-steps li:not(:last-child)::after {
+        position: absolute;
+        z-index: 1;
+        top: 50%;
+        right: -9px;
+        color: var(--pickle-dark);
+        content: "→";
+        font-size: 1.2rem;
+        font-weight: 900;
+        transform: translateY(-50%);
+      }
+      .workflow-step-number {
+        display: block;
+        margin-bottom: 6px;
+        color: var(--pickle-dark);
+        font-size: 0.72rem;
+        font-weight: 900;
+        letter-spacing: 0.08em;
+      }
+      .workflow-steps strong {
+        display: block;
+        font-size: 0.9rem;
+        line-height: 1.2;
+      }
+      .workflow-steps span:last-child {
+        display: block;
+        margin-top: 5px;
+        color: var(--ink-muted);
+        font-size: 0.78rem;
+        line-height: 1.35;
+      }
+      .workflow-note {
+        margin: 0;
+        color: var(--ink-mid);
+        font-size: 0.86rem;
+      }
       .card {
         display: flex;
         flex-direction: column;
@@ -254,6 +324,16 @@
         .cards {
           grid-template-columns: 1fr;
         }
+        .workflow-steps {
+          grid-template-columns: 1fr;
+        }
+        .workflow-steps li:not(:last-child)::after {
+          content: "↓";
+          top: auto;
+          right: 50%;
+          bottom: -19px;
+          transform: translateX(50%);
+        }
         .hero {
           padding-top: 48px;
         }
@@ -298,6 +378,24 @@
         </div>
       </section>
       <div class="wrap">
+        <section class="workflow" aria-labelledby="workflow-title">
+          <span class="tag">Methodology</span>
+          <h2 id="workflow-title">How a benchmark result is produced</h2>
+          <p>
+            Every route follows the same controlled path. A failure stays visible
+            as evidence; it is not converted into a quality score or silently
+            removed from the table.
+          </p>
+          <ol class="workflow-steps">
+            <li><span class="workflow-step-number">01</span><strong>Freeze release</strong><span>Task, roster, checks, and allowed files are fixed.</span></li>
+            <li><span class="workflow-step-number">02</span><strong>Preflight</strong><span>A harmless <code>hi</code> request confirms the exact route.</span></li>
+            <li><span class="workflow-step-number">03</span><strong>One clean attempt</strong><span>Fresh workspace, agent home, and session for every model.</span></li>
+            <li><span class="workflow-step-number">04</span><strong>Verify patch</strong><span>Allowed paths, public tests, and objective checks run separately.</span></li>
+            <li><span class="workflow-step-number">05</span><strong>Review evidence</strong><span>Patch, timing, cost, and outcome are frozen; reviews remain separate.</span></li>
+            <li><span class="workflow-step-number">06</span><strong>Publish manually</strong><span>Sanitized evidence and checked tables are reviewed before release.</span></li>
+          </ol>
+          <p class="workflow-note"><strong>One attempt. No second chance.</strong> Retries cost time and money; the first delivered result is the one preserved and scored. <a href="https://github.com/pickleshell/models-benchmark#benchmark-lifecycle">Read the full workflow ↗</a></p>
+        </section>
         <section class="cards" aria-label="Available benchmark result sets">
           <article class="card current">
             <span class="tag">Current · isolated</span>

@@ -31,15 +31,19 @@ const completed = [
   ['68-kimi-k3-go','Kimi K3','Pass',[10,10,9,10],313.263,.2865114,'OpenCode Go']
 ];
 const unavailable = [
-  ['51-claude-haiku-4-5','Claude Haiku 4.5'],['52-claude-sonnet-5','Claude Sonnet 5'],
-  ['53-claude-opus-5','Claude Opus 5'],['56-kimi-k3-opencode','Kimi K3'],
-  ['60-gpt-5-6-terra-opencode','GPT-5.6 Terra'],['61-gpt-5-5-opencode','GPT-5.5'],
-  ['62-gpt-5-5-pro-opencode','GPT-5.5 Pro'],['63-gpt-5-4-pro-opencode','GPT-5.4 Pro'],
-  ['64-gpt-5-3-codex-opencode','GPT-5.3 Codex']
+  ['51-claude-haiku-4-5','Claude Haiku 4.5','The exact OpenCode route did not return a recognised response during the release preflight, so the bug-fixing task was not started.'],
+  ['52-claude-sonnet-5','Claude Sonnet 5','The exact OpenCode route did not return a recognised response during the release preflight, so the bug-fixing task was not started.'],
+  ['53-claude-opus-5','Claude Opus 5','The exact OpenCode route did not return a recognised response during the release preflight, so the bug-fixing task was not started.'],
+  ['56-kimi-k3-opencode','Kimi K3','The OpenCode route failed its harmless availability request before any repository files were presented to the model.'],
+  ['60-gpt-5-6-terra-opencode','GPT-5.6 Terra','The OpenCode route failed its harmless availability request before any repository files were presented to the model.'],
+  ['61-gpt-5-5-opencode','GPT-5.5','The OpenCode route failed its harmless availability request before any repository files were presented to the model.'],
+  ['62-gpt-5-5-pro-opencode','GPT-5.5 Pro','The OpenCode route failed its harmless availability request before any repository files were presented to the model.'],
+  ['63-gpt-5-4-pro-opencode','GPT-5.4 Pro','The OpenCode route failed its harmless availability request before any repository files were presented to the model.'],
+  ['64-gpt-5-3-codex-opencode','GPT-5.3 Codex','The OpenCode route failed its harmless availability request before any repository files were presented to the model.']
 ];
 const mean = values => values.reduce((sum, value) => sum + value, 0) / values.length;
 const rows = completed.map((row, index) => ({id:row[0],label:row[1],status:'success',public:'Pass',hidden:row[2],f:row[3][0],r:row[3][1],m:row[3][2],s:row[3][3],overall:mean(row[3]),time:row[4],cost:row[5],channel:row[6],index}));
-unavailable.forEach((row, offset) => rows.push({id:row[0],label:row[1],status:'unavailable',public:null,hidden:null,f:null,r:null,m:null,s:null,overall:null,time:null,cost:null,channel:'OpenCode',index:completed.length+offset}));
+unavailable.forEach((row, offset) => rows.push({id:row[0],label:row[1],status:'unavailable',failureDetail:row[2],public:null,hidden:null,f:null,r:null,m:null,s:null,overall:null,time:null,cost:null,channel:'OpenCode',index:completed.length+offset}));
 const missing = value => value === null || value === undefined;
 const canonical = (a,b) => (a.status==='success'?0:1)-(b.status==='success'?0:1) || (b.overall??-1)-(a.overall??-1) || (a.time??Infinity)-(b.time??Infinity) || (a.cost??Infinity)-(b.cost??Infinity) || a.index-b.index;
 [...rows].sort(canonical).forEach((row,index) => row.rank=row.status==='unavailable'?null:index+1);
@@ -48,6 +52,6 @@ const escapeHtml = value => String(value).replace(/[&<>'"]/g, char => ({'&':'&am
 const score = value => missing(value)?'<span class="na">N/A</span>':Number(value.toFixed(2));
 const result = value => missing(value)?'<span class="na">N/A</span>':`<span class="badge result-badge ${value.toLowerCase()}">${value}</span>`;
 function compare(a,b){if(key==='overall'&&direction===-1)return canonical(a,b);const av=a[key],bv=b[key];if(missing(av)!==missing(bv))return missing(av)?1:-1;if(missing(av))return a.index-b.index;const value=typeof av==='number'?av-bv:String(av).localeCompare(String(bv),undefined,{numeric:true,sensitivity:'base'});return direction*value||a.index-b.index}
-function render(){document.getElementById('results-body').innerHTML=[...rows].sort(compare).map(row=>`<tr><td>${missing(row.rank)?'<span class="na">N/A</span>':`<strong>#${row.rank}</strong>`}<span class="badge ${row.status==='success'?'success':''}">${row.status}</span></td><td><span class="model">${escapeHtml(row.label)}</span><span class="candidate-id">${escapeHtml(row.id)}</span></td><td class="score">${result(row.public)}</td><td class="score">${result(row.hidden)}</td><td class="score">${score(row.f)}</td><td class="score">${score(row.r)}</td><td class="score">${score(row.m)}</td><td class="score">${score(row.s)}</td><td class="score overall">${score(row.overall)}</td><td class="number">${missing(row.time)?'<span class="na">N/A</span>':row.time.toFixed(3)}</td><td class="number">${missing(row.cost)?'<span class="na">N/A</span>':`$${row.cost}`}</td><td class="channel">${row.channel}</td></tr>`).join('')}
+function render(){document.getElementById('results-body').innerHTML=[...rows].sort(compare).map(row=>`<tr><td>${missing(row.rank)?'<span class="na">N/A</span>':`<strong>#${row.rank}</strong>`}<span class="badge ${row.status==='success'?'success':''}"${row.failureDetail?` data-failure-detail="${escapeHtml(row.failureDetail)}"`:''}>${row.status}</span></td><td><span class="model">${escapeHtml(row.label)}</span><span class="candidate-id">${escapeHtml(row.id)}</span></td><td class="score">${result(row.public)}</td><td class="score">${result(row.hidden)}</td><td class="score">${score(row.f)}</td><td class="score">${score(row.r)}</td><td class="score">${score(row.m)}</td><td class="score">${score(row.s)}</td><td class="score overall">${score(row.overall)}</td><td class="number">${missing(row.time)?'<span class="na">N/A</span>':row.time.toFixed(3)}</td><td class="number">${missing(row.cost)?'<span class="na">N/A</span>':`$${row.cost}`}</td><td class="channel">${row.channel}</td></tr>`).join('')}
 document.querySelectorAll('th button').forEach(button=>button.addEventListener('click',()=>{if(key===button.dataset.key)direction*=-1;else{key=button.dataset.key;direction=1}render()}));
 render();

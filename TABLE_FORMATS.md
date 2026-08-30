@@ -15,6 +15,10 @@ semantic reference.
 - Put the human-readable run status below the rank in the first column. Allowed
   labels include `completed`, `tests_failed`, `objective_failed`,
   `forbidden_changes`, `agent_failure`, and `unavailable`.
+- Every failed or unavailable row must offer a model-specific explanation
+  through its status badge. Use the sanitized artifact to state the failed
+  stage, the observable event, and whether a task, patch, or public-test result
+  exists. A raw code such as `process_failure` is not a sufficient explanation.
 - Keep deterministic checks (`Public` and `Objective` or historical `Hidden`)
   separate from the four review scores.
 - Review criteria are integer values from 0 to 10. `Overall` is their arithmetic
@@ -124,9 +128,14 @@ Before publication:
 2. Compare heading order with the selected format.
 3. Confirm every body row has exactly the header's cell count.
 4. Confirm status is descriptive text, not `0`, `1`, `true`, or `false`.
-5. Confirm review criteria are integers and only `Overall` is averaged.
-6. Confirm time and cost use their documented units and preserve unknown values.
-7. Confirm provider names are not duplicated in the Model and Channel columns.
-8. Execute page JavaScript and test sorting, including `N/A` rows.
-9. Check the deployed page, not only local HTML.
-
+5. For Format A, confirm the complete column order: `Rank / status`, `Model`,
+   `Public`, `Objective` (or historical `Hidden`), `Functional`, `Reliability`,
+   `Maintainability`, `Scope`, `Overall`, `Time (s)`, `Cost`, `Channel`. Record
+   any intentional exception before publication.
+6. Confirm review criteria are integers and only `Overall` is averaged.
+7. Confirm time and cost use their documented units and preserve unknown values.
+8. Confirm provider names are not duplicated in the Model and Channel columns.
+9. Execute page JavaScript and test sorting, including `N/A` rows.
+10. Check the deployed page, not only local HTML.
+11. Open every failure/unavailable popover and confirm it is specific to the
+    row's sanitized evidence and contains no raw logs or secrets.
