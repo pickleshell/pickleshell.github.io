@@ -637,7 +637,7 @@
             <strong>59</strong><span>tested candidates</span>
           </div>
           <div class="summary-card">
-            <strong>39</strong><span>scored patches</span>
+            <strong>52</strong><span>scored patches</span>
           </div>
           <div class="summary-card">
             <strong>20</strong><span>N/A availability outcomes</span>
@@ -770,7 +770,7 @@
                 reverse direction; N/A scores always remain last.
               </p>
             </div>
-            <p><span id="row-count">59</span> rows</p>
+            <p><span id="row-count">72</span> rows</p>
           </div>
           <div
             class="table-scroll"
@@ -2363,10 +2363,12 @@
         }
       ]
     </script>
+    <script src="model-comparison-openrouter-ledger-r1.js?v=1"></script>
     <script>
-      const candidates = JSON.parse(
-        document.getElementById("candidate-data").textContent,
-      );
+      const candidates = [
+        ...JSON.parse(document.getElementById("candidate-data").textContent),
+        ...(globalThis.phase1LedgerOpenrouterRows || []),
+      ];
       const unavailableCompletionIds = new Set([
         "21-grok-code",
         "23-qwen3-6-plus-free",
