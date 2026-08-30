@@ -19,6 +19,12 @@
         "Public tests passed, but the separate objective or hidden evaluator found incorrect behavior.",
     },
     {
+      match: /^fail$/,
+      label: "Check failed",
+      description:
+        "This check did not pass. Open the row-specific explanation for the sanitized evidence.",
+    },
+    {
       match: /^forbidden[_ ]changes$/,
       label: "Forbidden changes",
       description:
