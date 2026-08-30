@@ -1014,6 +1014,10 @@ const phase2v2Rows = {
   const rows = (phase2v2Rows[nomination] || []).map((r, index) => ({
     ...r,
     index,
+    f: r.scores?.[0] ?? null,
+    r: r.scores?.[1] ?? null,
+    m: r.scores?.[2] ?? null,
+    s: r.scores?.[3] ?? null,
     overall: mean(r.scores),
   }));
   const order = {
@@ -1044,7 +1048,11 @@ const phase2v2Rows = {
   const score = (v) =>
     missing(v) ? '<span class="na">N/A</span>' : Number(v.toFixed(2));
   const badge = (v) =>
-    '<span class="badge result-badge ' + v.toLowerCase() + ">" + v + "</span>";
+    '<span class="badge result-badge ' +
+    v.toLowerCase() +
+    '">' +
+    v +
+    "</span>";
   let key = "overall",
     direction = -1;
   const compare = (a, b) => {
