@@ -6,7 +6,7 @@
     <meta name="robots" content="index, follow" />
     <meta
       name="description"
-      content="Compare 50 coding-agent benchmark candidates across quality, execution time, access channel, and pricing."
+      content="Compare 59 coding-agent benchmark candidates across quality, execution time, access channel, and pricing."
     />
     <title>Patch Test: Repair Transaction Accounting — PickleShell</title>
     <link rel="icon" href="favicon.ico" sizes="48x48" />
@@ -615,7 +615,7 @@
           <div class="eyebrow">Ledger reconciliation patch</div>
           <h1>Patch test: repair transaction accounting</h1>
           <p class="lead">
-            Fifty-three coding-agent candidates received the same
+            Fifty-nine coding-agent candidates received the same
             ledger-reconciliation task. Quality scores review visible code and
             are constrained by recorded public and hidden correctness;
             availability outcomes remain separate from patch quality.
@@ -634,13 +634,13 @@
       <div class="wrap">
         <section class="summary" aria-label="Benchmark summary">
           <div class="summary-card">
-            <strong>53</strong><span>tested candidates</span>
+            <strong>59</strong><span>tested candidates</span>
           </div>
           <div class="summary-card">
-            <strong>31</strong><span>scored patches</span>
+            <strong>36</strong><span>scored patches</span>
           </div>
           <div class="summary-card">
-            <strong>22</strong><span>N/A availability outcomes</span>
+            <strong>23</strong><span>N/A availability outcomes</span>
           </div>
           <div class="summary-card">
             <strong>5</strong><span>quality dimensions</span>
@@ -770,7 +770,7 @@
                 reverse direction; N/A scores always remain last.
               </p>
             </div>
-            <p><span id="row-count">53</span> rows</p>
+            <p><span id="row-count">59</span> rows</p>
           </div>
           <div
             class="table-scroll"
@@ -780,7 +780,7 @@
           >
             <table>
               <caption>
-                All 53 phase-1 benchmark candidates with quality, speed, access,
+                All 59 phase-1 benchmark candidates with quality, speed, access,
                 and price information.
               </caption>
               <thead>
@@ -890,7 +890,21 @@
             Cache-write is shown where supplied. A dash means no separate
             verified cache-write value was provided for this comparison.
           </p>
+          <p>
+            Candidate patches, run records, deterministic evaluation summaries,
+            and expert reviews for the latest completion wave are public in the
+            models-test repository.
+          </p>
           <ul class="source-links">
+            <li>
+              <a
+                href="https://github.com/pickleshell/models-test/tree/main/results/benchmark-candidates/phase1-ledger-free-completion-r1"
+                target="_blank"
+                rel="noopener noreferrer"
+                >Latest Ledger completion records
+                <span aria-hidden="true">↗</span></a
+              >
+            </li>
             <li>
               <a
                 href="https://opencode.ai/docs/go/"
@@ -2236,6 +2250,108 @@
             "sortValue": 0
           },
           "originalIndex": 49
+        },
+        {
+          "candidateDir": "inkling-openrouter",
+          "model": "inkling",
+          "rawModel": "openrouter/thinkingmachines/inkling",
+          "rank": 0,
+          "status": "success",
+          "simplicity": 7,
+          "readability": 8,
+          "noExtraCode": 7,
+          "reliability": 7,
+          "edgeCases": 8,
+          "overall": 7.4,
+          "seconds": 107.326,
+          "channel": "OpenRouter",
+          "price": { "kind": "preview", "label": "Cost N/A", "sortGroup": 4, "sortValue": 0 },
+          "originalIndex": 53
+        },
+        {
+          "candidateDir": "inkling-small-openrouter-free",
+          "model": "inkling-small-free",
+          "rawModel": "openrouter/thinkingmachines/inkling-small:free",
+          "rank": 0,
+          "status": "success",
+          "simplicity": 7,
+          "readability": 7,
+          "noExtraCode": 6,
+          "reliability": 8,
+          "edgeCases": 9,
+          "overall": 7.4,
+          "seconds": 43.763,
+          "channel": "OpenRouter Free",
+          "price": { "kind": "free", "label": "Free", "sortGroup": 0, "sortValue": 0 },
+          "originalIndex": 54
+        },
+        {
+          "candidateDir": "dots-3-note-openrouter-free",
+          "model": "dots-3-note-preview-free",
+          "rawModel": "openrouter/dots-studio/dots-3-note-preview:free",
+          "rank": 0,
+          "status": "success",
+          "simplicity": 8,
+          "readability": 8,
+          "noExtraCode": 8,
+          "reliability": 7,
+          "edgeCases": 8,
+          "overall": 7.8,
+          "seconds": 153.396,
+          "channel": "OpenRouter Free",
+          "price": { "kind": "free", "label": "Free", "sortGroup": 0, "sortValue": 0 },
+          "originalIndex": 55
+        },
+        {
+          "candidateDir": "laguna-xs-2-1-openrouter-free",
+          "model": "laguna-xs-2.1-free",
+          "rawModel": "openrouter/poolside/laguna-xs-2.1:free",
+          "rank": 0,
+          "status": "evaluated failure",
+          "simplicity": 10,
+          "readability": 10,
+          "noExtraCode": 10,
+          "reliability": 2,
+          "edgeCases": 2,
+          "overall": 6.8,
+          "seconds": 713.320,
+          "channel": "OpenRouter Free",
+          "price": { "kind": "free", "label": "Free", "sortGroup": 0, "sortValue": 0 },
+          "originalIndex": 56
+        },
+        {
+          "candidateDir": "nemotron-3-nano-omni-openrouter-free",
+          "model": "nemotron-3-nano-omni-reasoning-free",
+          "rawModel": "openrouter/nvidia/nemotron-3-nano-omni-30b-a3b-reasoning:free",
+          "rank": null,
+          "status": "unavailable",
+          "simplicity": null,
+          "readability": null,
+          "noExtraCode": null,
+          "reliability": null,
+          "edgeCases": null,
+          "overall": null,
+          "seconds": 0,
+          "channel": "OpenRouter Free",
+          "price": { "kind": "free", "label": "Free", "sortGroup": 0, "sortValue": 0 },
+          "originalIndex": 57
+        },
+        {
+          "candidateDir": "lfm-2-5-2-6b-openrouter-free",
+          "model": "lfm-2.5-2.6b-free",
+          "rawModel": "openrouter/liquid/lfm-2.5-2.6b:free",
+          "rank": 0,
+          "status": "tests failed",
+          "simplicity": 8,
+          "readability": 7,
+          "noExtraCode": 7,
+          "reliability": 1,
+          "edgeCases": 1,
+          "overall": 4.8,
+          "seconds": 145.329,
+          "channel": "OpenRouter Free",
+          "price": { "kind": "free", "label": "Free", "sortGroup": 0, "sortValue": 0 },
+          "originalIndex": 58
         }
       ]
     </script>
@@ -2243,6 +2359,10 @@
       const candidates = JSON.parse(
         document.getElementById("candidate-data").textContent,
       );
+      candidates
+        .filter((candidate) => candidate.overall !== null)
+        .sort((a, b) => b.overall - a.overall || a.seconds - b.seconds)
+        .forEach((candidate, index) => (candidate.rank = index + 1));
       const body = document.getElementById("results-body");
       const headers = [...document.querySelectorAll("th")];
       const state = { key: "rank", direction: "ascending", type: "number" };
