@@ -2461,13 +2461,17 @@
               value.toFixed(overall ? 1 : 0) +
               "</span>";
       }
-      function priceMarkup(price) {
+      function priceMarkup(price, status) {
         if (price.kind === "free" || price.kind === "preview")
           return (
             '<div class="price"><strong>' +
             escapeHtml(price.label) +
             "</strong><small>" +
-            (price.kind === "free" ? "Tested endpoint" : "No rate comparison") +
+            (status === "unavailable"
+              ? "Preflight unavailable"
+              : price.kind === "free"
+                ? "Tested endpoint"
+                : "No rate comparison") +
             "</small></div>"
           );
         if (price.kind === "credits")
@@ -2589,7 +2593,7 @@
               escapeHtml(row.channel) +
               "</td>" +
               "<td>" +
-              priceMarkup(row.price) +
+              priceMarkup(row.price, row.status) +
               "</td></tr>"
             );
           })
