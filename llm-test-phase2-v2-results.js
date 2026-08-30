@@ -1054,7 +1054,12 @@ const phase2v2Rows = {
     v +
     "</span>";
   const displayLabel = (label) =>
-    ["repository-navigation", "tests-edge-cases"].includes(nomination)
+    [
+      "repository-navigation",
+      "tests-edge-cases",
+      "feature-implementation",
+      "refactoring",
+    ].includes(nomination)
       ? label.replace(/\s+\([^()]+\)$/, "")
       : label;
   let key = "overall",
