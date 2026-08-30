@@ -10,7 +10,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 6,
     "noExtraCode": 9,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 6.6,
     "seconds": 54.148,
     "channel": "OpenRouter",
     "price": {
@@ -35,7 +36,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 6,
     "noExtraCode": 8,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 6.4,
     "seconds": 121.719,
     "channel": "OpenRouter",
     "price": {
@@ -60,7 +62,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 5,
     "noExtraCode": 10,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 6.2,
     "seconds": 85.071,
     "channel": "OpenRouter",
     "price": {
@@ -85,7 +88,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 7,
     "noExtraCode": 9,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 6.8,
     "seconds": 68.497,
     "channel": "OpenRouter",
     "price": {
@@ -110,7 +114,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 5,
     "noExtraCode": 8,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 6.0,
     "seconds": 110.082,
     "channel": "OpenRouter",
     "price": {
@@ -135,7 +140,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 6,
     "noExtraCode": 9,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 6.6,
     "seconds": 152.848,
     "channel": "OpenRouter",
     "price": {
@@ -156,7 +162,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 3,
     "noExtraCode": 8,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 4.8,
     "seconds": 99.877,
     "channel": "OpenRouter",
     "price": {
@@ -177,7 +184,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 5,
     "noExtraCode": 9,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 6.2,
     "seconds": 906.023,
     "channel": "OpenRouter",
     "price": {
@@ -202,7 +210,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 4,
     "noExtraCode": 6,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 5.0,
     "seconds": 117.136,
     "channel": "OpenRouter",
     "price": {
@@ -223,7 +232,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 6,
     "noExtraCode": 9,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 6.6,
     "seconds": 60.331,
     "channel": "OpenRouter",
     "price": {
@@ -248,7 +258,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 6,
     "noExtraCode": 9,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 6.6,
     "seconds": 49.984,
     "channel": "OpenRouter",
     "price": {
@@ -273,7 +284,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 6,
     "noExtraCode": 9,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 6.6,
     "seconds": 79.812,
     "channel": "OpenRouter",
     "price": {
@@ -298,7 +310,8 @@ globalThis.phase1LedgerOpenrouterRows = [
     "readability": 2,
     "noExtraCode": 10,
     "reliability": 10,
-    "overall": null,
+    "edgeCases": 0,
+    "overall": 5.0,
     "seconds": 84.093,
     "channel": "OpenRouter",
     "price": {
@@ -314,4 +327,3 @@ globalThis.phase1LedgerOpenrouterRows = [
     "originalIndex": 71
   }
 ];
-
