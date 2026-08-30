@@ -637,10 +637,10 @@
             <strong>59</strong><span>tested candidates</span>
           </div>
           <div class="summary-card">
-            <strong>37</strong><span>scored patches</span>
+            <strong>39</strong><span>scored patches</span>
           </div>
           <div class="summary-card">
-            <strong>22</strong><span>N/A availability outcomes</span>
+            <strong>20</strong><span>N/A availability outcomes</span>
           </div>
           <div class="summary-card">
             <strong>5</strong><span>quality dimensions</span>
@@ -2388,7 +2388,6 @@
         "43-minimax-m2-5-free",
         "44-minimax-m2-1-free",
         "45-glm-4-7-free",
-        "nemotron-3-nano-omni-openrouter-free",
       ]);
       candidates.forEach((candidate) => {
         if (unavailableCompletionIds.has(candidate.candidateDir)) {
@@ -2397,19 +2396,39 @@
         }
         if (candidate.candidateDir === "08-qwen3-7-max") {
           Object.assign(candidate, {
-            status: "agent error with partial patch",
+            status: "evaluated failure",
             simplicity: 9,
             readability: 9,
-            noExtraCode: 10,
+            noExtraCode: 9,
             reliability: 7,
-            edgeCases: 8,
-            overall: 8.6,
-            seconds: 906.036,
+            edgeCases: 5,
+            overall: 7.8,
+            seconds: 77.961,
           });
         }
         if (candidate.candidateDir === "12-qwen3-6-plus") {
-          candidate.status = "agent failure · no patch";
-          candidate.seconds = 906.072;
+          Object.assign(candidate, {
+            status: "evaluated failure",
+            simplicity: 9,
+            readability: 9,
+            noExtraCode: 9,
+            reliability: 7,
+            edgeCases: 5,
+            overall: 7.8,
+            seconds: 69.865,
+          });
+        }
+        if (candidate.candidateDir === "nemotron-3-nano-omni-openrouter-free") {
+          Object.assign(candidate, {
+            status: "evaluated failure",
+            simplicity: 8,
+            readability: 6,
+            noExtraCode: 9,
+            reliability: 7,
+            edgeCases: 5,
+            overall: 7.0,
+            seconds: 125.852,
+          });
         }
       });
       candidates
