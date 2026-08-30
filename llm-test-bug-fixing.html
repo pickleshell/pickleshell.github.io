@@ -1,11 +1,330 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Bug-fixing LLM test: repair duplicate, sale, and refund handling in a ledger reconciler."><title>Bug-fixing Test: Repair Ledger Reconciliation — PickleShell</title><link rel="icon" href="favicon.ico"><link rel="stylesheet" href="llm-test.css"><style>.table-tools{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:12px}.table-tools h2,.table-tools p{margin:0}.table-scroll{overflow-x:auto;border:1px solid #aed58159;border-radius:16px;background:var(--white)}table{width:100%;min-width:1360px;border-collapse:collapse;font-size:.88rem}caption{position:absolute;width:1px;height:1px;overflow:hidden}th{padding:0;background:var(--cream-dark);border-bottom:2px solid var(--pickle-light);text-align:left}th button{width:100%;min-height:52px;padding:9px;border:0;background:transparent;color:var(--ink);font-weight:750;text-align:left;cursor:pointer}td{padding:11px 9px;border-bottom:1px solid #8882;vertical-align:top}.score{text-align:center;white-space:nowrap}.overall{color:var(--teal);font-weight:850}.model{font-weight:750;white-space:nowrap}.candidate-id{display:block;color:var(--ink-muted);font-size:.72rem}.badge{display:block;width:max-content;margin-top:4px;padding:3px 7px;border-radius:999px;background:var(--cream-dark);color:var(--ink-muted);font-size:.68rem;font-weight:750}.badge.success,.badge.pass{color:var(--pickle-dark);background:#7cb34226}.badge.fail{color:#b71c1c;background:#d32f2f1f}.result-badge{display:inline-block;margin:0;text-transform:uppercase}.na{color:var(--ink-muted)}.number,.channel{white-space:nowrap}.results-table{margin-bottom:28px}@media(max-width:760px){.table-tools{align-items:start;flex-direction:column}}</style></head><body>
-<header><div class="wrap"><nav><a class="brand" href="index.html"><img src="pickleshell-logo.png" alt="" width="36" height="36"><span>PickleShell</span></a><ul class="nav-links"><li><a href="model-benchmarks.html">LLM tests</a></li></ul></nav></div></header>
-<main><section class="hero"><div class="wrap"><div class="eyebrow">Clean-room benchmark · Bug fixing</div><h1>Bug-fixing test: repair ledger reconciliation</h1><p class="lead">This test measures whether a coding model can diagnose an existing accounting defect and repair it without changing the contract or widening the patch.</p><span class="state">39 tested runtime routes</span></div></section><div class="wrap">
-<section class="summary" aria-label="Benchmark summary"><div class="summary-card"><strong>39</strong><span>tested routes</span></div><div class="summary-card"><strong>30</strong><span>completed patches</span></div><div class="summary-card"><strong>28</strong><span>objective passes</span></div><div class="summary-card"><strong>9</strong><span>unavailable routes</span></div></section>
-<section class="task-brief"><p class="task-label">Test assignment</p><h2>Fix duplicates, sales, refunds, and invalid ledger rows</h2><p>The model receives a small ledger reconciler with seeded defects. It must understand the documented behavior, find the incorrect implementation, and make the smallest correct repair while preserving both exported functions and the result format.</p><h3>What the repaired code must do</h3><ul><li>Validate every row and count unusable entries without crashing.</li><li>Process only the first occurrence of a transaction ID and count every later occurrence as a duplicate, including duplicate refunds.</li><li>Parse non-negative dollar amounts exactly, accepting optional <code>$</code> and correctly grouped commas without rounding malformed values.</li><li>Group totals by account, currency, and the row's UTC date.</li><li>Subtract a refund from its previously processed sale's account and currency; count an unmatched refund as an orphan.</li><li>Keep totals sorted and count as processed only rows that actually affect them.</li></ul><span class="task-file">Allowed file: fixtures/phase2-v2/bug-fix-ledger/src/reconcile.js</span></section>
-<aside class="notice"><strong>What this nomination isolates.</strong> The implementation already exists but is wrong. The test rewards diagnosis and a focused repair, not a redesign.</aside>
-<section class="score-guide"><h2>How each reviewed solution is scored</h2><p class="score-intro">Each criterion receives 0–10. Public and objective checks remain separate from the review score.</p><p class="score-intro"><strong>Review policy.</strong> GPT-5.6 Sol is the single canonical expert reviewer to keep benchmark costs controlled. Independent Gemini cross-checks broadly agreed with its scoring. Claude Opus 4.8 was removed from future judging after repeatedly missing seeded hidden defects while evaluating candidate patches.</p><p class="score-intro"><strong>Independent verification.</strong> The test results, submitted patches, evaluation artifacts, and testing pipeline are publicly available. You can inspect the evidence, reproduce the process, and make your own independent assessment.</p><div class="criteria-grid"><article class="criterion"><h3>Functional correctness</h3><p>How fully the patch restores the documented ledger behavior.</p></article><article class="criterion"><h3>Reliability / edge cases</h3><p>How safely it handles malformed rows, exact money, duplicates, dates, and orphan refunds.</p></article><article class="criterion"><h3>Maintainability / clarity</h3><p>How readable, direct, and easy to reason about the repair is.</p></article><article class="criterion"><h3>Scope discipline</h3><p>How strictly the patch stays within the allowed file and avoids unrelated work.</p></article></div><p class="score-rank"><strong>Overall</strong> is the arithmetic mean of the four scores.</p></section>
-<section class="results-table"><div class="table-tools"><div><h2>Complete candidate results</h2><p>Click a heading to sort. N/A values remain last.</p></div><p>39 rows</p></div><div class="table-scroll"><table><caption>Bug-fixing results</caption><thead><tr><th><button data-key="rank">Rank / status</button></th><th><button data-key="label">Model</button></th><th><button data-key="public">Public</button></th><th><button data-key="hidden">Objective</button></th><th><button data-key="f">Functional</button></th><th><button data-key="r">Reliability</button></th><th><button data-key="m">Maintainability</button></th><th><button data-key="s">Scope</button></th><th><button data-key="overall">Overall</button></th><th><button data-key="time">Time (s)</button></th><th><button data-key="cost">Cost</button></th><th><button data-key="channel">Channel</button></th></tr></thead><tbody id="results-body"></tbody></table></div></section>
-<aside class="notice"><strong>How to read the table.</strong> Public and Objective are deterministic checks. The four scores also account for code clarity and scope. Cost is solution-only provider-reported USD; Codex does not report monetary task cost.</aside>
-<section class="sources"><h2>Sources and review</h2><p><a href="https://github.com/pickleshell/models-test/tree/main/fixtures/phase2-v2/bug-fix-ledger">Fixture and public tests ↗</a> · <a href="https://github.com/pickleshell/models-test/tree/main/results/benchmark-bug-fixing">Run records and review ↗</a></p></section></div></main><footer>PickleShell LLM tests · Bug-fixing benchmark.</footer>
-<script src="llm-test-bug-fixing-results.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Bug-fixing LLM test: repair duplicate, sale, and refund handling in a ledger reconciler."
+    />
+    <title>Bug-fixing Test: Repair Ledger Reconciliation — PickleShell</title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="llm-test.css" />
+    <style>
+      .table-tools {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 20px;
+        margin-bottom: 12px;
+      }
+      .table-tools h2,
+      .table-tools p {
+        margin: 0;
+      }
+      .table-scroll {
+        overflow-x: auto;
+        border: 1px solid #aed58159;
+        border-radius: 16px;
+        background: var(--white);
+      }
+      table {
+        width: 100%;
+        min-width: 1360px;
+        border-collapse: collapse;
+        font-size: 0.88rem;
+      }
+      caption {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+      th {
+        padding: 0;
+        background: var(--cream-dark);
+        border-bottom: 2px solid var(--pickle-light);
+        text-align: left;
+      }
+      th button {
+        width: 100%;
+        min-height: 52px;
+        padding: 9px;
+        border: 0;
+        background: transparent;
+        color: var(--ink);
+        font-weight: 750;
+        text-align: left;
+        cursor: pointer;
+      }
+      td {
+        padding: 11px 9px;
+        border-bottom: 1px solid #8882;
+        vertical-align: top;
+      }
+      .score {
+        text-align: center;
+        white-space: nowrap;
+      }
+      .overall {
+        color: var(--teal);
+        font-weight: 850;
+      }
+      .model {
+        font-weight: 750;
+        white-space: nowrap;
+      }
+      .candidate-id {
+        display: block;
+        color: var(--ink-muted);
+        font-size: 0.72rem;
+      }
+      .badge {
+        display: block;
+        width: max-content;
+        margin-top: 4px;
+        padding: 3px 7px;
+        border-radius: 999px;
+        background: var(--cream-dark);
+        color: var(--ink-muted);
+        font-size: 0.68rem;
+        font-weight: 750;
+      }
+      .badge.success,
+      .badge.pass {
+        color: var(--pickle-dark);
+        background: #7cb34226;
+      }
+      .badge.fail {
+        color: #b71c1c;
+        background: #d32f2f1f;
+      }
+      .result-badge {
+        display: inline-block;
+        margin: 0;
+        text-transform: uppercase;
+      }
+      .na {
+        color: var(--ink-muted);
+      }
+      .number,
+      .channel {
+        white-space: nowrap;
+      }
+      .results-table {
+        margin-bottom: 28px;
+      }
+      @media (max-width: 760px) {
+        .table-tools {
+          align-items: start;
+          flex-direction: column;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="wrap">
+        <nav>
+          <a class="brand" href="index.html"
+            ><img
+              src="pickleshell-logo.png"
+              alt=""
+              width="36"
+              height="36"
+            /><span>PickleShell</span></a
+          >
+          <ul class="nav-links">
+            <li><a href="model-benchmarks.html">LLM tests</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <div class="eyebrow">Clean-room benchmark · Bug fixing</div>
+          <h1>Bug-fixing test: repair ledger reconciliation</h1>
+          <p class="lead">
+            This test measures whether a coding model can diagnose an existing
+            accounting defect and repair it without changing the contract or
+            widening the patch.
+          </p>
+          <span class="state">39 tested runtime routes</span>
+        </div>
+      </section>
+      <div class="wrap">
+        <section class="summary" aria-label="Benchmark summary">
+          <div class="summary-card">
+            <strong>39</strong><span>tested routes</span>
+          </div>
+          <div class="summary-card">
+            <strong>30</strong><span>completed patches</span>
+          </div>
+          <div class="summary-card">
+            <strong>28</strong><span>objective passes</span>
+          </div>
+          <div class="summary-card">
+            <strong>9</strong><span>unavailable routes</span>
+          </div>
+        </section>
+        <section class="task-brief">
+          <p class="task-label">Test assignment</p>
+          <h2>Fix duplicates, sales, refunds, and invalid ledger rows</h2>
+          <p>
+            The model receives a small ledger reconciler with seeded defects. It
+            must understand the documented behavior, find the incorrect
+            implementation, and make the smallest correct repair while
+            preserving both exported functions and the result format.
+          </p>
+          <h3>What the repaired code must do</h3>
+          <ul>
+            <li>
+              Validate every row and count unusable entries without crashing.
+            </li>
+            <li>
+              Process only the first occurrence of a transaction ID and count
+              every later occurrence as a duplicate, including duplicate
+              refunds.
+            </li>
+            <li>
+              Parse non-negative dollar amounts exactly, accepting optional
+              <code>$</code> and correctly grouped commas without rounding
+              malformed values.
+            </li>
+            <li>Group totals by account, currency, and the row's UTC date.</li>
+            <li>
+              Subtract a refund from its previously processed sale's account and
+              currency; count an unmatched refund as an orphan.
+            </li>
+            <li>
+              Keep totals sorted and count as processed only rows that actually
+              affect them.
+            </li>
+          </ul>
+          <span class="task-file"
+            >Allowed file:
+            fixtures/phase2-v2/bug-fix-ledger/src/reconcile.js</span
+          >
+        </section>
+      <aside class="notice">
+        <strong>One attempt. No second chance.</strong> LLMs operate as part of
+        real development pipelines, and every retry costs
+        time and money. The quality of the first delivered result matters—that
+        is why we preserve and score the first-run outcome.
+      </aside>
+      <aside class="notice">
+          <strong>What this nomination isolates.</strong> The implementation
+          already exists but is wrong. The test rewards diagnosis and a focused
+          repair, not a redesign.
+        </aside>
+        <section class="score-guide">
+          <h2>How each reviewed solution is scored</h2>
+          <p class="score-intro">
+            Each criterion receives 0–10. Public and objective checks remain
+            separate from the review score.
+          </p>
+          <p class="score-intro">
+            <strong>Review policy.</strong> GPT-5.6 Sol is the single canonical
+            expert reviewer to keep benchmark costs controlled. Independent
+            Gemini cross-checks broadly agreed with its scoring. Claude Opus 4.8
+            was removed from future judging after repeatedly missing seeded
+            hidden defects while evaluating candidate patches.
+          </p>
+          <p class="score-intro">
+            <strong>Independent verification.</strong> The test results,
+            submitted patches, evaluation artifacts, and testing pipeline are
+            publicly available. You can inspect the evidence, reproduce the
+            process, and make your own independent assessment.
+          </p>
+          <div class="criteria-grid">
+            <article class="criterion">
+              <h3>Functional correctness</h3>
+              <p>
+                How fully the patch restores the documented ledger behavior.
+              </p>
+            </article>
+            <article class="criterion">
+              <h3>Reliability / edge cases</h3>
+              <p>
+                How safely it handles malformed rows, exact money, duplicates,
+                dates, and orphan refunds.
+              </p>
+            </article>
+            <article class="criterion">
+              <h3>Maintainability / clarity</h3>
+              <p>
+                How readable, direct, and easy to reason about the repair is.
+              </p>
+            </article>
+            <article class="criterion">
+              <h3>Scope discipline</h3>
+              <p>
+                How strictly the patch stays within the allowed file and avoids
+                unrelated work.
+              </p>
+            </article>
+          </div>
+          <p class="score-rank">
+            <strong>Overall</strong> is the arithmetic mean of the four scores.
+          </p>
+        </section>
+        <section class="results-table">
+          <div class="table-tools">
+            <div>
+              <h2>Complete candidate results</h2>
+              <p>Click a heading to sort. N/A values remain last.</p>
+            </div>
+            <p>39 rows</p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Bug-fixing results
+              </caption>
+              <thead>
+                <tr>
+                  <th><button data-key="rank">Rank / status</button></th>
+                  <th><button data-key="label">Model</button></th>
+                  <th><button data-key="public">Public</button></th>
+                  <th><button data-key="hidden">Objective</button></th>
+                  <th><button data-key="f">Functional</button></th>
+                  <th><button data-key="r">Reliability</button></th>
+                  <th><button data-key="m">Maintainability</button></th>
+                  <th><button data-key="s">Scope</button></th>
+                  <th><button data-key="overall">Overall</button></th>
+                  <th><button data-key="time">Time (s)</button></th>
+                  <th><button data-key="cost">Cost</button></th>
+                  <th><button data-key="channel">Channel</button></th>
+                </tr>
+              </thead>
+              <tbody id="results-body"></tbody>
+            </table>
+          </div>
+        </section>
+        <aside class="notice">
+          <strong>How to read the table.</strong> Public and Objective are
+          deterministic checks. The four scores also account for code clarity
+          and scope. Cost is solution-only provider-reported USD; Codex does not
+          report monetary task cost.
+        </aside>
+        <section class="sources">
+          <h2>Sources and review</h2>
+          <p>
+            <a
+              href="https://github.com/pickleshell/models-test/tree/main/fixtures/phase2-v2/bug-fix-ledger"
+              >Fixture and public tests ↗</a
+            >
+            ·
+            <a
+              href="https://github.com/pickleshell/models-test/tree/main/results/benchmark-bug-fixing"
+              >Run records and review ↗</a
+            >
+          </p>
+        </section>
+      </div>
+    </main>
+    <footer>PickleShell LLM tests · Bug-fixing benchmark.</footer>
+    <script src="llm-test-bug-fixing-results.js"></script>
+  </body>
+</html>

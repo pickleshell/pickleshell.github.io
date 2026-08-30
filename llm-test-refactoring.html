@@ -1,9 +1,202 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Refactoring LLM test: extract a shared event-filtering helper without changing behavior."><title>Refactoring Test: Extract Shared Event Filtering — PickleShell</title><link rel="icon" href="favicon.ico"><link rel="stylesheet" href="llm-test.css"></head><body data-nomination="refactoring">
-<header><div class="wrap"><nav><a class="brand" href="index.html"><img src="pickleshell-logo.png" alt="" width="36" height="36"><span>PickleShell</span></a><ul class="nav-links"><li><a href="model-benchmarks.html">LLM tests</a></li></ul></nav></div></header>
-<main><section class="hero"><div class="wrap"><div class="eyebrow">Clean-room benchmark · Refactoring</div><h1>Refactoring test: extract shared event filtering</h1><p class="lead">This test measures whether a model can improve internal structure exactly as requested while preserving already-correct observable behavior.</p><span class="state">15 tested runtime routes</span></div></section><div class="wrap">
-<section class="summary" aria-label="Test design"><div class="summary-card"><strong>Public tests</strong><span>behavior preservation</span></div><div class="summary-card"><strong>Objective evaluator</strong><span>structure and behavior</span></div><div class="summary-card"><strong>4 criteria</strong><span>separate blind review</span></div><div class="summary-card"><strong>1 source file</strong><span>strict change boundary</span></div></section>
-<section class="task-brief"><p class="task-label">Test assignment</p><h2>Share validation and filtering without changing outputs</h2><p>The existing event-summary functions already behave correctly. The model must remove duplicated selection logic by introducing exactly one required private helper and routing both exports through it.</p><h3>What the refactor must preserve and change</h3><ul><li>Keep <code>countByType</code> and <code>latestByType</code> as the only exports.</li><li>Add exactly one non-exported helper named <code>matchingValidEvents(events, type)</code>.</li><li>Use that helper from both public functions for validation and event selection.</li><li>Count only valid matching events and select the latest timestamp, keeping the first event when timestamps tie.</li><li>Return the documented fallback for invalid top-level input and never mutate the input array or events.</li></ul><span class="task-file">Allowed file: fixtures/phase2-v2/refactoring/src/events.js</span></section>
-<aside class="notice"><strong>What this nomination isolates.</strong> Passing behavior alone is insufficient: the requested internal structure is part of the contract.</aside>
-<section class="score-guide"><h2>How each reviewed solution will be scored</h2><p class="score-intro">Each criterion receives 0–10. Public and objective checks remain separate from the manual score.</p><div class="criteria-grid"><article class="criterion"><h3>Functional correctness</h3><p>How completely the refactor preserves both public functions' observable behavior.</p></article><article class="criterion"><h3>Reliability / edge cases</h3><p>How safely it preserves invalid-input, timestamp-tie, and immutability behavior.</p></article><article class="criterion"><h3>Maintainability / clarity</h3><p>How well the shared helper removes duplication and makes the module easier to understand.</p></article><article class="criterion"><h3>Scope discipline</h3><p>How precisely it follows the required helper name, export boundary, and allowed file.</p></article></div><p class="score-rank"><strong>Overall</strong> is the arithmetic mean of the four scores.</p></section>
-<section class="results-table"><div class="table-tools"><div><h2>Complete candidate results</h2><p>Click a heading to sort. N/A values remain last.</p></div><p>15 rows</p></div><div class="table-scroll"><table><caption>Refactoring results</caption><thead><tr><th><button data-key="rank">Rank / status</button></th><th><button data-key="label">Model</button></th><th><button data-key="public">Public</button></th><th><button data-key="objective">Objective</button></th><th><button data-key="f">Functional</button></th><th><button data-key="r">Reliability</button></th><th><button data-key="m">Maintainability</button></th><th><button data-key="s">Scope</button></th><th><button data-key="overall">Overall</button></th><th><button data-key="time">Time (s)</button></th><th><button data-key="cost">Cost</button></th><th><button data-key="channel">Channel</button></th></tr></thead><tbody id="results-body"></tbody></table></div></section>
-<section class="sources"><h2>Public evidence</h2><p><a href="https://github.com/pickleshell/models-test/tree/main/fixtures/phase2-v2/refactoring">Fixture and public tests ↗</a> · <a href="https://github.com/pickleshell/models-test/tree/main/results/benchmark-phase2-v2">Run records and reviews ↗</a></p></section></div></main><footer>PickleShell LLM tests · Refactoring benchmark.</footer><link rel="stylesheet" href="llm-test-results.css"><script src="llm-test-phase2-v2-results.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Refactoring LLM test: extract a shared event-filtering helper without changing behavior."
+    />
+    <title>
+      Refactoring Test: Extract Shared Event Filtering — PickleShell
+    </title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="llm-test.css" />
+  </head>
+  <body data-nomination="refactoring">
+    <header>
+      <div class="wrap">
+        <nav>
+          <a class="brand" href="index.html"
+            ><img
+              src="pickleshell-logo.png"
+              alt=""
+              width="36"
+              height="36"
+            /><span>PickleShell</span></a
+          >
+          <ul class="nav-links">
+            <li><a href="model-benchmarks.html">LLM tests</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <div class="eyebrow">Clean-room benchmark · Refactoring</div>
+          <h1>Refactoring test: extract shared event filtering</h1>
+          <p class="lead">
+            This test measures whether a model can improve internal structure
+            exactly as requested while preserving already-correct observable
+            behavior.
+          </p>
+          <span class="state">15 tested runtime routes</span>
+        </div>
+      </section>
+      <div class="wrap">
+        <section class="summary" aria-label="Test design">
+          <div class="summary-card">
+            <strong>Public tests</strong><span>behavior preservation</span>
+          </div>
+          <div class="summary-card">
+            <strong>Objective evaluator</strong
+            ><span>structure and behavior</span>
+          </div>
+          <div class="summary-card">
+            <strong>4 criteria</strong><span>separate blind review</span>
+          </div>
+          <div class="summary-card">
+            <strong>1 source file</strong><span>strict change boundary</span>
+          </div>
+        </section>
+        <section class="task-brief">
+          <p class="task-label">Test assignment</p>
+          <h2>Share validation and filtering without changing outputs</h2>
+          <p>
+            The existing event-summary functions already behave correctly. The
+            model must remove duplicated selection logic by introducing exactly
+            one required private helper and routing both exports through it.
+          </p>
+          <h3>What the refactor must preserve and change</h3>
+          <ul>
+            <li>
+              Keep <code>countByType</code> and <code>latestByType</code> as the
+              only exports.
+            </li>
+            <li>
+              Add exactly one non-exported helper named
+              <code>matchingValidEvents(events, type)</code>.
+            </li>
+            <li>
+              Use that helper from both public functions for validation and
+              event selection.
+            </li>
+            <li>
+              Count only valid matching events and select the latest timestamp,
+              keeping the first event when timestamps tie.
+            </li>
+            <li>
+              Return the documented fallback for invalid top-level input and
+              never mutate the input array or events.
+            </li>
+          </ul>
+          <span class="task-file"
+            >Allowed file: fixtures/phase2-v2/refactoring/src/events.js</span
+          >
+        </section>
+      <aside class="notice">
+        <strong>One attempt. No second chance.</strong> LLMs operate as part of
+        real development pipelines, and every retry costs
+        time and money. The quality of the first delivered result matters—that
+        is why we preserve and score the first-run outcome.
+      </aside>
+      <aside class="notice">
+          <strong>What this nomination isolates.</strong> Passing behavior alone
+          is insufficient: the requested internal structure is part of the
+          contract.
+        </aside>
+        <section class="score-guide">
+          <h2>How each reviewed solution will be scored</h2>
+          <p class="score-intro">
+            Each criterion receives 0–10. Public and objective checks remain
+            separate from the manual score.
+          </p>
+          <div class="criteria-grid">
+            <article class="criterion">
+              <h3>Functional correctness</h3>
+              <p>
+                How completely the refactor preserves both public functions'
+                observable behavior.
+              </p>
+            </article>
+            <article class="criterion">
+              <h3>Reliability / edge cases</h3>
+              <p>
+                How safely it preserves invalid-input, timestamp-tie, and
+                immutability behavior.
+              </p>
+            </article>
+            <article class="criterion">
+              <h3>Maintainability / clarity</h3>
+              <p>
+                How well the shared helper removes duplication and makes the
+                module easier to understand.
+              </p>
+            </article>
+            <article class="criterion">
+              <h3>Scope discipline</h3>
+              <p>
+                How precisely it follows the required helper name, export
+                boundary, and allowed file.
+              </p>
+            </article>
+          </div>
+          <p class="score-rank">
+            <strong>Overall</strong> is the arithmetic mean of the four scores.
+          </p>
+        </section>
+        <section class="results-table">
+          <div class="table-tools">
+            <div>
+              <h2>Complete candidate results</h2>
+              <p>Click a heading to sort. N/A values remain last.</p>
+            </div>
+            <p>15 rows</p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Refactoring results
+              </caption>
+              <thead>
+                <tr>
+                  <th><button data-key="rank">Rank / status</button></th>
+                  <th><button data-key="label">Model</button></th>
+                  <th><button data-key="public">Public</button></th>
+                  <th><button data-key="objective">Objective</button></th>
+                  <th><button data-key="f">Functional</button></th>
+                  <th><button data-key="r">Reliability</button></th>
+                  <th><button data-key="m">Maintainability</button></th>
+                  <th><button data-key="s">Scope</button></th>
+                  <th><button data-key="overall">Overall</button></th>
+                  <th><button data-key="time">Time (s)</button></th>
+                  <th><button data-key="cost">Cost</button></th>
+                  <th><button data-key="channel">Channel</button></th>
+                </tr>
+              </thead>
+              <tbody id="results-body"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="sources">
+          <h2>Public evidence</h2>
+          <p>
+            <a
+              href="https://github.com/pickleshell/models-test/tree/main/fixtures/phase2-v2/refactoring"
+              >Fixture and public tests ↗</a
+            >
+            ·
+            <a
+              href="https://github.com/pickleshell/models-test/tree/main/results/benchmark-phase2-v2"
+              >Run records and reviews ↗</a
+            >
+          </p>
+        </section>
+      </div>
+    </main>
+    <footer>PickleShell LLM tests · Refactoring benchmark.</footer>
+    <link rel="stylesheet" href="llm-test-results.css" />
+    <script src="llm-test-phase2-v2-results.js"></script>
+  </body>
+</html>

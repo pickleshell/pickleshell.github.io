@@ -1,9 +1,207 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="Feature-implementation LLM test: implement overrides and deterministic feature rollout."><title>Feature Test: Implement Deterministic Feature Rollout — PickleShell</title><link rel="icon" href="favicon.ico"><link rel="stylesheet" href="llm-test.css"></head><body data-nomination="feature-implementation">
-<header><div class="wrap"><nav><a class="brand" href="index.html"><img src="pickleshell-logo.png" alt="" width="36" height="36"><span>PickleShell</span></a><ul class="nav-links"><li><a href="model-benchmarks.html">LLM tests</a></li></ul></nav></div></header>
-<main><section class="hero"><div class="wrap"><div class="eyebrow">Clean-room benchmark · Feature implementation</div><h1>Feature test: implement deterministic feature rollout</h1><p class="lead">This test measures whether a model can translate a detailed product rule into a complete, deterministic implementation while preserving inputs and the public API.</p><span class="state">15 tested runtime routes</span></div></section><div class="wrap">
-<section class="summary" aria-label="Test design"><div class="summary-card"><strong>Public tests</strong><span>visible correctness checks</span></div><div class="summary-card"><strong>Objective evaluator</strong><span>private deterministic cases</span></div><div class="summary-card"><strong>4 criteria</strong><span>separate blind review</span></div><div class="summary-card"><strong>1 source file</strong><span>strict change boundary</span></div></section>
-<section class="task-brief"><p class="task-label">Test assignment</p><h2>Resolve feature flags with overrides and percentage rollout</h2><p>The model must implement <code>resolveFeature(config, context)</code> from a written contract. The result must be predictable for the same user and configuration, and the function must not mutate either argument.</p><h3>What the implementation must do</h3><ul><li>Reject invalid configuration, context, or feature names by returning <code>false</code>.</li><li>Give an exact boolean user override first priority, followed by a boolean global flag.</li><li>Support enabled flag objects with optional integer rollout percentages from 0 through 100.</li><li>Require a non-empty user ID for partial rollout.</li><li>Assign users deterministically with the specified unsigned 32-bit hash over Unicode code points.</li><li>Leave all input objects unchanged and preserve the existing public API.</li></ul><span class="task-file">Allowed file: fixtures/phase2-v2/feature-implementation/src/featureFlags.js</span></section>
-<aside class="notice"><strong>What this nomination isolates.</strong> Unlike bug fixing, the model must build missing behavior from a precise specification and cover the full precedence order.</aside>
-<section class="score-guide"><h2>How each reviewed solution will be scored</h2><p class="score-intro">Each criterion receives 0–10. Public and objective checks remain separate from the manual score.</p><div class="criteria-grid"><article class="criterion"><h3>Functional correctness</h3><p>How completely the implementation follows override, flag, and rollout precedence.</p></article><article class="criterion"><h3>Reliability / edge cases</h3><p>How safely it handles invalid inputs, boundary percentages, Unicode IDs, and immutability.</p></article><article class="criterion"><h3>Maintainability / clarity</h3><p>How clearly the code expresses the rules without unnecessary complexity.</p></article><article class="criterion"><h3>Scope discipline</h3><p>How strictly the change stays in the allowed source file and preserves the API.</p></article></div><p class="score-rank"><strong>Overall</strong> is the arithmetic mean of the four scores.</p></section>
-<section class="results-table"><div class="table-tools"><div><h2>Complete candidate results</h2><p>Click a heading to sort. N/A values remain last.</p></div><p>15 rows</p></div><div class="table-scroll"><table><caption>Feature implementation results</caption><thead><tr><th><button data-key="rank">Rank / status</button></th><th><button data-key="label">Model</button></th><th><button data-key="public">Public</button></th><th><button data-key="objective">Objective</button></th><th><button data-key="f">Functional</button></th><th><button data-key="r">Reliability</button></th><th><button data-key="m">Maintainability</button></th><th><button data-key="s">Scope</button></th><th><button data-key="overall">Overall</button></th><th><button data-key="time">Time (s)</button></th><th><button data-key="cost">Cost</button></th><th><button data-key="channel">Channel</button></th></tr></thead><tbody id="results-body"></tbody></table></div></section>
-<section class="sources"><h2>Public evidence</h2><p><a href="https://github.com/pickleshell/models-test/tree/main/fixtures/phase2-v2/feature-implementation">Fixture and public tests ↗</a> · <a href="https://github.com/pickleshell/models-test/tree/main/results/benchmark-phase2-v2">Run records and reviews ↗</a></p></section></div></main><footer>PickleShell LLM tests · Feature-implementation benchmark.</footer><link rel="stylesheet" href="llm-test-results.css"><script src="llm-test-phase2-v2-results.js"></script></body></html>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Feature-implementation LLM test: implement overrides and deterministic feature rollout."
+    />
+    <title>
+      Feature Test: Implement Deterministic Feature Rollout — PickleShell
+    </title>
+    <link rel="icon" href="favicon.ico" />
+    <link rel="stylesheet" href="llm-test.css" />
+  </head>
+  <body data-nomination="feature-implementation">
+    <header>
+      <div class="wrap">
+        <nav>
+          <a class="brand" href="index.html"
+            ><img
+              src="pickleshell-logo.png"
+              alt=""
+              width="36"
+              height="36"
+            /><span>PickleShell</span></a
+          >
+          <ul class="nav-links">
+            <li><a href="model-benchmarks.html">LLM tests</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <section class="hero">
+        <div class="wrap">
+          <div class="eyebrow">
+            Clean-room benchmark · Feature implementation
+          </div>
+          <h1>Feature test: implement deterministic feature rollout</h1>
+          <p class="lead">
+            This test measures whether a model can translate a detailed product
+            rule into a complete, deterministic implementation while preserving
+            inputs and the public API.
+          </p>
+          <span class="state">15 tested runtime routes</span>
+        </div>
+      </section>
+      <div class="wrap">
+        <section class="summary" aria-label="Test design">
+          <div class="summary-card">
+            <strong>Public tests</strong><span>visible correctness checks</span>
+          </div>
+          <div class="summary-card">
+            <strong>Objective evaluator</strong
+            ><span>private deterministic cases</span>
+          </div>
+          <div class="summary-card">
+            <strong>4 criteria</strong><span>separate blind review</span>
+          </div>
+          <div class="summary-card">
+            <strong>1 source file</strong><span>strict change boundary</span>
+          </div>
+        </section>
+        <section class="task-brief">
+          <p class="task-label">Test assignment</p>
+          <h2>Resolve feature flags with overrides and percentage rollout</h2>
+          <p>
+            The model must implement
+            <code>resolveFeature(config, context)</code> from a written
+            contract. The result must be predictable for the same user and
+            configuration, and the function must not mutate either argument.
+          </p>
+          <h3>What the implementation must do</h3>
+          <ul>
+            <li>
+              Reject invalid configuration, context, or feature names by
+              returning <code>false</code>.
+            </li>
+            <li>
+              Give an exact boolean user override first priority, followed by a
+              boolean global flag.
+            </li>
+            <li>
+              Support enabled flag objects with optional integer rollout
+              percentages from 0 through 100.
+            </li>
+            <li>Require a non-empty user ID for partial rollout.</li>
+            <li>
+              Assign users deterministically with the specified unsigned 32-bit
+              hash over Unicode code points.
+            </li>
+            <li>
+              Leave all input objects unchanged and preserve the existing public
+              API.
+            </li>
+          </ul>
+          <span class="task-file"
+            >Allowed file:
+            fixtures/phase2-v2/feature-implementation/src/featureFlags.js</span
+          >
+        </section>
+      <aside class="notice">
+        <strong>One attempt. No second chance.</strong> LLMs operate as part of
+        real development pipelines, and every retry costs
+        time and money. The quality of the first delivered result matters—that
+        is why we preserve and score the first-run outcome.
+      </aside>
+      <aside class="notice">
+          <strong>What this nomination isolates.</strong> Unlike bug fixing, the
+          model must build missing behavior from a precise specification and
+          cover the full precedence order.
+        </aside>
+        <section class="score-guide">
+          <h2>How each reviewed solution will be scored</h2>
+          <p class="score-intro">
+            Each criterion receives 0–10. Public and objective checks remain
+            separate from the manual score.
+          </p>
+          <div class="criteria-grid">
+            <article class="criterion">
+              <h3>Functional correctness</h3>
+              <p>
+                How completely the implementation follows override, flag, and
+                rollout precedence.
+              </p>
+            </article>
+            <article class="criterion">
+              <h3>Reliability / edge cases</h3>
+              <p>
+                How safely it handles invalid inputs, boundary percentages,
+                Unicode IDs, and immutability.
+              </p>
+            </article>
+            <article class="criterion">
+              <h3>Maintainability / clarity</h3>
+              <p>
+                How clearly the code expresses the rules without unnecessary
+                complexity.
+              </p>
+            </article>
+            <article class="criterion">
+              <h3>Scope discipline</h3>
+              <p>
+                How strictly the change stays in the allowed source file and
+                preserves the API.
+              </p>
+            </article>
+          </div>
+          <p class="score-rank">
+            <strong>Overall</strong> is the arithmetic mean of the four scores.
+          </p>
+        </section>
+        <section class="results-table">
+          <div class="table-tools">
+            <div>
+              <h2>Complete candidate results</h2>
+              <p>Click a heading to sort. N/A values remain last.</p>
+            </div>
+            <p>15 rows</p>
+          </div>
+          <div class="table-scroll">
+            <table>
+              <caption>
+                Feature implementation results
+              </caption>
+              <thead>
+                <tr>
+                  <th><button data-key="rank">Rank / status</button></th>
+                  <th><button data-key="label">Model</button></th>
+                  <th><button data-key="public">Public</button></th>
+                  <th><button data-key="objective">Objective</button></th>
+                  <th><button data-key="f">Functional</button></th>
+                  <th><button data-key="r">Reliability</button></th>
+                  <th><button data-key="m">Maintainability</button></th>
+                  <th><button data-key="s">Scope</button></th>
+                  <th><button data-key="overall">Overall</button></th>
+                  <th><button data-key="time">Time (s)</button></th>
+                  <th><button data-key="cost">Cost</button></th>
+                  <th><button data-key="channel">Channel</button></th>
+                </tr>
+              </thead>
+              <tbody id="results-body"></tbody>
+            </table>
+          </div>
+        </section>
+        <section class="sources">
+          <h2>Public evidence</h2>
+          <p>
+            <a
+              href="https://github.com/pickleshell/models-test/tree/main/fixtures/phase2-v2/feature-implementation"
+              >Fixture and public tests ↗</a
+            >
+            ·
+            <a
+              href="https://github.com/pickleshell/models-test/tree/main/results/benchmark-phase2-v2"
+              >Run records and reviews ↗</a
+            >
+          </p>
+        </section>
+      </div>
+    </main>
+    <footer>PickleShell LLM tests · Feature-implementation benchmark.</footer>
+    <link rel="stylesheet" href="llm-test-results.css" />
+    <script src="llm-test-phase2-v2-results.js"></script>
+  </body>
+</html>
