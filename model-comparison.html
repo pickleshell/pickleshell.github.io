@@ -637,10 +637,10 @@
             <strong>59</strong><span>tested candidates</span>
           </div>
           <div class="summary-card">
-            <strong>36</strong><span>scored patches</span>
+            <strong>37</strong><span>scored patches</span>
           </div>
           <div class="summary-card">
-            <strong>23</strong><span>N/A availability outcomes</span>
+            <strong>22</strong><span>N/A availability outcomes</span>
           </div>
           <div class="summary-card">
             <strong>5</strong><span>quality dimensions</span>
@@ -903,6 +903,14 @@
                 rel="noopener noreferrer"
                 >Latest Ledger completion records
                 <span aria-hidden="true">↗</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/pickleshell/models-test/tree/main/results/benchmark-candidates/phase1-ledger-na-completion-r1"
+                target="_blank"
+                rel="noopener noreferrer"
+                >N/A completion records <span aria-hidden="true">↗</span></a
               >
             </li>
             <li>
@@ -2359,6 +2367,51 @@
       const candidates = JSON.parse(
         document.getElementById("candidate-data").textContent,
       );
+      const unavailableCompletionIds = new Set([
+        "21-grok-code",
+        "23-qwen3-6-plus-free",
+        "24-kimi-k2-5-free",
+        "25-glm-5-free",
+        "26-hy3-preview-free",
+        "29-mimo-v2-pro-free",
+        "30-minimax-m3-free",
+        "31-north-mini-code-free",
+        "32-longcat-2-0-free",
+        "34-nemotron-3-super-free",
+        "36-trinity-large-preview-free",
+        "37-ring-2-6-1t-free",
+        "38-ling-3-0-flash-free",
+        "39-ling-3-0-tiny-free",
+        "40-ling-2-6-flash-free",
+        "41-mimo-v2-flash-free",
+        "42-mimo-v2-omni-free",
+        "43-minimax-m2-5-free",
+        "44-minimax-m2-1-free",
+        "45-glm-4-7-free",
+        "nemotron-3-nano-omni-openrouter-free",
+      ]);
+      candidates.forEach((candidate) => {
+        if (unavailableCompletionIds.has(candidate.candidateDir)) {
+          candidate.status = "unavailable";
+          candidate.seconds = null;
+        }
+        if (candidate.candidateDir === "08-qwen3-7-max") {
+          Object.assign(candidate, {
+            status: "agent error with partial patch",
+            simplicity: 9,
+            readability: 9,
+            noExtraCode: 10,
+            reliability: 7,
+            edgeCases: 8,
+            overall: 8.6,
+            seconds: 906.036,
+          });
+        }
+        if (candidate.candidateDir === "12-qwen3-6-plus") {
+          candidate.status = "agent failure · no patch";
+          candidate.seconds = 906.072;
+        }
+      });
       candidates
         .filter((candidate) => candidate.overall !== null)
         .sort((a, b) => b.overall - a.overall || a.seconds - b.seconds)
@@ -2509,7 +2562,9 @@
               score(row.overall, true) +
               "</td>" +
               '<td class="number">' +
-              row.seconds.toFixed(3) +
+              (row.seconds === null
+                ? '<span class="na">N/A</span>'
+                : row.seconds.toFixed(3)) +
               "</td>" +
               '<td class="channel">' +
               escapeHtml(row.channel) +
