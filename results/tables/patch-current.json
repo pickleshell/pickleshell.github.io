@@ -1,0 +1,699 @@
+{
+  "title": "Complete candidate results",
+  "caption": "Current retry-policy patch results for tested runtime routes.",
+  "ariaLabel": "Sortable retry-policy patch model comparison table",
+  "rows": [
+    {
+      "id": "70-muse-spark-1-2-free",
+      "label": "Muse Spark 1.2 Free",
+      "status": "success",
+      "public": "Pass",
+      "time": 64.919,
+      "cost": 0,
+      "channel": "OpenCode",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "69-ling-3-0-flash-fin-free",
+      "label": "Ling 3.0 Flash Fin Free",
+      "status": "success",
+      "public": "Pass",
+      "time": 51.678,
+      "cost": 0,
+      "channel": "OpenCode",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "01-gpt-5-6-luna",
+      "label": "GPT-5.6 Luna",
+      "status": "success",
+      "public": "Pass",
+      "time": 48.568,
+      "cost": 0.00775616,
+      "channel": "OpenCode Go",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "11-deepseek-v4-flash",
+      "label": "DeepSeek V4 Flash",
+      "status": "success",
+      "public": "Pass",
+      "time": 203.012,
+      "cost": 0.010074088,
+      "channel": "OpenCode Go",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "66-glm-5-3-go",
+      "label": "GLM-5.3",
+      "status": "success",
+      "public": "Pass",
+      "time": 87.02,
+      "cost": 0.06386552,
+      "channel": "OpenCode Go",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "64-gpt-5-3-codex-opencode",
+      "label": "GPT-5.3 Codex",
+      "status": "success",
+      "public": "Pass",
+      "time": 79.33,
+      "cost": 0.07004585,
+      "channel": "OpenCode",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "57-qwen3-8-27b-openrouter",
+      "label": "Qwen 3.8 27B",
+      "status": "success",
+      "public": "Pass",
+      "time": 226.026,
+      "cost": 0.091643175,
+      "channel": "OpenRouter",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "67-qwen3-8-max-go",
+      "label": "Qwen 3.8 Max",
+      "status": "success",
+      "public": "Pass",
+      "time": 156.438,
+      "cost": 0.095734,
+      "channel": "OpenCode Go",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "52-claude-sonnet-5",
+      "label": "Claude Sonnet 5",
+      "status": "success",
+      "public": "Pass",
+      "time": 89.839,
+      "cost": 0.1478449,
+      "channel": "OpenCode",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "68-kimi-k3-go",
+      "label": "Kimi K3",
+      "status": "success",
+      "public": "Pass",
+      "time": 130.084,
+      "cost": 0.165327,
+      "channel": "OpenCode Go",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "53-claude-opus-5",
+      "label": "Claude Opus 5",
+      "status": "success",
+      "public": "Pass",
+      "time": 90.36,
+      "cost": 0.30080325,
+      "channel": "OpenCode",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "62-gpt-5-5-pro-opencode",
+      "label": "GPT-5.5 Pro",
+      "status": "success",
+      "public": "Pass",
+      "time": 440.567,
+      "cost": 3.58257,
+      "channel": "OpenCode",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "55-glm-5-3-go",
+      "label": "GLM-5.3",
+      "status": "success",
+      "public": "Pass",
+      "time": 245.468,
+      "cost": null,
+      "channel": "OpenCode Go",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "19-big-pickle",
+      "label": "Big Pickle",
+      "status": "success",
+      "public": "Pass",
+      "time": 13.167,
+      "cost": 0,
+      "channel": "OpenCode",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "35-nemotron-3-ultra-free",
+      "label": "Nemotron 3 Ultra Free",
+      "status": "agent_failure",
+      "public": "Pass",
+      "time": 71.501,
+      "cost": 0,
+      "channel": "OpenCode",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "59-nemotron-3-super-openrouter-free",
+      "label": "Nemotron 3 Super Free",
+      "status": "success",
+      "public": "Pass",
+      "time": 111.281,
+      "cost": 0,
+      "channel": "OpenRouter",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "14-hy3",
+      "label": "Hy3",
+      "status": "success",
+      "public": "Pass",
+      "time": 30.796,
+      "cost": 0.0005663575,
+      "channel": "OpenCode Go",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "07-mimo-v2-5-pro",
+      "label": "MiMo V2.5 Pro",
+      "status": "success",
+      "public": "Pass",
+      "time": 64.069,
+      "cost": 0.004208915,
+      "channel": "OpenCode Go",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "04-deepseek-v4-pro",
+      "label": "DeepSeek V4 Pro",
+      "status": "success",
+      "public": "Pass",
+      "time": 43.028,
+      "cost": 0.013112924,
+      "channel": "OpenCode Go",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "06-minimax-m3",
+      "label": "MiniMax M3",
+      "status": "success",
+      "public": "Pass",
+      "time": 73.748,
+      "cost": 0.01410024,
+      "channel": "OpenCode Go",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "02-qwen3-7-plus",
+      "label": "Qwen 3.7 Plus",
+      "status": "success",
+      "public": "Pass",
+      "time": 72.362,
+      "cost": 0.0209556,
+      "channel": "OpenCode Go",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "58-grok-4-5-openrouter",
+      "label": "Grok 4.5",
+      "status": "success",
+      "public": "Pass",
+      "time": 33.055,
+      "cost": 0.03889,
+      "channel": "OpenRouter",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "05-glm-5-2",
+      "label": "GLM-5.2",
+      "status": "success",
+      "public": "Pass",
+      "time": 53.661,
+      "cost": 0.04173624,
+      "channel": "OpenCode Go",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "16-kimi-k2-6",
+      "label": "Kimi K2.6",
+      "status": "success",
+      "public": "Pass",
+      "time": 101.322,
+      "cost": 0.04194609,
+      "channel": "OpenCode Go",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "60-gpt-5-6-terra-opencode",
+      "label": "GPT-5.6 Terra",
+      "status": "success",
+      "public": "Pass",
+      "time": 24.309,
+      "cost": 0.05425625,
+      "channel": "OpenCode",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "15-glm-5-1",
+      "label": "GLM-5.1",
+      "status": "success",
+      "public": "Pass",
+      "time": 68.962,
+      "cost": 0.06041756,
+      "channel": "OpenCode Go",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "56-kimi-k3-opencode",
+      "label": "Kimi K3",
+      "status": "success",
+      "public": "Pass",
+      "time": 44.445,
+      "cost": 0.0797889,
+      "channel": "OpenCode",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "65-grok-4-6-go",
+      "label": "Grok 4.6",
+      "status": "success",
+      "public": "Pass",
+      "time": 52.512,
+      "cost": 0.080008,
+      "channel": "OpenCode Go",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "61-gpt-5-5-opencode",
+      "label": "GPT-5.5",
+      "status": "success",
+      "public": "Pass",
+      "time": 23.048,
+      "cost": 0.0821,
+      "channel": "OpenCode",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "63-gpt-5-4-pro-opencode",
+      "label": "GPT-5.4 Pro",
+      "status": "success",
+      "public": "Pass",
+      "time": 328.416,
+      "cost": 1.77096,
+      "channel": "OpenCode",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "51-claude-haiku-4-5",
+      "label": "Claude Haiku 4.5",
+      "status": "success",
+      "public": "Pass",
+      "time": 25.494,
+      "cost": 0.02885935,
+      "channel": "OpenCode",
+      "objective": "Fail",
+      "scores": [
+        7,
+        5,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "03-kimi-k2-7-code",
+      "label": "Kimi K2.7 Code",
+      "status": "success",
+      "public": "Pass",
+      "time": 131.845,
+      "cost": 0.03579015,
+      "channel": "OpenCode Go",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "54-inkling-openrouter",
+      "label": "Inkling",
+      "status": "success",
+      "public": "Pass",
+      "time": 23.821,
+      "cost": null,
+      "channel": "OpenRouter",
+      "objective": "Fail",
+      "scores": [
+        0,
+        0,
+        10,
+        10
+      ]
+    },
+    {
+      "id": "09-grok-4-5",
+      "label": "Grok 4.5",
+      "status": "unavailable",
+      "public": null,
+      "time": null,
+      "cost": null,
+      "channel": "OpenCode Go",
+      "objective": null
+    },
+    {
+      "id": "crosscheck-deepseek-v4-flash-free",
+      "label": "DeepSeek V4 Flash Free",
+      "status": "unavailable",
+      "public": null,
+      "time": null,
+      "cost": null,
+      "channel": "OpenCode",
+      "objective": null
+    },
+    {
+      "id": "crosscheck-hy3-free",
+      "label": "HY 3 Free",
+      "status": "success",
+      "public": "Pass",
+      "time": 21.446,
+      "cost": 0,
+      "channel": "OpenCode",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "crosscheck-laguna-s-2-1-free",
+      "label": "Laguna S 2.1 Free",
+      "status": "success",
+      "public": "Pass",
+      "time": 113.995,
+      "cost": 0,
+      "channel": "OpenRouter",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "crosscheck-nemotron-3-5-lightning-free",
+      "label": "Nemotron 3.5 Lightning Free",
+      "status": "success",
+      "public": "Pass",
+      "time": 38.668,
+      "cost": 0,
+      "channel": "OpenRouter",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "codex-gpt-5-3-codex-spark",
+      "label": "GPT-5.3 Codex Spark",
+      "status": "success",
+      "public": "Pass",
+      "time": 14.417,
+      "cost": null,
+      "channel": "Codex",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "codex-gpt-5-4",
+      "label": "GPT-5.4",
+      "status": "success",
+      "public": "Pass",
+      "time": 33.911,
+      "cost": null,
+      "channel": "Codex",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "codex-gpt-5-4-mini",
+      "label": "GPT-5.4 Mini",
+      "status": "success",
+      "public": "Pass",
+      "time": 50.606,
+      "cost": null,
+      "channel": "Codex",
+      "objective": "Fail",
+      "scores": [
+        8,
+        6,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "codex-gpt-5-6-luna",
+      "label": "GPT-5.6 Luna",
+      "status": "success",
+      "public": "Pass",
+      "time": 36.802,
+      "cost": null,
+      "channel": "Codex",
+      "objective": "Fail",
+      "scores": [
+        8,
+        5,
+        9,
+        10
+      ]
+    },
+    {
+      "id": "codex-gpt-5-6-sol",
+      "label": "GPT-5.6 Sol",
+      "status": "success",
+      "public": "Pass",
+      "time": 47.915,
+      "cost": null,
+      "channel": "Codex",
+      "objective": "Pass",
+      "scores": [
+        10,
+        10,
+        8,
+        10
+      ]
+    },
+    {
+      "id": "codex-gpt-5-6-terra",
+      "label": "GPT-5.6 Terra",
+      "status": "success",
+      "public": "Pass",
+      "time": 30.745,
+      "cost": null,
+      "channel": "Codex",
+      "objective": "Fail",
+      "scores": [
+        8,
+        5,
+        9,
+        10
+      ]
+    }
+  ]
+}

@@ -34,6 +34,54 @@ semantic reference.
 - A row must have exactly the same number of cells as the header.
 - Use the same badge colors and `N/A` treatment across table families.
 
+## Shared table component
+
+Current single-task result pages must use `benchmark-table.js` and
+`benchmark-table.css`. A page declares only the result source:
+
+```html
+<section
+  class="results-table"
+  data-benchmark-table
+  data-results="results/tables/example.json"
+></section>
+<link rel="stylesheet" href="benchmark-table.css" />
+<script src="benchmark-table.js"></script>
+```
+
+The component owns the table markup, column order, sorting, ranks, badges,
+missing-value formatting, time and cost formatting, and accessible header
+state. Do not copy table markup or a renderer into an individual result page.
+
+Table data belongs in `results/tables/`. Each JSON document contains page
+metadata and normalized rows:
+
+```json
+{
+  "title": "Complete candidate results",
+  "caption": "Example benchmark results",
+  "ariaLabel": "Sortable example model comparison table",
+  "rows": [
+    {
+      "id": "01-example",
+      "label": "Example Model",
+      "status": "completed",
+      "public": "Pass",
+      "objective": "Pass",
+      "scores": [10, 9, 9, 10],
+      "time": 42.123,
+      "cost": 0.01,
+      "channel": "Example Provider"
+    }
+  ]
+}
+```
+
+Use `null` for unknown values. A failed row may add `failureDetail` with a
+sanitized, model-specific explanation. Updating results should require editing
+only the corresponding JSON file; edit the shared component only when the
+format itself changes.
+
 ## Format A: current single-task benchmark
 
 Use this for current isolated and clean-room task results. This is the default.

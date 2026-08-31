@@ -149,39 +149,7 @@
             <strong>Overall</strong> is the arithmetic mean of the four scores.
           </p>
         </section>
-        <section class="results-table">
-          <div class="table-tools">
-            <div>
-              <h2>Complete candidate results</h2>
-              <p>Click a heading to sort. N/A values remain last.</p>
-            </div>
-            <p>81 rows</p>
-          </div>
-          <div class="table-scroll">
-            <table>
-              <caption>
-                Repository navigation results
-              </caption>
-              <thead>
-                <tr>
-                  <th><button data-key="rank">Rank / status</button></th>
-                  <th><button data-key="label">Model</button></th>
-                  <th><button data-key="public">Public</button></th>
-                  <th><button data-key="objective">Objective</button></th>
-                  <th><button data-key="f">Functional</button></th>
-                  <th><button data-key="r">Reliability</button></th>
-                  <th><button data-key="m">Maintainability</button></th>
-                  <th><button data-key="s">Scope</button></th>
-                  <th><button data-key="overall">Overall</button></th>
-                  <th><button data-key="time">Time (s)</button></th>
-                  <th><button data-key="cost">Cost</button></th>
-                  <th><button data-key="channel">Channel</button></th>
-                </tr>
-              </thead>
-              <tbody id="results-body"></tbody>
-            </table>
-          </div>
-        </section>
+        <section class="results-table" data-benchmark-table data-results="results/tables/repository-navigation.json"></section>
         <section class="sources">
           <h2>Public evidence</h2>
           <p>
@@ -199,9 +167,8 @@
       </div>
     </main>
     <footer>PickleShell LLM tests · Repository-navigation benchmark.</footer>
-    <link rel="stylesheet" href="llm-test-results.css?v=2" />
-    <script src="llm-test-repository-roster-r2.js?v=1"></script>
-    <script src="llm-test-phase2-v2-results.js?v=6"></script>
+    <link rel="stylesheet" href="benchmark-table.css?v=1" />
+    <script src="benchmark-table.js?v=1"></script>
     <script src="failure-taxonomy.js?v=1"></script>
   </body>
 </html>

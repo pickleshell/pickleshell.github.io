@@ -72,43 +72,49 @@
     });
   }
 
-  document.querySelectorAll("tbody .badge").forEach((badge) => {
-    const status = badge.textContent.trim().toLowerCase();
-    const item = taxonomy.find(({ match }) => match.test(status));
-    if (!item || badge.nextElementSibling?.classList.contains("failure-info"))
-      return;
+  function annotateBadges(root = document) {
+    root.querySelectorAll("tbody .badge").forEach((badge) => {
+      const status = badge.textContent.trim().toLowerCase();
+      const item = taxonomy.find(({ match }) => match.test(status));
+      if (!item || badge.nextElementSibling?.classList.contains("failure-info"))
+        return;
 
-    const holder = document.createElement("span");
-    holder.className = "failure-info";
-    const button = document.createElement("button");
-    button.type = "button";
-    button.className = "failure-info-button";
-    button.textContent = "i";
-    button.setAttribute("aria-label", `Explain status: ${item.label}`);
-    button.setAttribute("aria-expanded", "false");
-    const popover = document.createElement("span");
-    popover.className = "failure-info-popover";
-    popover.hidden = true;
-    const title = document.createElement("strong");
-    title.textContent = item.label;
-    const description = document.createElement("span");
-    // A results table may add a model-specific explanation from its sanitized
-    // public artifact.  Keep the taxonomy text as a fallback, but never reduce
-    // a concrete failure to an opaque process-status code.
-    const detail = badge.dataset.failureDetail?.trim();
-    description.textContent = detail || item.description;
-    popover.append(title, description);
-    holder.append(button, popover);
-    badge.after(holder);
+      const holder = document.createElement("span");
+      holder.className = "failure-info";
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "failure-info-button";
+      button.textContent = "i";
+      button.setAttribute("aria-label", `Explain status: ${item.label}`);
+      button.setAttribute("aria-expanded", "false");
+      const popover = document.createElement("span");
+      popover.className = "failure-info-popover";
+      popover.hidden = true;
+      const title = document.createElement("strong");
+      title.textContent = item.label;
+      const description = document.createElement("span");
+      // A results table may add a model-specific explanation from its sanitized
+      // public artifact. Keep the taxonomy text as a fallback.
+      const detail = badge.dataset.failureDetail?.trim();
+      description.textContent = detail || item.description;
+      popover.append(title, description);
+      holder.append(button, popover);
+      badge.after(holder);
 
-    button.addEventListener("click", (event) => {
-      event.stopPropagation();
-      const opening = popover.hidden;
-      closeAll(popover);
-      popover.hidden = !opening;
-      button.setAttribute("aria-expanded", String(opening));
+      button.addEventListener("click", (event) => {
+        event.stopPropagation();
+        const opening = popover.hidden;
+        closeAll(popover);
+        popover.hidden = !opening;
+        button.setAttribute("aria-expanded", String(opening));
+      });
     });
-  });
+  }
+
+  annotateBadges();
+  document.addEventListener("benchmark-table:rendered", (event) =>
+    annotateBadges(event.detail.container),
+  );
 
   document.addEventListener("click", () => closeAll());
   document.addEventListener("keydown", (event) => {
