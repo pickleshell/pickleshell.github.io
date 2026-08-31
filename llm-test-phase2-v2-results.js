@@ -1011,7 +1011,11 @@ const phase2v2Rows = {
       ? v.reduce((a, b) => a + b, 0) / v.length
       : null;
   const missing = (v) => v == null;
-  const rows = (phase2v2Rows[nomination] || []).map((r, index) => ({
+  const additionalRows =
+    nomination === "feature-implementation"
+      ? globalThis.phase2FeatureWorkingRows || []
+      : [];
+  const rows = [...(phase2v2Rows[nomination] || []), ...additionalRows].map((r, index) => ({
     ...r,
     index,
     f: r.scores?.[0] ?? null,
@@ -1047,10 +1051,12 @@ const phase2v2Rows = {
     );
   const score = (v) =>
     missing(v) ? '<span class="na">N/A</span>' : Number(v.toFixed(2));
-  const badge = (v) =>
+  const badge = (v, detail = "") =>
     '<span class="badge result-badge ' +
     v.toLowerCase() +
-    '">' +
+    '"' +
+    (detail ? ' data-failure-detail="' + esc(detail) + '"' : '') +
+    ">" +
     v +
     "</span>";
   const displayLabel = (label) =>
@@ -1093,7 +1099,7 @@ const phase2v2Rows = {
           '</span></td><td class="score">' +
           badge(r.public) +
           '</td><td class="score">' +
-          badge(r.objective) +
+          badge(r.objective, r.objective === "Fail" ? r.failureDetail : "") +
           '</td><td class="score">' +
           score(s[0]) +
           '</td><td class="score">' +
