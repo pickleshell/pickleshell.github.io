@@ -5,7 +5,7 @@
   "rows": [
     {
       "id": "69-ling-3-0-flash-fin-free",
-      "label": "Ling 3.0 Flash Fin Free (OpenCode Zen)",
+      "label": "Ling 3.0 Flash Fin Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Fail",
@@ -21,7 +21,7 @@
     },
     {
       "id": "70-muse-spark-1-2-free",
-      "label": "Muse Spark 1.2 Free (OpenCode Zen)",
+      "label": "Muse Spark 1.2 Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -37,7 +37,7 @@
     },
     {
       "id": "71-or-inkling-free",
-      "label": "Inkling Free (OpenRouter)",
+      "label": "Inkling Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -53,7 +53,7 @@
     },
     {
       "id": "72-or-inkling-small-free",
-      "label": "Inkling Small Free (OpenRouter)",
+      "label": "Inkling Small Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -69,7 +69,7 @@
     },
     {
       "id": "73-or-nemotron-3-ultra-free",
-      "label": "Nemotron 3 Ultra 550B Free (OpenRouter)",
+      "label": "Nemotron 3 Ultra 550B Free",
       "status": "agent_failure",
       "public": "Fail",
       "objective": "Fail",
@@ -80,7 +80,7 @@
     },
     {
       "id": "74-or-nemotron-3-super-free",
-      "label": "Nemotron 3 Super 120B Free (OpenRouter)",
+      "label": "Nemotron 3 Super 120B Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -96,7 +96,7 @@
     },
     {
       "id": "75-or-dots-3-note-free",
-      "label": "Dots 3 Note Preview Free (OpenRouter)",
+      "label": "Dots 3 Note Preview Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -112,7 +112,7 @@
     },
     {
       "id": "76-or-laguna-s-2-1-free",
-      "label": "Laguna S 2.1 Free (OpenRouter)",
+      "label": "Laguna S 2.1 Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -128,7 +128,7 @@
     },
     {
       "id": "77-or-minimax-m3-free",
-      "label": "MiniMax M3 Free (OpenRouter)",
+      "label": "MiniMax M3 Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -144,7 +144,7 @@
     },
     {
       "id": "78-or-minimax-m2-7-free",
-      "label": "MiniMax M2.7 Free (OpenRouter)",
+      "label": "MiniMax M2.7 Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Fail",
@@ -160,7 +160,7 @@
     },
     {
       "id": "79-or-laguna-xs-2-1-free",
-      "label": "Laguna XS 2.1 Free (OpenRouter)",
+      "label": "Laguna XS 2.1 Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -176,7 +176,7 @@
     },
     {
       "id": "80-or-north-mini-code-free",
-      "label": "North Mini Code Free (OpenRouter)",
+      "label": "North Mini Code Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -192,7 +192,7 @@
     },
     {
       "id": "81-or-nemotron-3-nano-omni-free",
-      "label": "Nemotron 3 Nano Omni Reasoning Free (OpenRouter)",
+      "label": "Nemotron 3 Nano Omni Reasoning Free",
       "status": "tests_failed",
       "public": "Fail",
       "objective": "Fail",
@@ -203,7 +203,7 @@
     },
     {
       "id": "82-or-nemotron-3-5-lightning-free",
-      "label": "Nemotron 3.5 Lightning Free (OpenRouter)",
+      "label": "Nemotron 3.5 Lightning Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -219,7 +219,7 @@
     },
     {
       "id": "83-or-lfm-2-5-2-6b-free",
-      "label": "LFM 2.5 2.6B Free (OpenRouter)",
+      "label": "LFM 2.5 2.6B Free",
       "status": "agent_failure",
       "public": "Pass",
       "objective": "Fail",
