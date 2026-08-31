@@ -101,7 +101,7 @@
     },
     {
       "id": "57-qwen3-8-27b-openrouter",
-      "label": "Qwen 3.8 27B",
+      "label": "Qwen3.8 27B",
       "status": "success",
       "public": "Pass",
       "time": 226.026,
@@ -117,7 +117,7 @@
     },
     {
       "id": "67-qwen3-8-max-go",
-      "label": "Qwen 3.8 Max",
+      "label": "Qwen3.8 Max",
       "status": "success",
       "public": "Pass",
       "time": 156.438,
@@ -325,7 +325,7 @@
     },
     {
       "id": "02-qwen3-7-plus",
-      "label": "Qwen 3.7 Plus",
+      "label": "Qwen3.7 Plus",
       "status": "success",
       "public": "Pass",
       "time": 72.362,

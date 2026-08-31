@@ -56,7 +56,7 @@
     },
     {
       "id": "02-qwen3-7-plus",
-      "label": "Qwen 3.7 Plus",
+      "label": "Qwen3.7 Plus",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -396,7 +396,7 @@
     },
     {
       "id": "57-qwen3-8-27b-openrouter",
-      "label": "Qwen 3.8 27B",
+      "label": "Qwen3.8 27B",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -481,7 +481,7 @@
     },
     {
       "id": "67-qwen3-8-max-go",
-      "label": "Qwen 3.8 Max",
+      "label": "Qwen3.8 Max",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -583,7 +583,7 @@
     },
     {
       "id": "158-glm-5",
-      "label": "Glm 5",
+      "label": "GLM-5",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -600,7 +600,7 @@
     },
     {
       "id": "159-glm-5-1",
-      "label": "Glm 5.1",
+      "label": "GLM-5.1",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -617,7 +617,7 @@
     },
     {
       "id": "160-glm-5-2",
-      "label": "Glm 5.2",
+      "label": "GLM-5.2",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -651,7 +651,7 @@
     },
     {
       "id": "177-deepseek-v4-flash-vision-exp",
-      "label": "Deepseek V4 Flash Vision Exp",
+      "label": "DeepSeek V4 Flash Vision Exp",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -668,7 +668,7 @@
     },
     {
       "id": "178-glm-5-3-flash",
-      "label": "Glm 5.3 Flash",
+      "label": "GLM-5.3 Flash",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -736,7 +736,7 @@
     },
     {
       "id": "185-gpt-5-4",
-      "label": "Gpt 5.4",
+      "label": "GPT-5.4",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -753,7 +753,7 @@
     },
     {
       "id": "186-gpt-5-4-fast",
-      "label": "Gpt 5.4 Fast",
+      "label": "GPT-5.4 Fast",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -770,7 +770,7 @@
     },
     {
       "id": "189-gpt-5-6-luna",
-      "label": "Gpt 5.6 Luna",
+      "label": "GPT-5.6 Luna",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -787,7 +787,7 @@
     },
     {
       "id": "190-gpt-5-6-luna-fast",
-      "label": "Gpt 5.6 Luna Fast",
+      "label": "GPT-5.6 Luna Fast",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -804,7 +804,7 @@
     },
     {
       "id": "191-gpt-5-6-sol",
-      "label": "Gpt 5.6 Sol",
+      "label": "GPT-5.6 Sol",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -821,7 +821,7 @@
     },
     {
       "id": "192-gpt-5-6-sol-fast",
-      "label": "Gpt 5.6 Sol Fast",
+      "label": "GPT-5.6 Sol Fast",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -838,7 +838,7 @@
     },
     {
       "id": "193-gpt-5-6-terra",
-      "label": "Gpt 5.6 Terra",
+      "label": "GPT-5.6 Terra",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -855,7 +855,7 @@
     },
     {
       "id": "194-gpt-5-6-terra-fast",
-      "label": "Gpt 5.6 Terra Fast",
+      "label": "GPT-5.6 Terra Fast",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -957,7 +957,7 @@
     },
     {
       "id": "169-mimo-v2-5-free",
-      "label": "Mimo V2.5 Free",
+      "label": "MiMo V2.5 Free",
       "status": "success",
       "failureDetail": "The patch fixes duplicate handling, UTC grouping, and refund attribution, but retains rounding-based money conversion and accepts values the strict contract rejects.",
       "public": "Pass",
@@ -974,7 +974,7 @@
     },
     {
       "id": "180-mimo-v2-5",
-      "label": "Mimo V2.5",
+      "label": "MiMo V2.5",
       "status": "success",
       "failureDetail": "The patch only makes duplicate IDs idempotent. It leaves money validation, UTC grouping, and refund attribution unchanged, so the objective evaluator finds the task incomplete.",
       "public": "Pass",
@@ -991,7 +991,7 @@
     },
     {
       "id": "181-minimax-m2-7",
-      "label": "Minimax M2.7",
+      "label": "MiniMax M2.7",
       "status": "success",
       "failureDetail": "The patch improves money parsing and duplicate handling but leaves UTC grouping and refund attribution incomplete, so the objective evaluator fails.",
       "public": "Pass",
@@ -1025,7 +1025,7 @@
     },
     {
       "id": "187-gpt-5-5",
-      "label": "Gpt 5.5",
+      "label": "GPT-5.5",
       "status": "success",
       "failureDetail": "The patch passes the public test command but fails the independent objective evaluator, so the score reflects the remaining contract or edge-case gap.",
       "public": "Pass",
@@ -1042,7 +1042,7 @@
     },
     {
       "id": "188-gpt-5-5-fast",
-      "label": "Gpt 5.5 Fast",
+      "label": "GPT-5.5 Fast",
       "status": "success",
       "failureDetail": "The patch passes the public test command but fails the independent objective evaluator, so the score reflects the remaining contract or edge-case gap.",
       "public": "Pass",
@@ -1076,7 +1076,7 @@
     },
     {
       "id": "199-minimax-minimax-m3-free",
-      "label": "Minimax M3:Free",
+      "label": "MiniMax M3 Free",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -1110,7 +1110,7 @@
     },
     {
       "id": "201-nvidia-nemotron-3-ultra-550b-a55b-free",
-      "label": "Nemotron 3 Ultra 550B A55B:Free",
+      "label": "Nemotron 3 Ultra 550B A55B Free",
       "status": "success",
       "failureDetail": null,
       "public": "Pass",
@@ -1144,7 +1144,7 @@
     },
     {
       "id": "196-minimax-minimax-m2-5",
-      "label": "Minimax M2.5",
+      "label": "MiniMax M2.5",
       "status": "success",
       "failureDetail": "The patch only makes duplicate IDs idempotent. It leaves money validation, UTC grouping, and refund attribution unchanged, so the objective evaluator finds the task incomplete.",
       "public": "Pass",
@@ -1161,7 +1161,7 @@
     },
     {
       "id": "197-minimax-minimax-m2-7",
-      "label": "Minimax M2.7",
+      "label": "MiniMax M2.7",
       "status": "success",
       "failureDetail": "The patch passes the public test command but fails the independent objective evaluator, so the score reflects the remaining contract or edge-case gap.",
       "public": "Pass",
@@ -1178,7 +1178,7 @@
     },
     {
       "id": "198-minimax-minimax-m2-7-free",
-      "label": "Minimax M2.7:Free",
+      "label": "MiniMax M2.7 Free",
       "status": "success",
       "failureDetail": "The patch only makes duplicate IDs idempotent. It leaves money validation, UTC grouping, and refund attribution unchanged, so the objective evaluator finds the task incomplete.",
       "public": "Pass",
@@ -1195,7 +1195,7 @@
     },
     {
       "id": "202-qwen-qwen3-5-plus-02-15",
-      "label": "Qwen3.5 Plus 02.15",
+      "label": "Qwen3.5 Plus 02-15",
       "status": "success",
       "failureDetail": "The patch passes the public test command but fails the independent objective evaluator, so the score reflects the remaining contract or edge-case gap.",
       "public": "Pass",

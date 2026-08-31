@@ -475,7 +475,7 @@
     },
     {
       "id": "158-glm-5",
-      "label": "Glm 5",
+      "label": "GLM-5",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -491,7 +491,7 @@
     },
     {
       "id": "159-glm-5-1",
-      "label": "Glm 5.1",
+      "label": "GLM-5.1",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -507,7 +507,7 @@
     },
     {
       "id": "160-glm-5-2",
-      "label": "Glm 5.2",
+      "label": "GLM-5.2",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -539,7 +539,7 @@
     },
     {
       "id": "169-mimo-v2-5-free",
-      "label": "Mimo V2.5 Free",
+      "label": "MiMo V2.5 Free",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -555,7 +555,7 @@
     },
     {
       "id": "177-deepseek-v4-flash-vision-exp",
-      "label": "Deepseek V4 Flash Vision Exp",
+      "label": "DeepSeek V4 Flash Vision Exp",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -587,7 +587,7 @@
     },
     {
       "id": "180-mimo-v2-5",
-      "label": "Mimo V2.5",
+      "label": "MiMo V2.5",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -651,7 +651,7 @@
     },
     {
       "id": "185-gpt-5-4",
-      "label": "Gpt 5.4",
+      "label": "GPT-5.4",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -667,7 +667,7 @@
     },
     {
       "id": "186-gpt-5-4-fast",
-      "label": "Gpt 5.4 Fast",
+      "label": "GPT-5.4 Fast",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -683,7 +683,7 @@
     },
     {
       "id": "187-gpt-5-5",
-      "label": "Gpt 5.5",
+      "label": "GPT-5.5",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -699,7 +699,7 @@
     },
     {
       "id": "188-gpt-5-5-fast",
-      "label": "Gpt 5.5 Fast",
+      "label": "GPT-5.5 Fast",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -715,7 +715,7 @@
     },
     {
       "id": "189-gpt-5-6-luna",
-      "label": "Gpt 5.6 Luna",
+      "label": "GPT-5.6 Luna",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -731,7 +731,7 @@
     },
     {
       "id": "190-gpt-5-6-luna-fast",
-      "label": "Gpt 5.6 Luna Fast",
+      "label": "GPT-5.6 Luna Fast",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -747,7 +747,7 @@
     },
     {
       "id": "191-gpt-5-6-sol",
-      "label": "Gpt 5.6 Sol",
+      "label": "GPT-5.6 Sol",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -763,7 +763,7 @@
     },
     {
       "id": "192-gpt-5-6-sol-fast",
-      "label": "Gpt 5.6 Sol Fast",
+      "label": "GPT-5.6 Sol Fast",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -779,7 +779,7 @@
     },
     {
       "id": "193-gpt-5-6-terra",
-      "label": "Gpt 5.6 Terra",
+      "label": "GPT-5.6 Terra",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -795,7 +795,7 @@
     },
     {
       "id": "194-gpt-5-6-terra-fast",
-      "label": "Gpt 5.6 Terra Fast",
+      "label": "GPT-5.6 Terra Fast",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -827,7 +827,7 @@
     },
     {
       "id": "196-minimax-minimax-m2-5",
-      "label": "Minimax M2.5",
+      "label": "MiniMax M2.5",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -843,7 +843,7 @@
     },
     {
       "id": "197-minimax-minimax-m2-7",
-      "label": "Minimax M2.7",
+      "label": "MiniMax M2.7",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -875,7 +875,7 @@
     },
     {
       "id": "202-qwen-qwen3-5-plus-02-15",
-      "label": "Qwen3.5 Plus 02.15",
+      "label": "Qwen3.5 Plus 02-15",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -939,7 +939,7 @@
     },
     {
       "id": "57-qwen3-8-27b-openrouter",
-      "label": "Qwen 3.8 27B",
+      "label": "Qwen3.8 27B",
       "status": "completed",
       "public": "Pass",
       "objective": "Pass",
@@ -972,7 +972,7 @@
     },
     {
       "id": "181-minimax-m2-7",
-      "label": "Minimax M2.7",
+      "label": "MiniMax M2.7",
       "status": "completed",
       "public": "Pass",
       "objective": "Fail",
@@ -1000,7 +1000,7 @@
     },
     {
       "id": "178-glm-5-3-flash",
-      "label": "Glm 5.3 Flash",
+      "label": "GLM-5.3 Flash",
       "status": "unavailable",
       "public": "N/A",
       "objective": "N/A",
@@ -1011,7 +1011,7 @@
     },
     {
       "id": "201-nvidia-nemotron-3-ultra-550b-a55b-free",
-      "label": "Nemotron 3 Ultra 550B A55B:Free",
+      "label": "Nemotron 3 Ultra 550B A55B Free",
       "status": "unavailable",
       "public": "N/A",
       "objective": "N/A",
@@ -1187,7 +1187,7 @@
     },
     {
       "id": "67-qwen3-8-max-go",
-      "label": "Qwen 3.8 Max",
+      "label": "Qwen3.8 Max",
       "status": "unavailable",
       "public": "N/A",
       "objective": "N/A",
@@ -1209,7 +1209,7 @@
     },
     {
       "id": "02-qwen3-7-plus",
-      "label": "Qwen 3.7 Plus",
+      "label": "Qwen3.7 Plus",
       "status": "unavailable",
       "public": "N/A",
       "objective": "N/A",

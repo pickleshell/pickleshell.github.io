@@ -2,7 +2,7 @@
 globalThis.phase1LedgerOpenrouterRows = [
   {
     "candidateDir": "or-qwen3-6-plus",
-    "model": "Qwen 3.6 Plus",
+    "model": "Qwen3.6 Plus",
     "rawModel": null,
     "rank": null,
     "status": "evaluated failure",
