@@ -1012,9 +1012,10 @@ const phase2v2Rows = {
       : null;
   const missing = (v) => v == null;
   const additionalRows =
-    nomination === "feature-implementation"
-      ? globalThis.phase2FeatureWorkingRows || []
-      : [];
+    ({
+      "feature-implementation": globalThis.phase2FeatureWorkingRows,
+      refactoring: globalThis.phase2RefactoringWorkingRows,
+    })[nomination] || [];
   const rows = [...(phase2v2Rows[nomination] || []), ...additionalRows].map((r, index) => ({
     ...r,
     index,
