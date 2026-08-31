@@ -1015,6 +1015,7 @@ const phase2v2Rows = {
     ({
       "feature-implementation": globalThis.phase2FeatureWorkingRows,
       refactoring: globalThis.phase2RefactoringWorkingRows,
+      "repository-navigation": globalThis.phase2RepositoryRosterR2Rows,
     })[nomination] || [];
   const rows = [...(phase2v2Rows[nomination] || []), ...additionalRows].map((r, index) => ({
     ...r,
@@ -1091,7 +1092,11 @@ const phase2v2Rows = {
           r.rank +
           '</strong><span class="badge ' +
           (r.status === "completed" ? "success" : "") +
-          '">' +
+          '"' +
+          (r.failureDetail
+            ? ' data-failure-detail="' + esc(r.failureDetail) + '"'
+            : '') +
+          '>' +
           esc(r.status) +
           '</span></td><td><span class="model">' +
           esc(displayLabel(r.label)) +
